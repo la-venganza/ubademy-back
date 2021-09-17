@@ -15,9 +15,14 @@ docker-compose up
 
 ```bash
 http://localhost:5555/node 
+http://localhost:5555/ping
 ```
 It query the nginx server which in turn query the node server(s) (acts as a load balancer)
 
 ## Arquitecture
 
-ToDo
+[Arquitectura](/doc/arquitectura.png)
+
+## Recursos
+
+https://docs.docker.com/engine/install/ubuntu/
