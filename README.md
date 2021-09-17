@@ -19,7 +19,7 @@ http://localhost:5555/ping
 ```
 It query the nginx server which in turn query the node server(s) (acts as a load balancer)
 
-## Arquitecture
+## Design
 
 ![Arquitectura](/doc/arquitectura.png)
 
