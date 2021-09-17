@@ -21,7 +21,7 @@ It query the nginx server which in turn query the node server(s) (acts as a load
 
 ## Arquitecture
 
-[Arquitectura](/doc/arquitectura.png)
+![Arquitectura](/doc/arquitectura.png)
 
 ## Recursos
 
