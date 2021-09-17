@@ -23,6 +23,6 @@ It query the nginx server which in turn query the node server(s) (acts as a load
 
 ![Arquitectura](/doc/arquitectura.png)
 
-## Recursos
+## Resources
 
 https://docs.docker.com/engine/install/ubuntu/
