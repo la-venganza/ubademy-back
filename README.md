@@ -1,2 +1,16 @@
-# ubademy-back
-Backend de la app ubademy (taller2 - fiuba)
+# Ubademy - Backend
+
+Backend of Ubademy application, it works as a link between front-end app and microservices.
+
+
+## How to run:
+```bash
+cd app
+npm install
+cd ..
+docker-compose up
+```
+
+## Arquitecture
+
+ToDo
