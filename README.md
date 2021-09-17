@@ -3,7 +3,7 @@
 Backend of Ubademy application, it works as a link between front-end app and microservices.
 
 
-## How to run:
+## How to run
 ```bash
 cd app
 npm install
