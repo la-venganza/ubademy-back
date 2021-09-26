@@ -1,25 +1,69 @@
-
 const express = require('express')
 const request = require('request')
 const sleep = require('sleep');
+const passport = require('passport');
+const cookieSession = require('cookie-session');
+
 const app = express()
+require('./passport');
+
 const port = 3000
-const TIMEOUT = 5*1000
+app.use(cookieSession({
+  name: 'google-auth-session',
+  keys: ['key1', 'key2']
+}))
 
-app.get('/node', (_req, res) => {
+const isLoggedIn = (req, res, next) => {
+  if (req.user) {
+      next();
+  } else {
+      res.sendStatus(401);
+  }
+}
 
-  // sleep random amount of time to test graphs
-  var delay = (Math.floor(Math.random() * 500)) + 200
-  sleep.msleep(delay)
+app.use(passport.initialize());
+app.use(passport.session());
 
-  res.send('Hello World Node!\n')
-});
+app.get("/", (req, res) => {
+  res.json({message: "You are not logged in"})
+})
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-});
+app.get("/failed", (req, res) => {
+  res.send("Failed")
+})
+
+app.get("/success", isLoggedIn, (req, res) => {
+  res.send(`Welcome ${req.user.displayName}`)
+})
 
 app.get('/ping', (_req, res) => {
   res.status(200).send('Ping\n');
+});
+
+app.get('/auth',
+    passport.authenticate('google', {
+            scope:
+                ['email', 'profile']
+        }
+    ));
+
+app.get('/auth/callback',
+    passport.authenticate('google', {
+        failureRedirect: '/failed',
+    }),
+    function (req, res) {
+        res.redirect('/success')
+
+    }
+);
+
+app.get('/logout', (req, res) => {
+  req.session = null;
+  req.logout();
+  res.redirect('/');
+});
+
+app.listen(port, () => {
+  console.log(`Ubademy back app listening at http://localhost:${port}`)
 });
 
