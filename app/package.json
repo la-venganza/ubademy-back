@@ -19,7 +19,8 @@
     "passport-google-oauth20": "^2.0.0",
     "properties-reader": "^2.2.0",
     "request": "2.88.2",
-    "sleep": "^6.3.0"
+    "sleep": "^6.3.0",
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
     "cross-env": "^7.0.2"

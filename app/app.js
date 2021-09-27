@@ -4,6 +4,9 @@ const sleep = require('sleep');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
 
+const swaggerUi = require('swagger-ui-express');
+swaggerDocument = require('./swagger.json');
+
 const app = express()
 require('./passport');
 
@@ -23,6 +26,11 @@ const isLoggedIn = (req, res, next) => {
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(
+  '/api-docs',
+  swaggerUi.serve, 
+  swaggerUi.setup(swaggerDocument)
+);
 
 app.get("/", (req, res) => {
   res.json({message: "You are not logged in"})
