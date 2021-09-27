@@ -1,0 +1,38 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0", 
+      "title": "Ubademy - Backend",
+      "description": "Ubademy -  Coursera like app, for taller2",
+      "license": {
+        "name": "FIUBA",
+        "url": "https://fi.uba.ar/"
+      }
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Ubademy",
+        "description": "Facade for ubademy services."
+      }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    
+    "paths": {
+        "/auth": {
+          "get": {
+            "tags": ["Auth"],
+            "summary": "Authenticate Client",
+            "responses": {
+              "200": {
+                "description": "OK"
+              }
+            }
+          }
+        }
+      }
+      
+  }
