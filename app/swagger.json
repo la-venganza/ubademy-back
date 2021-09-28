@@ -24,8 +24,19 @@
     "paths": {
         "/auth": {
           "get": {
-            "tags": ["Auth"],
+            "tags": ["Auth Login"],
             "summary": "Authenticate Client",
+            "responses": {
+              "200": {
+                "description": "OK"
+              }
+            }
+          }
+        },
+        "/logout": {
+          "get": {
+            "tags": ["Auth Logout"],
+            "summary": "Logout client",
             "responses": {
               "200": {
                 "description": "OK"
