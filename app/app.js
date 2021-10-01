@@ -3,65 +3,37 @@ const request = require('request')
 const sleep = require('sleep');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
+const swaggerUi = require('swagger-ui-express');
+swaggerDocument = require('./swagger.json');
+services = require('./services.js');
+require('./passport')
 
 const app = express()
-require('./passport');
 
 const port = 3000
+
 app.use(cookieSession({
   name: 'google-auth-session',
   keys: ['key1', 'key2']
 }))
 
-const isLoggedIn = (req, res, next) => {
-  if (req.user) {
-      next();
-  } else {
-      res.sendStatus(401);
-  }
-}
-
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.get("/", (req, res) => {
-  res.json({message: "You are not logged in"})
-})
-
-app.get("/failed", (req, res) => {
-  res.send("Failed")
-})
-
-app.get("/success", isLoggedIn, (req, res) => {
-  res.send(`Welcome ${req.user.displayName}`)
-})
-
-app.get('/ping', (_req, res) => {
-  res.status(200).send('Ping\n');
-});
-
-app.get('/auth',
-    passport.authenticate('google', {
-            scope:
-                ['email', 'profile']
-        }
-    ));
-
-app.get('/auth/callback',
-    passport.authenticate('google', {
-        failureRedirect: '/failed',
-    }),
-    function (req, res) {
-        res.redirect('/success')
-
-    }
+app.use(
+  '/api-docs',
+  swaggerUi.serve, 
+  swaggerUi.setup(swaggerDocument)
 );
 
-app.get('/logout', (req, res) => {
-  req.session = null;
-  req.logout();
-  res.redirect('/');
-});
+// Services mapping
+
+app.use('/', services);
+app.use('/failed', services);
+app.use('/success', services);
+app.use('/ping', services);
+app.use('/auth', services);
+app.use('/auth/callback', services);
+app.use('/logout', services);
 
 app.listen(port, () => {
   console.log(`Ubademy back app listening at http://localhost:${port}`)
