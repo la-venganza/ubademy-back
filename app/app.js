@@ -1,16 +1,17 @@
 const express = require('express')
 const request = require('request')
-const sleep = require('sleep');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
 const swaggerUi = require('swagger-ui-express');
 swaggerDocument = require('./swagger.json');
 services = require('./services.js');
-require('./passport')
+firebase = require('./firebase.js');
+require('./passport');
+require('dotenv').config();
 
 const app = express()
 
-const port = 3000
+const port = process.env.PORT
 
 app.use(cookieSession({
   name: 'google-auth-session',

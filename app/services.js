@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 require('./passport')
 const passport = require('passport');
+require('dotenv').config();
 
 const isLoggedIn = (req, res, next) => {
     if (req.user) {
