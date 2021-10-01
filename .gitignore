@@ -1,1 +1,3 @@
 sensitive.conf
+.env
+node_modules

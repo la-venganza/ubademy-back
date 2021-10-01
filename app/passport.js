@@ -1,7 +1,6 @@
 const passport =require("passport")
 const config = require("config");
-const PropertiesReader = require('properties-reader');
-const prop = PropertiesReader('sensitive.conf');
+require('dotenv').config();
 
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
@@ -14,11 +13,12 @@ passport.deserializeUser(function(user, done) {
 });
 
 passport.use(new GoogleStrategy({
-        clientID:`${prop.get('google.client.id')}`,
-        clientSecret:`${prop.get('google.client.secret')}`,
-        callbackURL: `${config.get('callbackURL')}/auth/callback`,
+        clientID:`${process.env.GOOGLE_CLIENT_ID}`,
+        clientSecret:`${process.env.GOOGLE_CLIENT_SECRET}`,
+        callbackURL: `${process.env.CALLBACK_URL}/auth/callback`,
         passReqToCallback   : true
     },
+
     function(request, accessToken, refreshToken, profile, done) {
             return done(null, profile);
     }

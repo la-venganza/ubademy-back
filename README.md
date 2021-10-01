@@ -25,6 +25,7 @@ Starts the server and the load balancer in a dockerized environment
 cd app
 npm install
 cd ..
+docker-compose build
 docker-compose up
 ```
 
@@ -35,16 +36,10 @@ docker-compose up
 
 ```bash
 http://localhost:3000/
-http://localhost:3000/auth 
+http://localhost:3000/api-docs 
 http://localhost:3000/health-check
 ```
 
-### Dockerized mode
-
-```bash
-http://localhost:5555/
-http://localhost:5555/auth
-http://localhost:5555/health-check
 ```
 It query the nginx server which in turn query the node server(s) (acts as a load balancer)
 
