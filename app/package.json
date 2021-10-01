@@ -4,7 +4,7 @@
   "description": "Ubademy - Coursera like application backend.",
   "main": "app.js",
   "scripts": {
-    "start": "PORT=3000 nodemon server.js",
+    "start": "PORT=process.env.PORT nodemon server.js",
     "start:dev": "PORT=3000 nodemon server.js",
     "start:prod": "PORT=5000 nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
