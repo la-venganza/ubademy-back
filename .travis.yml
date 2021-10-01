@@ -9,6 +9,7 @@ cache:
   directories:
   - node_modules
 before_install:
+- cd app
 - npm update
 install:
 - npm install
