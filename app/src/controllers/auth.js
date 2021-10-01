@@ -6,6 +6,7 @@ exports.doLogin = (req, res) => passport.authenticate('google', {
 });
 
 exports.authCallback = (req, res) => {
+  // TODO: Here we should implement login check and callback to app
   res.redirect('/success');
 };
 
