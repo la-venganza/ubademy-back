@@ -23,5 +23,9 @@
     "properties-reader": "^2.2.0",
     "request": "2.88.2",
     "swagger-ui-express": "^4.1.6"
+  },
+  "devDependencies": {
+    "coveralls": "^3.1.1",
+    "jest": "^27.2.4"
   }
 }
