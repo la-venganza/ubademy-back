@@ -4,7 +4,7 @@ const authController = require('../controllers/auth');
 
 const router = express.Router();
 
-router.post('/', isLoggedIn, authController.post);
+router.post('/', isLoggedIn, authController.doLogin);
 router.get('/callback', isLoggedIn, authController.authCallback);
 router.post('/logout', isLoggedIn, authController.logout);
 router.get('/success', isLoggedIn, (req, res) => {

@@ -19,3 +19,5 @@ router.get('/ping', (_req, res) => {
 // Routes mapping
 
 router.use('/auth', auth);
+
+module.exports = router;

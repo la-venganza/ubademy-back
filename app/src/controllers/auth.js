@@ -1,6 +1,6 @@
 const passport = require('passport');
 
-exports.post = (req, res) => passport.authenticate('google', {
+exports.doLogin = (req, res) => passport.authenticate('google', {
   scope:
             ['email', 'profile'],
 });
