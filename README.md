@@ -35,15 +35,13 @@ docker-compose up
 
 ## How to browse
 
-### Stand alone mode 
-
 ```bash
 http://localhost:3000/
 http://localhost:3000/api-docs 
 http://localhost:3000/health-check
 ```
 
-It query the nginx server which in turn query the node server(s) (acts as a load balancer)
+In prod mode, the nginx server is queried which in turn query the node server(s) (acts as a load balancer)
 
 ## Design
 
