@@ -43,7 +43,6 @@ http://localhost:3000/api-docs
 http://localhost:3000/health-check
 ```
 
-```
 It query the nginx server which in turn query the node server(s) (acts as a load balancer)
 
 ## Design
