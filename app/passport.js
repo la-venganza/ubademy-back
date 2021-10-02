@@ -1,25 +1,22 @@
-const passport =require("passport")
-const config = require("config");
+const passport = require('passport');
+const config = require('config');
 require('dotenv').config();
 
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-passport.serializeUser(function(user, done) {
-    done(null, user);
+passport.serializeUser((user, done) => {
+  done(null, user);
 });
 
-passport.deserializeUser(function(user, done) {
-        done(null, user);
+passport.deserializeUser((user, done) => {
+  done(null, user);
 });
 
 passport.use(new GoogleStrategy({
-        clientID:`${process.env.GOOGLE_CLIENT_ID}`,
-        clientSecret:`${process.env.GOOGLE_CLIENT_SECRET}`,
-        callbackURL: `${process.env.CALLBACK_URL}/auth/callback`,
-        passReqToCallback   : true
-    },
+  clientID: `${process.env.GOOGLE_CLIENT_ID}`,
+  clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
+  callbackURL: `${process.env.CALLBACK_URL}/auth/callback`,
+  passReqToCallback: true,
+},
 
-    function(request, accessToken, refreshToken, profile, done) {
-            return done(null, profile);
-    }
-));
+((request, accessToken, refreshToken, profile, done) => done(null, profile))));
