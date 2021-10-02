@@ -1,4 +1,4 @@
-const authController = require('../../controllers/auth');
+const authController = require('../src/controllers/auth');
 
 describe('Auth controller', () => {
   describe('authCallback', () => {
