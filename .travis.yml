@@ -1,7 +1,7 @@
 sudo: false
 language: node_js
 node_js:
-- '10.19.0'
+- '14'
 branches:
   only:
   - develop
@@ -15,4 +15,3 @@ install:
 - npm install
 script:
 - npm test
-- jest --coverage && coveralls < coverage/lcov.info

@@ -7,7 +7,7 @@
     "start": "nodemon server.js",
     "start:dev": "PORT=3000 nodemon server.js",
     "start:prod": "PORT=5000 nodemon server.js",
-    "test": "jest --passWithNoTests --coverage"
+    "test": "jest --coverage && coveralls < coverage/lcov.info"
   },
   "author": "",
   "license": "ISC",
