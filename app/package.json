@@ -14,10 +14,13 @@
   "license": "ISC",
   "dependencies": {
     "config": "^3.3.6",
+    "connect-datadog": "0.0.9",
     "cookie-session": "^1.4.0",
+    "dd-trace": "^1.4.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "firebase": "^9.1.1",
+    "hot-shots": "^8.5.2",
     "nodemon": "^2.0.13",
     "passport": "^0.5.0",
     "passport-google-oauth20": "^2.0.0",

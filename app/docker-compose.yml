@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+    application:
+        container_name: ubademy-back
+        build:
+            context: .
+        volumes:
+            - .:/usr/src/app
+        restart: always
+        ports:
+            - "3000:3000"
+        depends_on:
+            - datadog-agent
+    datadog-agent:
+        container_name: datadog-agent
+        image: datadog/agent:latest
+        environment:
+            - DD_API_KEY=${DATADOG_API_KEY}
+            - DD_SITE=${DATADOG_SITE:-datadoghq.com}
+            - DD_HOSTNAME=${HOSTNAME}
+            - DD_LOGS_ENABLED=true
+            #- DD_PROCESS_AGENT_ENABLED=true
+            - DD_APM_ENABLED=true
+            - NON_LOCAL_TRAFFIC=true
+#            - DD_BIND_HOST=0.0.0.0
+        ports:
+            - "8126:8126/tcp"
+        volumes:
+            # Logs are collected from container stdout/stderr from the Docker socket.
+            - /var/run/docker.sock:/var/run/docker.sock:ro
