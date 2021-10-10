@@ -5,7 +5,6 @@ const cookieSession = require('cookie-session');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 // require('./firebase');
-require('./passport');
 require('dotenv').config();
 const routes = require('./src/routes');
 

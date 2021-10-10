@@ -1,4 +1,5 @@
 [![Build Status](https://app.travis-ci.com/la-venganza/ubademy-back.svg?branch=develop)](https://app.travis-ci.com/la-venganza/ubademy-back)
+
 [![Coverage Status](https://coveralls.io/repos/github/la-venganza/ubademy-back/badge.svg?branch=develop)](https://coveralls.io/github/la-venganza/ubademy-back?branch=develop)
 
 # Ubademy - Backend
@@ -35,16 +36,14 @@ docker-compose up
 
 ## How to browse
 
-### Stand alone mode 
-
 ```bash
 http://localhost:3000/
 http://localhost:3000/api-docs 
 http://localhost:3000/health-check
 ```
 
-```
-It query the nginx server which in turn query the node server(s) (acts as a load balancer)
+In prod mode, the nginx server is queried which in turn query the node server(s) (acts as a load balancer)
+
 
 ## Design
 
