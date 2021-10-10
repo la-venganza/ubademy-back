@@ -1,3 +1,5 @@
 sensitive.conf
 .env
 node_modules
+.vscode/
+package-lock.json
