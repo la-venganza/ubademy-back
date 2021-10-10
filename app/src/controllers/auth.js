@@ -17,9 +17,9 @@ exports.authCallback = (req, res, next) => {
   }),
   (function (req, res) {
     const redirectUrl = req.session.redirect;
-    console.log(`Redirecting to ${redirectUrl}`);
-    // Successful authentication, redirect home.
     if (redirectUrl) {
+      console.log(`Redirecting to ${redirectUrl}`);
+      // Successful authentication, redirect home.
       res.redirect(redirectUrl);
     } else {
       res.redirect('/auth/success');
