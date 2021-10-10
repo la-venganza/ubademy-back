@@ -1,11 +1,12 @@
-version: '2'
+version: '3.7'
 
 services:
     node:
         build: app/
         volumes:
             - ./app/app.js:/usr/src/app/app.js:ro
-
+        depends_on:
+            - datadog-agent
     nginx:
         image: nginx:1.19.8
         ports:
@@ -15,3 +16,23 @@ services:
             - ./store/static/files:/static:ro
         links:
             - node
+    datadog-agent:
+        container_name: datadog-agent
+        image: datadog/agent:latest
+        environment:
+            - DD_API_KEY=${DATADOG_API_KEY}
+            - DD_SITE=${DATADOG_SITE:-datadoghq.com}
+            - DD_HOSTNAME=${HOSTNAME}
+            - DD_LOGS_ENABLED=true
+            - DD_PROCESS_AGENT_ENABLED=true
+            - DD_APM_ENABLED=true
+            - NON_LOCAL_TRAFFIC=true
+            - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
+#            - DD_BIND_HOST=0.0.0.0
+        ports:
+            - "8126:8126/tcp"
+        volumes:
+            # Logs are collected from container stdout/stderr from the Docker socket.
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+            - /proc/:/host/proc/:ro
+            - /sys/fs/cgroup:/host/sys/fs/cgroup:ro

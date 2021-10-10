@@ -9,17 +9,17 @@ require('./passport');
 require('dotenv').config();
 const routes = require('./src/routes');
 
-const dd_options = {
+const ddOptions = {
   response_code: true,
   tags: ['app:ubademy_back'],
 };
 
-const connect_datadog = require('connect-datadog')(dd_options);
+const connectDatadog = require('connect-datadog')(ddOptions);
 
 const app = express();
 
 const port = process.env.PORT || 3000;
-app.use(connect_datadog);
+app.use(connectDatadog);
 app.use(cookieSession({
   name: 'google-auth-session',
   keys: ['key1', 'key2'],
