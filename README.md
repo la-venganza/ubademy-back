@@ -43,6 +43,7 @@ http://localhost:3000/health-check
 
 In prod mode, the nginx server is queried which in turn query the node server(s) (acts as a load balancer)
 
+
 ## Design
 
 ![Arquitectura](/doc/arquitectura.png)
