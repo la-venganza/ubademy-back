@@ -5,15 +5,15 @@ services:
         build: app/
         volumes:
             - ./app/app.js:/usr/src/app/app.js:ro
-        depends_on:
-            - datadog-agent
+        # depends_on:
+        #     - datadog-agent
     nginx:
         image: nginx:1.19.8
         ports:
             - "3000:80"
         volumes:
             - ./nginx_reverse_proxy.conf:/etc/nginx/conf.d/default.conf:ro
-            - ./store/static/files:/static:ro
+            - ./store/static/files:/static:ro   
         links:
             - node
     datadog-agent:

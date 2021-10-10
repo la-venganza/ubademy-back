@@ -8,17 +8,18 @@ const swaggerDocument = require('./swagger.json');
 require('dotenv').config();
 const routes = require('./src/routes');
 
-const ddOptions = {
-  response_code: true,
-  tags: ['app:ubademy_back'],
-};
+// const ddOptions = {
+//   response_code: true,
+//   tags: ['app:ubademy_back'],
+// };
 
-const connectDatadog = require('connect-datadog')(ddOptions);
+// const connectDatadog = require('connect-datadog')(ddOptions);
+const tracer = require('dd-trace').init();
 
 const app = express();
 
 const port = process.env.PORT || 3000;
-app.use(connectDatadog);
+// app.use(connectDatadog);
 app.use(cookieSession({
   name: 'google-auth-session',
   keys: ['key1', 'key2'],
