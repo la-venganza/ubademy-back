@@ -31,13 +31,16 @@ exports.doLogin = (req, res, next) => {
 
 exports.authenticateCallback = (req, res) => {
   const redirectUrl = req.session.redirect;
+
+  if (req.user) {
+    postUser(req.user);
+  }
+
   if (redirectUrl) {
     console.log(`Redirecting to ${redirectUrl}`);
     // Successful authentication, redirect home.
-    postUser(req.user);
     res.redirect(redirectUrl);
   } else {
-    postUser(req.user);
     res.redirect('/auth/success');
   }
 };

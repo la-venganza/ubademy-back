@@ -7,7 +7,8 @@ describe('Auth controller', () => {
       const sessionMock = { redirect: redirectMock };
       const req = { session: sessionMock };
       const res = { redirect: redirectMock };
-      authController.authCallback(req, res);
+
+      authController.authenticateCallback(req, res);
       expect(redirectMock).toHaveBeenCalled();
     });
   });
