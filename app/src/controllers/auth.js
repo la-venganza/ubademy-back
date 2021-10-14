@@ -29,17 +29,37 @@ exports.doLogin = (req, res, next) => {
   authenticator(req, res, next);
 };
 
+// who needs a cookie parser
+const parseCookie = (str) => str
+  .split(';')
+  .map((v) => v.split('='))
+  .reduce((acc, v) => {
+    acc[decodeURIComponent(v[0].trim())] = decodeURIComponent(v[1].trim());
+    return acc;
+  }, {});
+
 exports.authenticateCallback = (req, res) => {
   const redirectUrl = req.session.redirect;
 
+  let userJWT = 'none';
   if (req.user) {
     postUser(req.user);
+    // eslint-disable-next-line no-underscore-dangle
+    if (req.session._ctx) {
+      // eslint-disable-next-line no-underscore-dangle
+      userJWT = parseCookie(req.session._ctx.headers.cookie)[req.session._ctx.sessionKey];
+      console.log(userJWT);
+    }
   }
+
+  // eslint-disable-next-line no-underscore-dangle
 
   if (redirectUrl) {
     console.log(`Redirecting to ${redirectUrl}`);
     // Successful authentication, redirect home.
-    res.redirect(redirectUrl);
+
+    // warning!! jwt dangerously set in query string!
+    res.redirect(`${redirectUrl}?name=${req.user.name.givenName}&jwt=${userJWT}`);
   } else {
     res.redirect('/auth/success');
   }
