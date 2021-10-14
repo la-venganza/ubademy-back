@@ -16,7 +16,16 @@ describe('Auth controller', () => {
         emails: [{ value: 'asdfads' }],
       };
       const sessionMock = { redirect: redirectMock };
-      const req = { session: sessionMock, user };
+      const req = {
+        session: sessionMock,
+        user,
+        _ctx: {
+          sessionKey: 'test',
+          headers: {
+            cookie: 'test=lala',
+          },
+        },
+      };
       const res = { redirect: redirectMock };
 
       authController.authenticateCallback(req, res);
