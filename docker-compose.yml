@@ -2,11 +2,11 @@ version: '3.7'
 
 services:
     node:
-        build: app/
+        build: .
         volumes:
             - ./app/app.js:/usr/src/app/app.js:ro
-        # depends_on:
-        #     - datadog-agent
+        depends_on:
+            - datadog-agent
     nginx:
         image: nginx:1.19.8
         ports:
@@ -17,7 +17,7 @@ services:
         links:
             - node
     datadog-agent:
-        container_name: datadog-agent
+        container_name: datadog-agent-back
         image: datadog/agent:latest
         environment:
             - DD_API_KEY=${DATADOG_API_KEY}
@@ -28,7 +28,7 @@ services:
             - DD_APM_ENABLED=true
             - NON_LOCAL_TRAFFIC=true
             - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
-#            - DD_BIND_HOST=0.0.0.0
+            - DD_BIND_HOST=0.0.0.0
         ports:
             - "8126:8126/tcp"
         volumes:
