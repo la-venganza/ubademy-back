@@ -55,7 +55,7 @@ exports.authenticateCallback = (req, res) => {
     // Successful authentication, redirect home.
 
     // warning!! jwt dangerously set in query string!
-    res.redirect(`${redirectUrl}?jwt=${userJWT}`);
+    res.redirect(`${redirectUrl}?name=${req.user.name.givenName}&jwt=${userJWT}`);
   } else {
     res.redirect('/auth/success');
   }
