@@ -7,6 +7,8 @@ const swaggerDocument = require('./swagger.json');
 require('dotenv').config();
 const routes = require('./src/routes');
 
+const tracer = require('dd-trace').init();
+
 const app = express();
 
 const port = process.env.PORT || 3000;
