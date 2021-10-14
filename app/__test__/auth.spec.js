@@ -15,16 +15,18 @@ describe('Auth controller', () => {
         },
         emails: [{ value: 'asdfads' }],
       };
-      const sessionMock = { redirect: redirectMock };
-      const req = {
-        session: sessionMock,
-        user,
+      const sessionMock = {
+        redirect: redirectMock,
         _ctx: {
           sessionKey: 'test',
           headers: {
             cookie: 'test=lala',
           },
         },
+      };
+      const req = {
+        session: sessionMock,
+        user,
       };
       const res = { redirect: redirectMock };
 
