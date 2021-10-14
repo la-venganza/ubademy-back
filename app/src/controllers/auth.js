@@ -47,7 +47,7 @@ exports.authenticateCallback = (req, res) => {
     // eslint-disable-next-line no-underscore-dangle
     userJWT = parseCookie(req.session._ctx.headers.cookie)[req.session._ctx.sessionKey];
   }
-  console.log('aloha');
+
   // eslint-disable-next-line no-underscore-dangle
 
   if (redirectUrl) {
