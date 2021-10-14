@@ -1,4 +1,5 @@
 [![Build Status](https://app.travis-ci.com/la-venganza/ubademy-back.svg?branch=develop)](https://app.travis-ci.com/la-venganza/ubademy-back)
+
 [![Coverage Status](https://coveralls.io/repos/github/la-venganza/ubademy-back/badge.svg?branch=develop)](https://coveralls.io/github/la-venganza/ubademy-back?branch=develop)
 
 # Ubademy - Backend
