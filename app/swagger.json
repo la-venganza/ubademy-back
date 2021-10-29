@@ -24,7 +24,7 @@
     "paths": {
         "/auth": {
           "get": {
-            "tags": ["Auth Login"],
+            "tags": ["Auth"],
             "summary": "Authenticate Client",
             "responses": {
               "200": {
@@ -35,11 +35,101 @@
         },
         "/logout": {
           "get": {
-            "tags": ["Auth Logout"],
+            "tags": ["Auth"],
             "summary": "Logout client",
             "responses": {
               "200": {
                 "description": "OK"
+              }
+            }
+          }
+        },
+        "/course": {
+          "post": {
+            "tags": ["Courses"],
+            "summary": "Create new course",
+            "responses": {
+              "201": {
+                "description": "OK",
+                "content": {
+                  "application/json": {
+                    "id": "id of created course"
+                  }
+                } 
+              },
+              "400": {
+                "description": "Error"
+              }
+            }
+          }
+        },
+        "/course/:id": {
+          "get": {
+            "tags": ["Courses"],
+            "summary": "Get course's content",
+            "responses": {
+              "200": {
+                "description": "OK"
+              },
+              "400": {
+                "description": "Error"
+              }
+            }
+          },
+          "put": {
+            "tags": ["Courses"],
+            "summary": "Modify course's content",
+            "responses": {
+              "200": {
+                "description": "OK"
+              },
+              "400": {
+                "description": "Error"
+              }
+            }
+          }
+        },
+        "/user": {
+          "post": {
+            "tags": ["Users"],
+            "summary": "Create new user",
+            "responses": {
+              "201": {
+                "description": "OK",
+                "content": {
+                  "application/json": {
+                    "id": "id of created user"
+                  }
+                } 
+              },
+              "400": {
+                "description": "Error"
+              }
+            }
+          }
+        },
+        "/users/:id": {
+          "get": {
+            "tags": ["Users"],
+            "summary": "Get user's content",
+            "responses": {
+              "200": {
+                "description": "OK"
+              },
+              "400": {
+                "description": "Error"
+              }
+            }
+          },
+          "put": {
+            "tags": ["Users"],
+            "summary": "Modify user's content",
+            "responses": {
+              "200": {
+                "description": "OK"
+              },
+              "400": {
+                "description": "Error"
               }
             }
           }

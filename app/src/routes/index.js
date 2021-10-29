@@ -1,5 +1,6 @@
 const express = require('express');
 const auth = require('./auth');
+const course = require('./course');
 
 const router = express.Router();
 
@@ -19,5 +20,6 @@ router.get('/ping', (_req, res) => {
 // Routes mapping
 
 router.use('/auth', auth);
+router.use('/course', course);
 
 module.exports = router;
