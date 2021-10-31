@@ -108,7 +108,7 @@
             }
           }
         },
-        "/users/:id": {
+        "/user/:id": {
           "get": {
             "tags": ["Users"],
             "summary": "Get user's content",

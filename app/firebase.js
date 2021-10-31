@@ -1,5 +1,5 @@
-const firebaseApp = require("firebase/app")
-const firebaseAuth = require("firebase/auth")
+const { initializeApp } = require('firebase-admin/app');
+const firebaseAuth = require("firebase-admin/auth")
 require('dotenv').config();
 
 const firebaseConfig = {
@@ -11,32 +11,18 @@ const firebaseConfig = {
   appId:`${process.env.FIREBASE_APPID}`
 };
 
-const app = firebaseApp.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-const provider = new firebaseAuth.GoogleAuthProvider();
+let auth = firebaseAuth.getAuth(app);
 
-const auth = firebaseAuth.getAuth();
-firebaseAuth.signInWithPopup(auth, provider)
-  .then((result) => {
-   
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
+async function verifyIdToken (token) {
+  try {
+    const decodedToken = await auth.verifyIdToken(token)
+    return decodedToken
+   } catch (e) {
+    console.log(e)
+    throw new Error(e)
+   }
+}
 
-    // The signed-in user info.
-    const user = result.user;
-
-  }).catch((error) => {
-    
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    
-    // The email of the user's account used.
-    const email = error.email;
-    
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-
-  });
-
+module.exports = verifyIdToken

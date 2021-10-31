@@ -13,27 +13,13 @@ router.get('/:id', async function(req, res) {
         // Pedir al back de python
         console.log(req.params.id);
         body = {
-            "id": 1,
-            "title": 'Titulo',
-            "description": 'Descripcion re copada',
-            "stages": [
-                {
-                    "position": 0,
-                    "active": true,
-                    "required": false,
-                    "multimedia_id": 'idhasheado12yt',
-                    "title": 'Stage 0 Title',
-                    "multimedia_type": 'Tipo',
-                },
-                {
-                    "position": 1,
-                    "active": true,
-                    "required": true,
-                    "multimedia_id": 'otrohash?',
-                    "title": 'Stage 1 Title',
-                    "multimedia_type": 'Otro tipo',
-                }
-            ]
+            "first_name": "A name",
+            "last_name": "A lastname",
+            "email": "user@example.com",
+            "role": "role",
+            "is_admin": false,
+            "age": 25,
+            "subscription" :  "basic"
         }
         res.status(200).send(body)
     } catch (e) {

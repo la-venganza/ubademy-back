@@ -11,7 +11,8 @@ router.get('/', setRedirect, authController.doLogin);
 router.get('/callback',
   // eslint-disable-next-line no-unused-expressions
   passport.authenticate('google', { failureRedirect: '/failed' }),
-  authController.authenticateCallback);
+  authController.authenticateCallback
+);
 
 router.get('/logout', isLoggedIn, authController.logout);
 router.get('/success', isLoggedIn, (req, res) => {
