@@ -1,14 +1,15 @@
 const express = require('express');
 const course = require('./course');
+const user = require('./user')
 
 const router = express.Router();
 
 // Health check routes
-router.get('/', (req, res) => {
+router.get('/', (_req, res) => {
   res.json({ message: 'You are not logged in' });
 });
 
-router.get('/failed', (req, res) => {
+router.get('/failed', (_req, res) => {
   res.send('Failed');
 });
 
@@ -19,5 +20,6 @@ router.get('/ping', (_req, res) => {
 // Routes mapping
 
 router.use('/course', course);
+router.use('/user', user)
 
 module.exports = router;

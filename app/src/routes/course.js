@@ -1,14 +1,14 @@
 const express = require('express');
 const verifyIdToken =  require('../middlewares/firebase')
-const getcookie = require('../middlewares/cookieHandler')
+const ConnectionError = require('../errors/connecionError')
+const AuthError = require('../errors/authError')
 
 const router = express.Router();
 
 router.get('/:id', async function(req, res) {
     // Verifica que el token de firebase sea valido
     try {
-        const cookies = getcookie(req)
-        const uid = await verifyIdToken(cookies[firebaseAuth])
+        const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
         // Pedir al back de python
         console.log(req.params.id);
@@ -51,6 +51,12 @@ router.get('/:id', async function(req, res) {
                 message: e.message
             }
             res.status(401).send(body)
+        } else {
+            body = {
+                error: e.name,
+                message: e.message
+            }
+            res.status(500).send(body)
         }
     }
 });
@@ -58,8 +64,8 @@ router.get('/:id', async function(req, res) {
 router.post('/', async function(req, res) {
     // Verificar request y mandar al back de python
     try {
-        const cookies = getcookie(req)
-        const uid = await verifyIdToken(cookies[firebaseAuth])
+        const uid = await verifyIdToken(req.cookies.firebaseAuth)
+
         body = {id: 1}
         // Send to back
         res.status(201).send(body)
@@ -77,6 +83,12 @@ router.post('/', async function(req, res) {
                 message: e.message
             }
             res.status(401).send(body)
+        } else {
+            body = {
+                error: e.name,
+                message: e.message
+            }
+            res.status(500).send(body)
         }
     }
 });
@@ -84,8 +96,8 @@ router.post('/', async function(req, res) {
 router.put('/:id', async function(req, res) {
     // Verificar request y mandar al back de python
     try {
-        const cookies = getcookie(req)
-        const uid = await verifyIdToken(cookies[firebaseAuth])
+        const uid = await verifyIdToken(req.cookies.firebaseAuth)
+
         // Send to back
         res.status(202).send('PUT successful')
     } catch (e) {
@@ -102,6 +114,12 @@ router.put('/:id', async function(req, res) {
                 message: e.message
             }
             res.status(401).send(body)
+        } else {
+            body = {
+                error: e.name,
+                message: e.message
+            }
+            res.status(500).send(body)
         }
     }
 });

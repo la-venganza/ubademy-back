@@ -1,8 +1,8 @@
 class ConnectionError extends Error {
     
-    constructor(message) {
+    constructor(e) {
         // Pasa los argumentos restantes (incluidos los específicos del proveedor) al constructor padre
-        super()
+        super(e)
     
         // Mantiene un seguimiento adecuado de la pila para el lugar donde se lanzó nuestro error (solo disponible en V8)
         if (Error.captureStackTrace) {
@@ -15,3 +15,5 @@ class ConnectionError extends Error {
         this.date = new Date()
     }
 }
+
+module.exports = ConnectionError
