@@ -1,5 +1,5 @@
 const express = require('express');
-const verifyIdToken =  require('../../firebase')
+const verifyIdToken =  require('../middlewares/firebase')
 const getcookie = require('../middlewares/cookieHandler')
 
 const router = express.Router();
@@ -7,12 +7,12 @@ const router = express.Router();
 router.get('/:id', async function(req, res) {
     // Verifica que el token de firebase sea valido
     try {
-        let cookies = getcookie(req)
-        let uid = await verifyIdToken(cookies[firebaseAuth])
+        const cookies = getcookie(req)
+        const uid = await verifyIdToken(cookies[firebaseAuth])
 
         // Pedir al back de python
         console.log(req.params.id);
-        body = {
+        let body = {
             "first_name": "A name",
             "last_name": "A lastname",
             "email": "user@example.com",
@@ -23,41 +23,71 @@ router.get('/:id', async function(req, res) {
         }
         res.status(200).send(body)
     } catch (e) {
-        body = {
-            error: e
+        let body = {}
+        if (e instanceof ConnectionError) {
+            body = {
+                error: e.name,
+                message: e.message
+            }
+            res.status(500).send(body)
+        } else if (e instanceof AuthError) {
+            body = {
+                error: e.name,
+                message: e.message
+            }
+            res.status(401).send(body)
         }
-        res.status(400).send(body)
     }
 });
 
 router.post('/', async function(req, res) {
     // Verificar request y mandar al back de python
     try {
-        let cookies = getcookie(req)
-        let uid = await verifyIdToken(cookies[firebaseAuth])
-        body = {id: 1}
+        const cookies = getcookie(req)
+        const uid = await verifyIdToken(cookies[firebaseAuth])
+        let body = {id: 1}
         // Send to back
         res.status(201).send(body)
     } catch (e) {
-        body = {
-            error: e
+        let body = {}
+        if (e instanceof ConnectionError) {
+            body = {
+                error: e.name,
+                message: e.message
+            }
+            res.status(500).send(body)
+        } else if (e instanceof AuthError) {
+            body = {
+                error: e.name,
+                message: e.message
+            }
+            res.status(401).send(body)
         }
-        res.status(400).send(body)
     }
 });
 
 router.put('/:id', async function(req, res) {
     // Verificar request y mandar al back de python
     try {
-        let cookies = getcookie(req)
-        let uid = await verifyIdToken(cookies[firebaseAuth])
+        const cookies = getcookie(req)
+        const uid = await verifyIdToken(cookies[firebaseAuth])
         // Send to back
         res.status(202).send('PUT successful')
     } catch (e) {
-        body = {
-            error: e
+        let body = {}
+        if (e instanceof ConnectionError) {
+            body = {
+                error: e.name,
+                message: e.message
+            }
+            res.status(500).send(body)
+        } else if (e instanceof AuthError) {
+            body = {
+                error: e.name,
+                message: e.message
+            }
+            res.status(401).send(body)
         }
-        res.status(400).send(body)
     }
 });
 

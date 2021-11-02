@@ -13,7 +13,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-let auth = firebaseAuth.getAuth(app);
+const auth = firebaseAuth.getAuth(app);
 
 async function verifyIdToken (token) {
   try {
