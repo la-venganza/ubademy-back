@@ -22,28 +22,6 @@
     "produces": ["application/json"],
     
     "paths": {
-        "/auth": {
-          "get": {
-            "tags": ["Auth"],
-            "summary": "Authenticate Client",
-            "responses": {
-              "200": {
-                "description": "OK"
-              }
-            }
-          }
-        },
-        "/logout": {
-          "get": {
-            "tags": ["Auth"],
-            "summary": "Logout client",
-            "responses": {
-              "200": {
-                "description": "OK"
-              }
-            }
-          }
-        },
         "/course": {
           "post": {
             "tags": ["Courses"],
@@ -57,8 +35,11 @@
                   }
                 } 
               },
-              "400": {
-                "description": "Error"
+              "401": {
+                "description": "Authorization error"
+              },
+              "500": {
+                "description": "Server error"
               }
             }
           }
@@ -71,8 +52,11 @@
               "200": {
                 "description": "OK"
               },
-              "400": {
-                "description": "Error"
+              "401": {
+                "description": "Authorization error"
+              },
+              "500": {
+                "description": "Server error"
               }
             }
           },
@@ -80,11 +64,14 @@
             "tags": ["Courses"],
             "summary": "Modify course's content",
             "responses": {
-              "200": {
+              "202": {
                 "description": "OK"
               },
-              "400": {
-                "description": "Error"
+              "401": {
+                "description": "Authorization error"
+              },
+              "500": {
+                "description": "Server error"
               }
             }
           }
@@ -100,10 +87,30 @@
                   "application/json": {
                     "id": "id of created user"
                   }
-                } 
+                }
               },
-              "400": {
-                "description": "Error"
+              "401": {
+                "description": "Authorization error"
+              },
+              "500": {
+                "description": "Server error"
+              }
+            }
+          }
+        },
+        "/user/:email": {
+          "get": {
+            "tags": ["Users"],
+            "summary": "Get user's content by email",
+            "responses": {
+              "200": {
+                "description": "OK"
+              },
+              "401": {
+                "description": "Authorization error"
+              },
+              "500": {
+                "description": "Server error"
               }
             }
           }
@@ -111,25 +118,31 @@
         "/user/:id": {
           "get": {
             "tags": ["Users"],
-            "summary": "Get user's content",
+            "summary": "Get user's content by id",
             "responses": {
               "200": {
                 "description": "OK"
               },
-              "400": {
-                "description": "Error"
+              "401": {
+                "description": "Authorization error"
+              },
+              "500": {
+                "description": "Server error"
               }
             }
           },
           "put": {
             "tags": ["Users"],
-            "summary": "Modify user's content",
+            "summary": "Modify user's content by id",
             "responses": {
-              "200": {
-                "description": "OK"
+              "202": {
+                "description": "User inormation updated correctly"
               },
-              "400": {
-                "description": "Error"
+              "401": {
+                "description": "Authorization error"
+              },
+              "500": {
+                "description": "Server error"
               }
             }
           }
