@@ -18,13 +18,10 @@ const auth = firebaseAuth.getAuth(app);
 
 async function verifyIdToken (token) {
   try {
-    console.log(Date.now())
     const decodedToken = await auth.verifyIdToken(token)
-    console.log(Date.now())
     return decodedToken
    } catch (e) {
-    console.log(e)
-    throw new AuthError(e)
+    throw new AuthError(e, 'Firebase')
    }
 }
 

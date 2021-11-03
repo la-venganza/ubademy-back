@@ -1,6 +1,5 @@
 const express = require('express');
 const passport = require('passport');
-// const cookieSession = require('cookie-session');
 const cookieParser = require('cookie-parser')
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');

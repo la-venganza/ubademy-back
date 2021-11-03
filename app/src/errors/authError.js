@@ -1,6 +1,6 @@
 class AuthError extends Error {
 
-    constructor(e) {
+    constructor(e, message) {
         // Pasa los argumentos restantes (incluidos los específicos del proveedor) al constructor padre
         super(e)
     
@@ -11,7 +11,7 @@ class AuthError extends Error {
     
         this.name = 'AuthError'
         // Información de depuración personalizada
-        this.message = 'Error authenticating against Firebase'
+        this.message = 'Error authenticating against auhorization service: ' + message
         this.date = new Date()
     }
 }

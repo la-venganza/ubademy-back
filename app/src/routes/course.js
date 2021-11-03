@@ -11,8 +11,7 @@ router.get('/:id', async function(req, res) {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
         // Pedir al back de python
-        console.log(req.params.id);
-        body = {
+        const body = {
             "id": 1,
             "creator_id": 1,
             "title": 'Titulo',

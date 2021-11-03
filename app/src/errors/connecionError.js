@@ -1,6 +1,6 @@
 class ConnectionError extends Error {
     
-    constructor(e) {
+    constructor(e, message) {
         // Pasa los argumentos restantes (incluidos los específicos del proveedor) al constructor padre
         super(e)
     
@@ -11,7 +11,7 @@ class ConnectionError extends Error {
     
         this.name = 'ConnectionError'
         // Información de depuración personalizada
-        this.message = 'Error connecting to Python service'
+        this.message = 'Error connecting to server: ' + message
         this.date = new Date()
     }
 }

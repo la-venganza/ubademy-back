@@ -11,7 +11,7 @@ router.get('/:id', async function(req, res) {
 
         // Pedir al back de python
         console.log(req.params.id);
-        let body = {
+        const body = {
             "first_name": "A name",
             "last_name": "A lastname",
             "email": "user@example.com",
