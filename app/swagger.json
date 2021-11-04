@@ -51,7 +51,7 @@
         }
       }
     },
-    "/course/:id": {
+    "/course/{id}": {
       "get": {
         "tags": [
           "Courses"
