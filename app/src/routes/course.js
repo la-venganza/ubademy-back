@@ -1,6 +1,6 @@
 const express = require('express');
 const verifyIdToken =  require('../middlewares/firebase')
-const ConnectionError = require('../errors/connecionError')
+const ConnectionError = require('../errors/connectionError')
 const AuthError = require('../errors/authError')
 
 const router = express.Router();
