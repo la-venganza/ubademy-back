@@ -6,12 +6,28 @@ const instance = axios.create({
     baseURL: process.env.BACK_PY,
 });
 
+function handleError(error){
+    if (error.response) {
+        //custom errors for server status response
+        console.log("there was a response ")
+        throw error
+    } else if (error.request) {
+        //custom error for unresponsive server
+        console.log("no response from python service")
+        throw new ConnectionError(e, 'Python Service is not responding')
+
+    } else {
+        // Something happened in setting up the request and triggered an Error
+        console.log('Error', error.message);
+    }
+}
+
 async function getUserByEmail (email) {
      try {
         const res = await instance.get('/api/v1/users?email=' + email)
         return res.data
     } catch (e) {
-        throw new ConnectionError(e, 'Python Service')
+        handleError(e)
     }
 }
 
@@ -20,7 +36,7 @@ async function createUser (body) {
         const res = await instance.post('/api/v1/users', body)
         return res.data
     } catch (e) {
-        throw new ConnectionError(e, 'Python Service')
+        handleError(e)
     }
 }
 
@@ -29,7 +45,7 @@ async function getCourseById (id) {
         const res = await instance.get('/api/v1/courses/' + id)
         return res.data
     } catch (e) {
-        throw new ConnectionError(e, 'Python Service')
+        handleError(e)
     }
 }
 async function updateCourse (id, body) {
@@ -37,7 +53,7 @@ async function updateCourse (id, body) {
         const res = await instance.patch('/api/v1/courses/' + id, body)
         return res.data
     } catch (e) {
-        throw new ConnectionError(e, 'Python Service')
+        handleError(e)
     }
 }
 async function createCourse (body) {
@@ -45,7 +61,7 @@ async function createCourse (body) {
         const res = await instance.post('/api/v1/courses', body)
         return res.data
     } catch (e) {
-        throw new ConnectionError(e, 'Python Service')
+        handleError(e)
     }
 }
 
