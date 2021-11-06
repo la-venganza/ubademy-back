@@ -67,13 +67,13 @@ router.post('/', async function(req, res) {
     }
 });
 
-router.put('/', async function(req, res) {
+router.put('/:id', async function(req, res) {
     // Verificar request y mandar al back de python
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        response = await pythonBackendService.createUser(req.body)
-        res.status(202).send('PUT successful')
+        response = await pythonBackendService.updateUser(req.params.id,req.body)
+        res.status(202).send(response)
     } catch (e) {
         let body = {}
         if (e instanceof ConnectionError) {
