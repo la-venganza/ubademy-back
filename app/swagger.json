@@ -1,152 +1,151 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "version": "1.0.0", 
-      "title": "Ubademy - Backend",
-      "description": "Ubademy -  Coursera like app, for taller2",
-      "license": {
-        "name": "FIUBA",
-        "url": "https://fi.uba.ar/"
-      }
-    },
-    "host": "localhost:3000",
-    "basePath": "/",
-    "tags": [
-      {
-        "name": "Ubademy",
-        "description": "Facade for ubademy services."
-      }
-    ],
-    "schemes": ["http"],
-    "consumes": ["application/json"],
-    "produces": ["application/json"],
-    
-    "paths": {
-        "/course": {
-          "post": {
-            "tags": ["Courses"],
-            "summary": "Create new course",
-            "responses": {
-              "201": {
-                "description": "OK",
-                "content": {
-                  "application/json": {
-                    "id": "id of created course"
-                  }
-                } 
-              },
-              "401": {
-                "description": "Authorization error"
-              },
-              "500": {
-                "description": "Server error"
-              }
-            }
-          }
-        },
-        "/course/:id": {
-          "get": {
-            "tags": ["Courses"],
-            "summary": "Get course's content",
-            "responses": {
-              "200": {
-                "description": "OK"
-              },
-              "401": {
-                "description": "Authorization error"
-              },
-              "500": {
-                "description": "Server error"
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Ubademy - Backend",
+    "description": "Ubademy -  Coursera like app, for taller2",
+    "license": {
+      "name": "FIUBA",
+      "url": "https://fi.uba.ar/"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Ubademy",
+      "description": "Facade for ubademy services."
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/course": {
+      "post": {
+        "tags": [
+          "Courses"
+        ],
+        "summary": "Create new course",
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "id": "id of created course"
               }
             }
           },
-          "put": {
-            "tags": ["Courses"],
-            "summary": "Modify course's content",
-            "responses": {
-              "202": {
-                "description": "OK"
-              },
-              "401": {
-                "description": "Authorization error"
-              },
-              "500": {
-                "description": "Server error"
-              }
-            }
-          }
-        },
-        "/user": {
-          "post": {
-            "tags": ["Users"],
-            "summary": "Create new user",
-            "responses": {
-              "201": {
-                "description": "OK",
-                "content": {
-                  "application/json": {
-                    "id": "id of created user"
-                  }
-                }
-              },
-              "401": {
-                "description": "Authorization error"
-              },
-              "500": {
-                "description": "Server error"
-              }
-            }
-          }
-        },
-        "/user/:email": {
-          "get": {
-            "tags": ["Users"],
-            "summary": "Get user's content by email",
-            "responses": {
-              "200": {
-                "description": "OK"
-              },
-              "401": {
-                "description": "Authorization error"
-              },
-              "500": {
-                "description": "Server error"
-              }
-            }
-          }
-        },
-        "/user/:id": {
-          "get": {
-            "tags": ["Users"],
-            "summary": "Get user's content by id",
-            "responses": {
-              "200": {
-                "description": "OK"
-              },
-              "401": {
-                "description": "Authorization error"
-              },
-              "500": {
-                "description": "Server error"
-              }
-            }
+          "401": {
+            "description": "Authorization error"
           },
-          "put": {
-            "tags": ["Users"],
-            "summary": "Modify user's content by id",
-            "responses": {
-              "202": {
-                "description": "User inormation updated correctly"
-              },
-              "401": {
-                "description": "Authorization error"
-              },
-              "500": {
-                "description": "Server error"
-              }
-            }
+          "500": {
+            "description": "Server error"
           }
         }
       }
-      
+    },
+    "/course/{id}": {
+      "get": {
+        "tags": [
+          "Courses"
+        ],
+        "summary": "Get course's content",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Courses"
+        ],
+        "summary": "Modify course's content",
+        "responses": {
+          "202": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/user": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create new user",
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "id": "id of created user"
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Modify user's content by email",
+        "responses": {
+          "202": {
+            "description": "User inormation updated correctly"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/users/{email}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get user's content by email",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    }
   }
+}
