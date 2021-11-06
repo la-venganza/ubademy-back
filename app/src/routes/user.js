@@ -1,6 +1,6 @@
 const express = require('express');
 const verifyIdToken =  require('../middlewares/firebase')
-const getUserByEmail = require('../middlewares/requestHandler')
+const requestHandler = require('../middlewares/requestHandler')
 const ConnectionError = require('../errors/connectionError')
 const AuthError = require('../errors/authError')
 
@@ -11,9 +11,8 @@ router.get('/:email', async function(req, res) {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
         
         // Pedir al back de python
-        const body = await getUserByEmail(req.params.email)
-
-        res.status(200).send(body)
+        const response = await requestHandler.getUserByEmail(req.params.email)
+        res.status(200).send(response)
     } catch (e) {
         let body = {}
         if (e instanceof ConnectionError) {
@@ -42,9 +41,8 @@ router.post('/', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        let body = {id: 1}
-        // Send to back
-        res.status(201).send(body)
+        response = await requestHandler.createUser(req.body)
+        res.status(201).send(response)
     } catch (e) {
         let body = {}
         if (e instanceof ConnectionError) {
@@ -74,7 +72,7 @@ router.put('/', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        // Send to back
+        response = await requestHandler.createUser(req.body)
         res.status(202).send('PUT successful')
     } catch (e) {
         let body = {}

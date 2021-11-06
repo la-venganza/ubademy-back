@@ -7,12 +7,21 @@ const instance = axios.create({
 });
 
 async function getUserByEmail (email) {
-    try {
-        const res = await instance.get('/api/v1/users')
-        return res
+     try {
+        const res = await instance.get('/api/v1/users?email=' + email)
+        return res.data
     } catch (e) {
         throw new ConnectionError(e, 'Python Service')
     }
 }
 
-module.exports = getUserByEmail
+async function createUser (body) {
+    // try {
+        const res = await instance.post('/api/v1/users', body)
+        return res.data
+    // } catch (e) {
+    //     throw new ConnectionError(e, 'Python Service')
+    // }
+}
+module.exports = {getUserByEmail,
+ createUser}
