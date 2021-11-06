@@ -1,5 +1,7 @@
 const express = require('express');
 const verifyIdToken =  require('../middlewares/firebase')
+const pythonBackendService = require('../middlewares/pythonBackendService')
+
 const ConnectionError = require('../errors/connectionError')
 const AuthError = require('../errors/authError')
 
@@ -11,7 +13,7 @@ router.get('/:id', async function(req, res) {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
         // Pedir al back de python
-        const body = {
+        const originalBody = {
             "id": 1,
             "creator_id": 1,
             "title": 'Titulo',
@@ -35,7 +37,42 @@ router.get('/:id', async function(req, res) {
                 }
             ]
         }
-        res.status(200).send(body)
+        const newBody = {
+            "user_id":"9b8fcc59-3298-4ab2-8f33-4b3b74053123",
+            "title":"Titulo",
+            "description":"Descripcion re copada",
+            "type": "type test",
+            "hashtags": "hasthags",
+            "location": "internet",
+            "lessons":[
+               {
+                  "position":0,
+                  "active":true,
+                  "required":false,
+                  "multimedia_id":"idhasheado12yt",
+                  "title":"Stage 0 Title",
+                  "multimedia_type":"Tipo",
+                  "sequence_number": 0,
+                  "require": true
+         
+               },
+               {
+                  "position":1,
+                  "active":true,
+                  "required":true,
+                  "multimedia_id":"otrohash?",
+                  "title":"Stage 1 Title",
+                  "multimedia_type":"Otro tipo",
+                  "sequence_number": 0,
+                  "require": true
+         
+         
+               }
+            ]
+         }
+        const response = await pythonBackendService.getCourseById(req.params.id)
+
+        res.status(200).send(response)
     } catch (e) {
         let body = {}
         if (e instanceof ConnectionError) {
@@ -65,9 +102,9 @@ router.post('/', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        body = {id: 1}
-        // Send to back
-        res.status(201).send(body)
+        const response = await pythonBackendService.createCourse(req.body)
+
+        res.status(201).send(response)
     } catch (e) {
         let body = {}
         if (e instanceof ConnectionError) {

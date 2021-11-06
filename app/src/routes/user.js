@@ -1,6 +1,6 @@
 const express = require('express');
 const verifyIdToken =  require('../middlewares/firebase')
-const requestHandler = require('../middlewares/requestHandler')
+const pythonBackendService = require('../middlewares/pythonBackendService')
 const ConnectionError = require('../errors/connectionError')
 const AuthError = require('../errors/authError')
 
@@ -11,7 +11,7 @@ router.get('/:email', async function(req, res) {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
         
         // Pedir al back de python
-        const response = await requestHandler.getUserByEmail(req.params.email)
+        const response = await pythonBackendService.getUserByEmail(req.params.email)
         res.status(200).send(response)
     } catch (e) {
         let body = {}
@@ -41,7 +41,7 @@ router.post('/', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        response = await requestHandler.createUser(req.body)
+        response = await pythonBackendService.createUser(req.body)
         res.status(201).send(response)
     } catch (e) {
         let body = {}
@@ -72,7 +72,7 @@ router.put('/', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        response = await requestHandler.createUser(req.body)
+        response = await pythonBackendService.createUser(req.body)
         res.status(202).send('PUT successful')
     } catch (e) {
         let body = {}
