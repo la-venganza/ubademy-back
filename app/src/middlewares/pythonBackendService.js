@@ -32,7 +32,14 @@ async function getCourseById (id) {
         throw new ConnectionError(e, 'Python Service')
     }
 }
-
+async function updateCourse (id, body) {
+    try {
+        const res = await instance.patch('/api/v1/courses/' + id, body)
+        return res.data
+    } catch (e) {
+        throw new ConnectionError(e, 'Python Service')
+    }
+}
 async function createCourse (body) {
     try {
         const res = await instance.post('/api/v1/courses', body)
@@ -42,4 +49,4 @@ async function createCourse (body) {
     }
 }
 
-module.exports = {getUserByEmail, createUser, createCourse, getCourseById}
+module.exports = {getUserByEmail, createUser, createCourse, getCourseById, updateCourse}

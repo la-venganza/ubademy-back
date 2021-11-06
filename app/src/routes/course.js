@@ -134,8 +134,17 @@ router.put('/:id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
+        const body = {
+            "user_id":"9b8fcc59-3298-4ab2-8f33-4b3b74053123",
+            "course":{
+            "hashtags": "cambio el hashtag"
+            }
+        }
+
+        const response = await pythonBackendService.updateCourse(req.params.id, req.body)
+
         // Send to back
-        res.status(202).send('PUT successful')
+        res.status(202).send(response)
     } catch (e) {
         let body = {}
         if (e instanceof ConnectionError) {
