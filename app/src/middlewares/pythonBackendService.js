@@ -50,6 +50,15 @@ async function updateUser (id, body) {
     }
 }
 
+async function getCourses () {
+    try {
+        const res = await instance.get('/api/v1/courses/')
+        return res.data
+    } catch (e) {
+        handleError(e)
+    }
+}
+
 async function getCourseById (id) {
     try {
         const res = await instance.get('/api/v1/courses/' + id)
@@ -77,4 +86,4 @@ async function updateCourse (id, body) {
     }
 }
 
-module.exports = {getUserByEmail, createUser, updateUser, createCourse, getCourseById, updateCourse}
+module.exports = {getUserByEmail, createUser, updateUser, createCourse, getCourses, getCourseById, updateCourse}

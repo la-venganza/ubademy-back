@@ -9,6 +9,29 @@ const ServerError = require('../errors/serverError')
 
 const router = express.Router();
 
+router.get('/', async function(req, res) {
+    try {
+        const uid = await verifyIdToken(req.cookies.firebaseAuth)
+
+        const response = await pythonBackendService.getCourses()
+
+        res.status(200).send(response)
+    } catch (e) {
+        const body = {
+            error: e.name,
+            message: e.message
+        }
+        if (e instanceof ConnectionError) {
+            res.status(500).send(body)
+        } else if (e instanceof AuthError) {
+            res.status(401).send(body)
+        } else if (e instanceof ServerError) {
+            res.status(400).send(body)
+        } else {
+            res.status(500).send(body)
+        }
+    }
+})
 
 router.get('/:id', async function(req, res) {
     // Verifica que el token de firebase sea valido
