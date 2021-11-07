@@ -4,6 +4,7 @@ const pythonBackendService = require('../middlewares/pythonBackendService')
 
 const ConnectionError = require('../errors/connectionError')
 const AuthError = require('../errors/authError')
+const ServerError = require('../errors/serverError')
 
 const router = express.Router();
 
@@ -37,6 +38,7 @@ router.get('/:id', async function(req, res) {
                 }
             ]
         }
+
         const newBody = {
             "user_id":"9b8fcc59-3298-4ab2-8f33-4b3b74053123",
             "title":"Titulo",
@@ -74,24 +76,17 @@ router.get('/:id', async function(req, res) {
 
         res.status(200).send(response)
     } catch (e) {
-        let body = {}
+        const body = {
+            error: e.name,
+            message: e.message
+        }
         if (e instanceof ConnectionError) {
-            body = {
-                error: e.name,
-                message: e.message
-            }
             res.status(500).send(body)
         } else if (e instanceof AuthError) {
-            body = {
-                error: e.name,
-                message: e.message
-            }
             res.status(401).send(body)
+        } else if (e instanceof ServerError) {
+            res.status(404).send(body)
         } else {
-            body = {
-                error: e.name,
-                message: e.message
-            }
             res.status(500).send(body)
         }
     }
@@ -102,28 +97,45 @@ router.post('/', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        const response = await pythonBackendService.createCourse(req.body)
+        let lessons = []
+        const stages = body.stages
+
+        stages.forEach( element => { 
+            let lesson = {
+                "active": element.active,
+                "multimedia_id": element.multimedia_id,
+                "title": element.title,
+                "multimedia_type": element.multimedia_type,
+                "sequence_number": element.position,
+                "require": element.required,
+            }
+            lessons.push(lesson)
+        })
+
+        const body = {
+            "title": body.title,
+            "description": body.description,
+            "type": "course",
+            "hashtags": "hasthags",
+            "location": "internet",
+            "lessons": lessons
+        }
+
+        const response = await pythonBackendService.createCourse(body)
 
         res.status(201).send(response)
     } catch (e) {
-        let body = {}
+        const body = {
+            error: e.name,
+            message: e.message
+        }
         if (e instanceof ConnectionError) {
-            body = {
-                error: e.name,
-                message: e.message
-            }
             res.status(500).send(body)
         } else if (e instanceof AuthError) {
-            body = {
-                error: e.name,
-                message: e.message
-            }
             res.status(401).send(body)
+        } else if (e instanceof ServerError) {
+            res.status(404).send(body)
         } else {
-            body = {
-                error: e.name,
-                message: e.message
-            }
             res.status(500).send(body)
         }
     }
@@ -134,36 +146,46 @@ router.put('/:id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        const body = {
-            "user_id":"9b8fcc59-3298-4ab2-8f33-4b3b74053123",
-            "course":{
-            "hashtags": "cambio el hashtag"
+        let lessons = []
+        const stages = body.stages
+
+        stages.forEach( element => { 
+            let lesson = {
+                "active": element.active,
+                "multimedia_id": element.multimedia_id,
+                "title": element.title,
+                "multimedia_type": element.multimedia_type,
+                "sequence_number": element.position,
+                "require": element.required,
             }
+            lessons.push(lesson)
+        })
+
+        const body = {
+            "title": body.title,
+            "description": body.description,
+            "type": "course",
+            "hashtags": "hasthags",
+            "location": "internet",
+            "lessons": lessons
         }
 
-        const response = await pythonBackendService.updateCourse(req.params.id, req.body)
+        const response = await pythonBackendService.updateCourse(req.params.id, body)
 
         // Send to back
         res.status(202).send(response)
     } catch (e) {
-        let body = {}
+        const body = {
+            error: e.name,
+            message: e.message
+        }
         if (e instanceof ConnectionError) {
-            body = {
-                error: e.name,
-                message: e.message
-            }
             res.status(500).send(body)
         } else if (e instanceof AuthError) {
-            body = {
-                error: e.name,
-                message: e.message
-            }
             res.status(401).send(body)
+        } else if (e instanceof ServerError) {
+            res.status(404).send(body)
         } else {
-            body = {
-                error: e.name,
-                message: e.message
-            }
             res.status(500).send(body)
         }
     }

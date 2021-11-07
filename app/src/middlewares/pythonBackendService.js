@@ -1,5 +1,6 @@
 // Middleware para resolver llamadas a python
 const ConnectionError = require('../errors/connectionError')
+const ServerError = require('../errors/serverError')
 const axios = require('axios').default;
 
 const instance = axios.create({
@@ -10,7 +11,7 @@ function handleError(error){
     if (error.response) {
         //custom errors for server status response
         console.log("there was a response ")
-        throw error
+        throw new ServerError(e, 'Python Service is responding, but an error has ocurred')
     } else if (error.request) {
         //custom error for unresponsive server
         console.log("no response from python service")
@@ -57,6 +58,7 @@ async function getCourseById (id) {
         handleError(e)
     }
 }
+
 async function createCourse (body) {
     try {
         const res = await instance.post('/api/v1/courses', body)
@@ -65,6 +67,7 @@ async function createCourse (body) {
         handleError(e)
     }
 }
+
 async function updateCourse (id, body) {
     try {
         const res = await instance.patch('/api/v1/courses/' + id, body)
