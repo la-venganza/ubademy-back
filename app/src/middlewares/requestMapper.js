@@ -9,6 +9,8 @@ function courseMapping(requestBody) {
         throw new ServerError('Error', 'Bad request - \"stages\" not an array')
     }
 
+    //TODO: una vez que empezemos con la parte de examenes, veriicar que un examen tenga preguntas
+
     stages.forEach(element => {
         let lesson = {
             "active": element.active,
