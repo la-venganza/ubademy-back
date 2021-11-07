@@ -4,6 +4,7 @@ const pythonBackendService = require('../middlewares/pythonBackendService')
 
 const ConnectionError = require('../errors/connectionError')
 const AuthError = require('../errors/authError')
+const ServerError = require('../errors/serverError')
 
 const router = express.Router();
 
@@ -37,7 +38,7 @@ router.get('/:id', async function(req, res) {
                 }
             ]
         }
-        
+
         const newBody = {
             "user_id":"9b8fcc59-3298-4ab2-8f33-4b3b74053123",
             "title":"Titulo",
@@ -83,7 +84,7 @@ router.get('/:id', async function(req, res) {
             res.status(500).send(body)
         } else if (e instanceof AuthError) {
             res.status(401).send(body)
-        } else if (e instanceof NotFoundError) {
+        } else if (e instanceof ServerError) {
             res.status(404).send(body)
         } else {
             res.status(500).send(body)
@@ -132,7 +133,7 @@ router.post('/', async function(req, res) {
             res.status(500).send(body)
         } else if (e instanceof AuthError) {
             res.status(401).send(body)
-        } else if (e instanceof NotFoundError) {
+        } else if (e instanceof ServerError) {
             res.status(404).send(body)
         } else {
             res.status(500).send(body)
@@ -182,7 +183,7 @@ router.put('/:id', async function(req, res) {
             res.status(500).send(body)
         } else if (e instanceof AuthError) {
             res.status(401).send(body)
-        } else if (e instanceof NotFoundError) {
+        } else if (e instanceof ServerError) {
             res.status(404).send(body)
         } else {
             res.status(500).send(body)
