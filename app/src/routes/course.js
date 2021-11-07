@@ -9,6 +9,7 @@ const ServerError = require('../errors/serverError')
 
 const router = express.Router();
 
+
 router.get('/:id', async function(req, res) {
     // Verifica que el token de firebase sea valido
     try {
@@ -96,7 +97,7 @@ router.get('/:id', async function(req, res) {
 router.post('/', async function(req, res) {
     // Verificar request y mandar al back de python
     try {
-        // const uid = await verifyIdToken(req.cookies.firebaseAuth)
+        const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
         const body = courseMapper(req.body)
 
