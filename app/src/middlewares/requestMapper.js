@@ -25,3 +25,5 @@ function courseMapping(requestBody) {
 
     return body
 }
+
+module.exports = courseMapping;
