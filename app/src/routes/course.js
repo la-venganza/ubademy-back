@@ -1,6 +1,7 @@
 const express = require('express');
 const verifyIdToken =  require('../middlewares/firebase')
 const pythonBackendService = require('../middlewares/pythonBackendService')
+const courseMapper = require('../middlewares/requestMapper')
 
 const ConnectionError = require('../errors/connectionError')
 const AuthError = require('../errors/authError')
@@ -97,29 +98,7 @@ router.post('/', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        let lessons = []
-        const stages = body.stages
-
-        stages.forEach( element => { 
-            let lesson = {
-                "active": element.active,
-                "multimedia_id": element.multimedia_id,
-                "title": element.title,
-                "multimedia_type": element.multimedia_type,
-                "sequence_number": element.position,
-                "require": element.required,
-            }
-            lessons.push(lesson)
-        })
-
-        const body = {
-            "title": body.title,
-            "description": body.description,
-            "type": "course",
-            "hashtags": "hasthags",
-            "location": "internet",
-            "lessons": lessons
-        }
+        const body = courseMapper(req.body)
 
         const response = await pythonBackendService.createCourse(body)
 
@@ -146,30 +125,8 @@ router.put('/:id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        let lessons = []
-        const stages = body.stages
-
-        stages.forEach( element => { 
-            let lesson = {
-                "active": element.active,
-                "multimedia_id": element.multimedia_id,
-                "title": element.title,
-                "multimedia_type": element.multimedia_type,
-                "sequence_number": element.position,
-                "require": element.required,
-            }
-            lessons.push(lesson)
-        })
-
-        const body = {
-            "title": body.title,
-            "description": body.description,
-            "type": "course",
-            "hashtags": "hasthags",
-            "location": "internet",
-            "lessons": lessons
-        }
-
+        const body = courseMapper(req.body)
+        
         const response = await pythonBackendService.updateCourse(req.params.id, body)
 
         // Send to back
