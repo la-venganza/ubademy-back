@@ -11,7 +11,7 @@ function handleError(error){
     if (error.response) {
         //custom errors for server status response
         console.log("there was a response ")
-        throw new ServerError(e, 'Python Service is responding, but an error has ocurred')
+        throw new ServerError(e, error.message)
     } else if (error.request) {
         //custom error for unresponsive server
         console.log("no response from python service")
