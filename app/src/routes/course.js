@@ -86,7 +86,7 @@ router.get('/:id', async function(req, res) {
         } else if (e instanceof AuthError) {
             res.status(401).send(body)
         } else if (e instanceof ServerError) {
-            res.status(404).send(body)
+            res.status(400).send(body)
         } else {
             res.status(500).send(body)
         }
@@ -96,7 +96,7 @@ router.get('/:id', async function(req, res) {
 router.post('/', async function(req, res) {
     // Verificar request y mandar al back de python
     try {
-        const uid = await verifyIdToken(req.cookies.firebaseAuth)
+        // const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
         const body = courseMapper(req.body)
 
@@ -113,7 +113,7 @@ router.post('/', async function(req, res) {
         } else if (e instanceof AuthError) {
             res.status(401).send(body)
         } else if (e instanceof ServerError) {
-            res.status(404).send(body)
+            res.status(400).send(body)
         } else {
             res.status(500).send(body)
         }
@@ -141,7 +141,7 @@ router.put('/:id', async function(req, res) {
         } else if (e instanceof AuthError) {
             res.status(401).send(body)
         } else if (e instanceof ServerError) {
-            res.status(404).send(body)
+            res.status(400).send(body)
         } else {
             res.status(500).send(body)
         }

@@ -1,6 +1,13 @@
+const ServerError = require("../errors/serverError")
+
 function courseMapping(requestBody) {
     let lessons = []
+
     const stages = requestBody.stages
+
+    if (typeof stages == 'undefined' || !Array.isArray(stages)) {
+        throw new ServerError('Error', 'Bad request - \"stages\" not an array')
+    }
 
     stages.forEach(element => {
         let lesson = {
