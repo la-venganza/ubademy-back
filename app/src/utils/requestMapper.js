@@ -5,7 +5,7 @@ function courseMapping(requestBody) {
 
     const stages = requestBody.stages
 
-    if (typeof stages == 'undefined' || !Array.isArray(stages)) {
+    if (typeof stages === 'undefined' || !Array.isArray(stages)) {
         throw new ServerError('Error', 'Bad request - field stages not an array')
     }
 

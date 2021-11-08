@@ -1,6 +1,6 @@
 const express = require('express');
 const verifyIdToken =  require('../middlewares/firebase')
-const pythonBackendService = require('../middlewares/pythonBackendService')
+const userService = require('../middlewares/userService')
 const ConnectionError = require('../errors/connectionError')
 const AuthError = require('../errors/authError')
 const ServerError = require('../errors/serverError')
@@ -12,7 +12,7 @@ router.get('/:email', async function(req, res) {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
         
         // Pedir al back de python
-        const response = await pythonBackendService.getUserByEmail(req.params.email)
+        const response = await userService.getUserByEmail(req.params.email)
         res.status(200).send(response)
     } catch (e) {
         const body = {
@@ -35,7 +35,7 @@ router.post('/', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        response = await pythonBackendService.createUser(req.body)
+        response = await userService.createUser(req.body)
         res.status(201).send(response)
     } catch (e) {
         const body = {
@@ -59,7 +59,7 @@ router.put('/:id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        response = await pythonBackendService.updateUser(req.params.id,req.body)
+        response = await userService.updateUser(req.params.id,req.body)
         res.status(202).send(response)
     } catch (e) {
         const body = {

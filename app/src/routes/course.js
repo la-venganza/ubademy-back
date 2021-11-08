@@ -1,7 +1,7 @@
 const express = require('express');
 const verifyIdToken =  require('../middlewares/firebase')
-const pythonBackendService = require('../middlewares/pythonBackendService')
-const courseMapper = require('../middlewares/requestMapper')
+const courseService = require('../middlewares/courseService')
+const courseMapper = require('../utils/requestMapper')
 
 const ConnectionError = require('../errors/connectionError')
 const AuthError = require('../errors/authError')
@@ -13,7 +13,7 @@ router.get('/', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        const response = await pythonBackendService.getCourses()
+        const response = await courseService.getCourses()
 
         res.status(200).send(response)
     } catch (e) {
@@ -97,7 +97,7 @@ router.get('/:id', async function(req, res) {
                }
             ]
          }
-        const response = await pythonBackendService.getCourseById(req.params.id)
+        const response = await courseService.getCourseById(req.params.id)
 
         res.status(200).send(response)
     } catch (e) {
@@ -124,7 +124,7 @@ router.post('/', async function(req, res) {
 
         const body = courseMapper(req.body)
 
-        const response = await pythonBackendService.createCourse(body)
+        const response = await courseService.createCourse(body)
 
         res.status(201).send(response)
     } catch (e) {
@@ -151,7 +151,7 @@ router.put('/:id', async function(req, res) {
 
         const body = courseMapper(req.body)
         
-        const response = await pythonBackendService.updateCourse(req.params.id, body)
+        const response = await courseService.updateCourse(req.params.id, body)
 
         // Send to back
         res.status(202).send(response)

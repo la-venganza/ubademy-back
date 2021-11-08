@@ -50,40 +50,4 @@ async function updateUser (id, body) {
     }
 }
 
-async function getCourses () {
-    try {
-        const res = await instance.get('/api/v1/courses/')
-        return res.data
-    } catch (e) {
-        handleError(e)
-    }
-}
-
-async function getCourseById (id) {
-    try {
-        const res = await instance.get('/api/v1/courses/' + id)
-        return res.data
-    } catch (e) {
-        handleError(e)
-    }
-}
-
-async function createCourse (body) {
-    try {
-        const res = await instance.post('/api/v1/courses', body)
-        return res.data
-    } catch (e) {
-        handleError(e)
-    }
-}
-
-async function updateCourse (id, body) {
-    try {
-        const res = await instance.patch('/api/v1/courses/' + id, body)
-        return res.data
-    } catch (e) {
-        handleError(e)
-    }
-}
-
-module.exports = {getUserByEmail, createUser, updateUser, createCourse, getCourses, getCourseById, updateCourse}
+module.exports = {getUserByEmail, createUser, updateUser}
