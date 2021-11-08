@@ -14,7 +14,7 @@
     "start": "nodemon server.js",
     "start:dev": "PORT=3000 nodemon server.js",
     "start:prod": "PORT=5000 nodemon server.js",
-    "test": "jest --coverage && coveralls < coverage/lcov.info",
+    "test": "jest --coverage && cat coverage/lcov.info | coveralls",
     "lint": "eslint ."
   },
   "author": "",
