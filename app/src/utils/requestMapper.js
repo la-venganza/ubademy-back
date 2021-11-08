@@ -6,7 +6,7 @@ function courseMapping(requestBody) {
     const stages = requestBody.stages
 
     if (typeof stages === 'undefined' || !Array.isArray(stages)) {
-        throw new ServerError('Error', 'Bad request - field stages not an array')
+        throw new ServerError('Error', 'Bad request - field stages not an array', 400)
     }
 
     //TODO: una vez que empezemos con la parte de examenes, veriicar que un examen tenga preguntas
