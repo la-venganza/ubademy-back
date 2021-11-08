@@ -1,12 +1,37 @@
 const express = require('express');
 const verifyIdToken =  require('../middlewares/firebase')
-const pythonBackendService = require('../middlewares/pythonBackendService')
+const courseService = require('../middlewares/courseService')
+const courseMapper = require('../utils/requestMapper')
 
 const ConnectionError = require('../errors/connectionError')
 const AuthError = require('../errors/authError')
 const ServerError = require('../errors/serverError')
 
 const router = express.Router();
+
+router.get('/', async function(req, res) {
+    try {
+        const uid = await verifyIdToken(req.cookies.firebaseAuth)
+
+        const response = await courseService.getCourses()
+
+        res.status(200).send(response)
+    } catch (e) {
+        const body = {
+            error: e.name,
+            message: e.message
+        }
+        if (e instanceof ConnectionError) {
+            res.status(500).send(body)
+        } else if (e instanceof AuthError) {
+            res.status(401).send(body)
+        } else if (e instanceof ServerError) {
+            res.status(e.status).send(body)
+        } else {
+            res.status(500).send(body)
+        }
+    }
+})
 
 router.get('/:id', async function(req, res) {
     // Verifica que el token de firebase sea valido
@@ -72,7 +97,7 @@ router.get('/:id', async function(req, res) {
                }
             ]
          }
-        const response = await pythonBackendService.getCourseById(req.params.id)
+        const response = await courseService.getCourseById(req.params.id)
 
         res.status(200).send(response)
     } catch (e) {
@@ -85,7 +110,7 @@ router.get('/:id', async function(req, res) {
         } else if (e instanceof AuthError) {
             res.status(401).send(body)
         } else if (e instanceof ServerError) {
-            res.status(404).send(body)
+            res.status(e.status).send(body)
         } else {
             res.status(500).send(body)
         }
@@ -97,31 +122,9 @@ router.post('/', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        let lessons = []
-        const stages = body.stages
+        const body = courseMapper(req.body)
 
-        stages.forEach( element => { 
-            let lesson = {
-                "active": element.active,
-                "multimedia_id": element.multimedia_id,
-                "title": element.title,
-                "multimedia_type": element.multimedia_type,
-                "sequence_number": element.position,
-                "require": element.required,
-            }
-            lessons.push(lesson)
-        })
-
-        const body = {
-            "title": body.title,
-            "description": body.description,
-            "type": "course",
-            "hashtags": "hasthags",
-            "location": "internet",
-            "lessons": lessons
-        }
-
-        const response = await pythonBackendService.createCourse(body)
+        const response = await courseService.createCourse(body)
 
         res.status(201).send(response)
     } catch (e) {
@@ -134,7 +137,7 @@ router.post('/', async function(req, res) {
         } else if (e instanceof AuthError) {
             res.status(401).send(body)
         } else if (e instanceof ServerError) {
-            res.status(404).send(body)
+            res.status(e.status).send(body)
         } else {
             res.status(500).send(body)
         }
@@ -146,31 +149,9 @@ router.put('/:id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        let lessons = []
-        const stages = body.stages
-
-        stages.forEach( element => { 
-            let lesson = {
-                "active": element.active,
-                "multimedia_id": element.multimedia_id,
-                "title": element.title,
-                "multimedia_type": element.multimedia_type,
-                "sequence_number": element.position,
-                "require": element.required,
-            }
-            lessons.push(lesson)
-        })
-
-        const body = {
-            "title": body.title,
-            "description": body.description,
-            "type": "course",
-            "hashtags": "hasthags",
-            "location": "internet",
-            "lessons": lessons
-        }
-
-        const response = await pythonBackendService.updateCourse(req.params.id, body)
+        const body = courseMapper(req.body)
+        
+        const response = await courseService.updateCourse(req.params.id, body)
 
         // Send to back
         res.status(202).send(response)
@@ -184,7 +165,7 @@ router.put('/:id', async function(req, res) {
         } else if (e instanceof AuthError) {
             res.status(401).send(body)
         } else if (e instanceof ServerError) {
-            res.status(404).send(body)
+            res.status(e.status).send(body)
         } else {
             res.status(500).send(body)
         }
