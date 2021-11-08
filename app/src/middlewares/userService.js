@@ -21,7 +21,7 @@ async function createUser (body) {
 
 async function updateUser (id, body) {
     try {
-        const res = await instance.patch('/api/v1/courses/' + id, body)
+        const res = await instance.patch('/api/v1/users/' + id, body)
         return res.data
     } catch (e) {
         handleError(e)
