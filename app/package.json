@@ -4,7 +4,11 @@
   "description": "Ubademy - Coursera like application backend.",
   "main": "app.js",
   "jest": {
-    "resolver": "jest-node-exports-resolver"
+    "resolver": "jest-node-exports-resolver",
+    "coverageProvider": "v8",
+    "clearMocks": true,
+    "collectCoverage": true,
+    "coverageDirectory": "coverage"
   },
   "scripts": {
     "start": "nodemon server.js",
