@@ -26,7 +26,7 @@ router.get('/', async function(req, res) {
         } else if (e instanceof AuthError) {
             res.status(401).send(body)
         } else if (e instanceof ServerError) {
-            res.status(400).send(body)
+            res.status(e.status).send(body)
         } else {
             res.status(500).send(body)
         }
@@ -110,7 +110,7 @@ router.get('/:id', async function(req, res) {
         } else if (e instanceof AuthError) {
             res.status(401).send(body)
         } else if (e instanceof ServerError) {
-            res.status(400).send(body)
+            res.status(e.status).send(body)
         } else {
             res.status(500).send(body)
         }
@@ -137,7 +137,7 @@ router.post('/', async function(req, res) {
         } else if (e instanceof AuthError) {
             res.status(401).send(body)
         } else if (e instanceof ServerError) {
-            res.status(400).send(body)
+            res.status(e.status).send(body)
         } else {
             res.status(500).send(body)
         }
@@ -165,7 +165,7 @@ router.put('/:id', async function(req, res) {
         } else if (e instanceof AuthError) {
             res.status(401).send(body)
         } else if (e instanceof ServerError) {
-            res.status(400).send(body)
+            res.status(e.status).send(body)
         } else {
             res.status(500).send(body)
         }

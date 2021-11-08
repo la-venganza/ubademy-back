@@ -1,6 +1,6 @@
 class ServerError extends Error {
     
-    constructor(e, message) {
+    constructor(e, message, status) {
         // Pasa los argumentos restantes (incluidos los específicos del proveedor) al constructor padre
         super(e)
     
@@ -12,6 +12,7 @@ class ServerError extends Error {
         this.name = 'ServerError'
         // Información de depuración personalizada
         this.message = 'Error with the server: ' + message
+        this.status = status
         this.date = new Date()
     }
 }
