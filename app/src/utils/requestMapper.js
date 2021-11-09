@@ -24,11 +24,12 @@ function courseMapping(requestBody) {
     })
 
     const body = {
-        "title": requestBody.title,
-        "description": requestBody.description,
-        "type": "course",
-        "hashtags": "hasthags",
-        "location": "internet",
+        "user_id": requestBody.user_id,
+        "title": requestBody.title || "titulo del urso",
+        "description": requestBody.description || "descripcion del curso",
+        "type": requestBody.course || "course",
+        "hashtags": requestBody.hashtags || "hasthags",
+        "location": requestBody.location || "internet",
         "lessons": lessons
     }
 
