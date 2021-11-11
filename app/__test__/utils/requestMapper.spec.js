@@ -14,7 +14,7 @@ describe("RequestMapper", () => {
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "required": "required",
-                        "position": "position",
+                        "position": 0,
                         "title": "title"
                     },
                     {
@@ -22,7 +22,7 @@ describe("RequestMapper", () => {
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "required": "required",
-                        "position": "position",
+                        "position": 1,
                         "title": "title"
                     }                      
                 ]
@@ -39,7 +39,7 @@ describe("RequestMapper", () => {
                             "multimedia_id": "multimedia_id",
                             "multimedia_type": "multimedia_type",
                             "require": "required",
-                            "sequence_number": "position",
+                            "sequence_number": 0,
                             "title": "title"
                         },
                         {
@@ -47,7 +47,7 @@ describe("RequestMapper", () => {
                             "multimedia_id": "multimedia_id",
                             "multimedia_type": "multimedia_type",
                             "require": "required",
-                            "sequence_number": "position",
+                            "sequence_number": 1,
                             "title": "title"
                         }   
                     ]
@@ -79,7 +79,59 @@ describe("RequestMapper", () => {
             expect(res).toEqual(expectedRes)
         })
 
-        it('fails to map non array stages', () => {
+        it('maps only the given fields (lessons)', () => {
+            const body = {
+                "user_id": "id",
+                "stages": [
+                    {
+                        "active": "active",
+                        "multimedia_id": "multimedia_id",
+                        "multimedia_type": "multimedia_type",
+                        "required": "required",
+                        "position": 0,
+                        "title": "title"
+                    },
+                    {
+                        "active": "active",
+                        "multimedia_id": "multimedia_id",
+                        "multimedia_type": "multimedia_type",
+                        "required": "required",
+                        "position": 1,
+                        "title": "title"
+                    }                      
+                ]
+            }
+
+            const expectedRes = {
+                "user_id": "id",
+                "course": {
+                    "lessons": [
+                        {
+                            "active": "active",
+                            "multimedia_id": "multimedia_id",
+                            "multimedia_type": "multimedia_type",
+                            "require": "required",
+                            "sequence_number": 0,
+                            "title": "title"
+                        },
+                        {
+                            "active": "active",
+                            "multimedia_id": "multimedia_id",
+                            "multimedia_type": "multimedia_type",
+                            "require": "required",
+                            "sequence_number": 1,
+                            "title": "title"
+                        }   
+                    ]
+                }
+            }
+
+            const res = requestMapper.courseMappingPatch(body)
+
+            expect(res).toEqual(expectedRes)
+        })
+
+        it('throws error when non array stages', () => {
             const body = {
                 "user_id": "id",
                 "title": "title",
@@ -95,61 +147,7 @@ describe("RequestMapper", () => {
                 }
             }
 
-            const res = requestMapper.courseMappingPatch(body)
-
-            expect(res).toEqual(expectedRes)
-        })
-
-        it('maps only the given fields (lessons)', () => {
-            const body = {
-                "user_id": "id",
-                "stages": [
-                    {
-                        "active": "active",
-                        "multimedia_id": "multimedia_id",
-                        "multimedia_type": "multimedia_type",
-                        "required": "required",
-                        "position": "position",
-                        "title": "title"
-                    },
-                    {
-                        "active": "active",
-                        "multimedia_id": "multimedia_id",
-                        "multimedia_type": "multimedia_type",
-                        "required": "required",
-                        "position": "position",
-                        "title": "title"
-                    }                      
-                ]
-            }
-
-            const expectedRes = {
-                "user_id": "id",
-                "course": {
-                    "lessons": [
-                        {
-                            "active": "active",
-                            "multimedia_id": "multimedia_id",
-                            "multimedia_type": "multimedia_type",
-                            "require": "required",
-                            "sequence_number": "position",
-                            "title": "title"
-                        },
-                        {
-                            "active": "active",
-                            "multimedia_id": "multimedia_id",
-                            "multimedia_type": "multimedia_type",
-                            "require": "required",
-                            "sequence_number": "position",
-                            "title": "title"
-                        }   
-                    ]
-                }
-            }
-
-            const res = requestMapper.courseMappingPatch(body)
-
-            expect(res).toEqual(expectedRes)
+            expect(() => requestMapper.courseMappingPatch(body)).toThrow(ServerError)
         })
     })
 
@@ -165,7 +163,7 @@ describe("RequestMapper", () => {
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "required": "required",
-                        "position": "position",
+                        "position": 0,
                         "title": "title"
                     },
                     {
@@ -173,7 +171,7 @@ describe("RequestMapper", () => {
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "required": "required",
-                        "position": "position",
+                        "position": 1,
                         "title": "title"
                     }                      
                 ]
@@ -192,7 +190,7 @@ describe("RequestMapper", () => {
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "require": "required",
-                        "sequence_number": "position",
+                        "sequence_number": 0,
                         "title": "title"
                     },
                     {
@@ -200,7 +198,7 @@ describe("RequestMapper", () => {
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "require": "required",
-                        "sequence_number": "position",
+                        "sequence_number": 1,
                         "title": "title"
                     }   
                 ]   
@@ -225,7 +223,7 @@ describe("RequestMapper", () => {
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "required": "required",
-                        "position": "position",
+                        "position": 0,
                         "title": "title"
                     },
                     {
@@ -233,7 +231,7 @@ describe("RequestMapper", () => {
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "required": "required",
-                        "position": "position",
+                        "position": 1,
                         "title": "title"
                     }                      
                 ]
@@ -252,7 +250,7 @@ describe("RequestMapper", () => {
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "require": "required",
-                        "sequence_number": "position",
+                        "sequence_number": 0,
                         "title": "title"
                     },
                     {
@@ -260,7 +258,7 @@ describe("RequestMapper", () => {
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "require": "required",
-                        "sequence_number": "position",
+                        "sequence_number": 1,
                         "title": "title"
                     }   
                 ]   

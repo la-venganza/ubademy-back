@@ -54,6 +54,8 @@ function courseMappingPatch(requestBody) {
     if (!(typeof stages === 'undefined') && Array.isArray(stages)) {
         const lessons = lessonResolver(stages)
         body.course["lessons"] = lessons
+    } else if (!Array.isArray(stages) && !(typeof stages === 'undefined')) {
+        throw new ServerError('Error', 'Bad request - field stages not an array', 400)
     }
 
     if (!(typeof requestBody.description === 'undefined')) {
