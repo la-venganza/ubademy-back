@@ -51,7 +51,7 @@ function courseMappingPatch(requestBody) {
         }
     }
 
-    if (!(typeof stages === 'undefined') || Array.isArray(stages)) {
+    if (!(typeof stages === 'undefined') && Array.isArray(stages)) {
         const lessons = lessonResolver(stages)
         body.course["lessons"] = lessons
     }

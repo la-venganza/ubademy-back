@@ -79,6 +79,27 @@ describe("RequestMapper", () => {
             expect(res).toEqual(expectedRes)
         })
 
+        it('fails to map non array stages', () => {
+            const body = {
+                "user_id": "id",
+                "title": "title",
+                "description": "description",
+                "stages": "5"
+            }
+
+            const expectedRes = {
+                "user_id": "id",
+                "course": {
+                    "title": "title",
+                    "description": "description",
+                }
+            }
+
+            const res = requestMapper.courseMappingPatch(body)
+
+            expect(res).toEqual(expectedRes)
+        })
+
         it('maps only the given fields (lessons)', () => {
             const body = {
                 "user_id": "id",
