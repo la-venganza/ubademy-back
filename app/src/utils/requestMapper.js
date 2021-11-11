@@ -3,12 +3,6 @@ const ServerError = require("../errors/serverError")
 function lessonResolver(stages) {
     let lessons = []
 
-    if (typeof stages === 'undefined' || !Array.isArray(stages)) {
-        throw new ServerError('Error', 'Bad request - field stages not an array', 400)
-    }
-
-    //TODO: una vez que empezemos con la parte de examenes, verificar que un examen tenga preguntas
-
     stages.forEach(element => {
         let lesson = {
             "active": element.active,
@@ -27,6 +21,12 @@ function lessonResolver(stages) {
 function courseMappingPost(requestBody) {
     const stages = requestBody.stages
 
+    if (typeof stages === 'undefined' || !Array.isArray(stages)) {
+        throw new ServerError('Error', 'Bad request - field stages not an array', 400)
+    }
+
+    //TODO: una vez que empezemos con la parte de examenes, verificar que un examen tenga preguntas
+
     const lessons = lessonResolver(stages)
 
     const body = {
@@ -43,16 +43,24 @@ function courseMappingPost(requestBody) {
 
 function courseMappingPatch(requestBody) {
     const stages = requestBody.stages
-
-    const lessons = lessonResolver(stages)
-
-    const body = {
+    let body = {
         "user_id": requestBody.user_id,
         "course": {
-            "title": requestBody.title,
-            "description": requestBody.description,
-            "lessons": lessons
+
         }
+    }
+
+    if (!(typeof stages === 'undefined') || Array.isArray(stages)) {
+        const lessons = lessonResolver(stages)
+        body.course["lessons"] = lessons
+    }
+
+    if (!(typeof requestBody.description === 'undefined')) {
+        body.course["description"] = requestBody.description
+    }
+
+    if (!(typeof requestBody.title === 'undefined')) {
+        body.course["title"] = requestBody.title
     }
 
     return body
