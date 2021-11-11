@@ -1,6 +1,6 @@
 const ServerError = require("../errors/serverError")
 
-function lessonResolver(lessons) {
+function lessonResolver(stages) {
     let lessons = []
 
     if (typeof stages === 'undefined' || !Array.isArray(stages)) {
