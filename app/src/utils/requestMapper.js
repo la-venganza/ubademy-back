@@ -24,12 +24,14 @@ function courseMapping(requestBody) {
     })
 
     const body = {
-        "title": requestBody.title,
-        "description": requestBody.description,
-        "type": "course",
-        "hashtags": "hasthags",
-        "location": "internet",
-        "lessons": lessons
+        "course": {
+            "title": requestBody.title,
+            "description": requestBody.description,
+            "type": "course",
+            "hashtags": "hasthags",
+            "location": "internet",
+            "lessons": lessons
+        }
     }
 
     return body
