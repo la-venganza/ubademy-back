@@ -1,6 +1,6 @@
 const ServerError = require("../errors/serverError")
 
-function courseMapping(requestBody) {
+function courseMappingPost(requestBody) {
     let lessons = []
 
     const stages = requestBody.stages
@@ -24,6 +24,42 @@ function courseMapping(requestBody) {
     })
 
     const body = {
+        "title": requestBody.title,
+        "description": requestBody.description,
+        "type": "course",
+        "hashtags": "hasthags",
+        "location": "internet",
+        "lessons": lessons
+    }
+
+    return body
+}
+
+function courseMappingPut(requestBody) {
+    let lessons = []
+
+    const stages = requestBody.stages
+
+    if (typeof stages === 'undefined' || !Array.isArray(stages)) {
+        throw new ServerError('Error', 'Bad request - field stages not an array', 400)
+    }
+
+    //TODO: una vez que empezemos con la parte de examenes, veriicar que un examen tenga preguntas
+
+    stages.forEach(element => {
+        let lesson = {
+            "active": element.active,
+            "multimedia_id": element.multimedia_id,
+            "title": element.title,
+            "multimedia_type": element.multimedia_type,
+            "sequence_number": element.position,
+            "require": element.required,
+        }
+        lessons.push(lesson)
+    })
+
+    const body = {
+        "user_id": requestBody.user_id,
         "course": {
             "title": requestBody.title,
             "description": requestBody.description,
@@ -37,4 +73,4 @@ function courseMapping(requestBody) {
     return body
 }
 
-module.exports = courseMapping;
+module.exports = { courseMappingPost, courseMappingPut };
