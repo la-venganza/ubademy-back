@@ -33,7 +33,7 @@ function courseMappingPost(requestBody) {
         "title": requestBody.title,
         "description": requestBody.description,
         "type": "course",
-        "hashtags": "hasthags",
+        "hashtags": "hashtags",
         "location": "internet",
         "lessons": lessons
     }
