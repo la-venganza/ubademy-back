@@ -133,7 +133,7 @@ describe("RequestMapper", () => {
     })
 
     describe("courseMappingPost", () => {
-        it('maps full response', () => {
+        it('maps full response with default values', () => {
             const body = {
                 "user_id": "user_id",
                 "title": "title",
@@ -190,11 +190,82 @@ describe("RequestMapper", () => {
             expect(res).toEqual(expectedRes)
         })
 
-        it('fails with exception', () => {
+        it('maps full response with given values', () => {
             const body = {
                 "user_id": "user_id",
                 "title": "title",
                 "description": "description",
+                "hashtags": "some_hashtags",
+                "location": "some_internet",
+                "course": "some_course",
+                "stages": [
+                    {
+                        "active": "active",
+                        "multimedia_id": "multimedia_id",
+                        "multimedia_type": "multimedia_type",
+                        "required": "required",
+                        "position": "position",
+                        "title": "title"
+                    },
+                    {
+                        "active": "active",
+                        "multimedia_id": "multimedia_id",
+                        "multimedia_type": "multimedia_type",
+                        "required": "required",
+                        "position": "position",
+                        "title": "title"
+                    }                      
+                ]
+            }
+
+            const expectedRes = {
+                "user_id": "user_id",
+                "title": "title",
+                "description": "description",
+                "hashtags": "some_hashtags",
+                "location": "some_internet",
+                "type": "some_course",
+                "lessons": [
+                    {
+                        "active": "active",
+                        "multimedia_id": "multimedia_id",
+                        "multimedia_type": "multimedia_type",
+                        "require": "required",
+                        "sequence_number": "position",
+                        "title": "title"
+                    },
+                    {
+                        "active": "active",
+                        "multimedia_id": "multimedia_id",
+                        "multimedia_type": "multimedia_type",
+                        "require": "required",
+                        "sequence_number": "position",
+                        "title": "title"
+                    }   
+                ]   
+            }
+
+            const res = requestMapper.courseMappingPost(body)
+
+            expect(res).toEqual(expectedRes)
+        })
+
+        it('fails with exception when stages is not in request', () => {
+            const body = {
+                "user_id": "user_id",
+                "title": "title",
+                "description": "description",
+            }
+
+            expect(() => requestMapper.courseMappingPost(body)).toThrow(ServerError)
+        })
+
+        it('fails with exception when stages is not an array', () => {
+            const body = {
+                "user_id": "user_id",
+                "title": "title",
+                "description": "description",
+                "stages": "5"
             }
 
             expect(() => requestMapper.courseMappingPost(body)).toThrow(ServerError)

@@ -31,7 +31,7 @@ function courseMappingPost(requestBody) {
 
     const body = {
         "user_id": requestBody.user_id,
-        "title": requestBody.title || "titulo del urso",
+        "title": requestBody.title || "titulo del curso",
         "description": requestBody.description || "descripcion del curso",
         "type": requestBody.course || "course",
         "hashtags": requestBody.hashtags || "hashtags",
