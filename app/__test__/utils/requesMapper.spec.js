@@ -57,7 +57,5 @@ describe("RequestMapper", () => {
 
             expect(res).toEqual(expectedRes)
         })
-
-        it('fails')
     })
 })
