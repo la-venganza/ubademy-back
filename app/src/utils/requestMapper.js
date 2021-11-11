@@ -51,9 +51,6 @@ function courseMappingPatch(requestBody) {
         "course": {
             "title": requestBody.title,
             "description": requestBody.description,
-            "type": "course",
-            "hashtags": "hasthags",
-            "location": "internet",
             "lessons": lessons
         }
     }
