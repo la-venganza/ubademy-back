@@ -1,3 +1,4 @@
+const ServerError = require('../../src/errors/serverError')
 const requestMapper = require('../../src/utils/requestMapper')
 
 describe("RequestMapper", () => {
@@ -187,6 +188,16 @@ describe("RequestMapper", () => {
             const res = requestMapper.courseMappingPost(body)
 
             expect(res).toEqual(expectedRes)
+        })
+
+        it('fails with exception', () => {
+            const body = {
+                "user_id": "user_id",
+                "title": "title",
+                "description": "description",
+            }
+
+            expect(() => requestMapper.courseMappingPost(body)).toThrow(ServerError)
         })
     })
 })
