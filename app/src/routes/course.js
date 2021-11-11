@@ -149,7 +149,7 @@ router.put('/:id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        const body = courseMapper.courseMappingPut(req.body)
+        const body = courseMapper.courseMappingPatch(req.body)
         
         const response = await courseService.updateCourse(req.params.id, body)
 

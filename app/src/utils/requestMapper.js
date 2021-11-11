@@ -7,7 +7,7 @@ function lessonResolver(stages) {
         throw new ServerError('Error', 'Bad request - field stages not an array', 400)
     }
 
-    //TODO: una vez que empezemos con la parte de examenes, veriicar que un examen tenga preguntas
+    //TODO: una vez que empezemos con la parte de examenes, verificar que un examen tenga preguntas
 
     stages.forEach(element => {
         let lesson = {
@@ -41,7 +41,7 @@ function courseMappingPost(requestBody) {
     return body
 }
 
-function courseMappingPut(requestBody) {
+function courseMappingPatch(requestBody) {
     const stages = requestBody.stages
 
     const lessons = lessonResolver(stages)
@@ -61,4 +61,4 @@ function courseMappingPut(requestBody) {
     return body
 }
 
-module.exports = { courseMappingPost, courseMappingPut };
+module.exports = { courseMappingPost, courseMappingPatch }
