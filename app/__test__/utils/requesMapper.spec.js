@@ -134,6 +134,7 @@ describe("RequestMapper", () => {
     describe("courseMappingPost", () => {
         it('maps full response', () => {
             const body = {
+                "user_id": "user_id",
                 "title": "title",
                 "description": "description",
                 "stages": [
@@ -157,29 +158,30 @@ describe("RequestMapper", () => {
             }
 
             const expectedRes = {
+                "user_id": "user_id",
                 "title": "title",
-                    "description": "description",
-                    "hashtags": "hashtags",
-                    "location": "internet",
-                    "type": "course",
-                    "lessons": [
-                        {
-                            "active": "active",
-                            "multimedia_id": "multimedia_id",
-                            "multimedia_type": "multimedia_type",
-                            "require": "required",
-                            "sequence_number": "position",
-                            "title": "title"
-                        },
-                        {
-                            "active": "active",
-                            "multimedia_id": "multimedia_id",
-                            "multimedia_type": "multimedia_type",
-                            "require": "required",
-                            "sequence_number": "position",
-                            "title": "title"
-                        }   
-                    ]
+                "description": "description",
+                "hashtags": "hashtags",
+                "location": "internet",
+                "type": "course",
+                "lessons": [
+                    {
+                        "active": "active",
+                        "multimedia_id": "multimedia_id",
+                        "multimedia_type": "multimedia_type",
+                        "require": "required",
+                        "sequence_number": "position",
+                        "title": "title"
+                    },
+                    {
+                        "active": "active",
+                        "multimedia_id": "multimedia_id",
+                        "multimedia_type": "multimedia_type",
+                        "require": "required",
+                        "sequence_number": "position",
+                        "title": "title"
+                    }   
+                ]   
             }
 
             const res = requestMapper.courseMappingPost(body)

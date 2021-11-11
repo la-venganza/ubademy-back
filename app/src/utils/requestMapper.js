@@ -34,7 +34,7 @@ function courseMappingPost(requestBody) {
         "title": requestBody.title || "titulo del urso",
         "description": requestBody.description || "descripcion del curso",
         "type": requestBody.course || "course",
-        "hashtags": requestBody.hashtags || "hasthags",
+        "hashtags": requestBody.hashtags || "hashtags",
         "location": requestBody.location || "internet",
         "lessons": lessons
     }
