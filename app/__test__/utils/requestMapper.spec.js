@@ -1,3 +1,4 @@
+const ServerError = require('../../src/errors/serverError')
 const requestMapper = require('../../src/utils/requestMapper')
 
 describe("RequestMapper", () => {
@@ -13,7 +14,7 @@ describe("RequestMapper", () => {
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "required": "required",
-                        "position": "position",
+                        "position": 0,
                         "title": "title"
                     },
                     {
@@ -21,7 +22,7 @@ describe("RequestMapper", () => {
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "required": "required",
-                        "position": "position",
+                        "position": 1,
                         "title": "title"
                     }                      
                 ]
@@ -38,7 +39,7 @@ describe("RequestMapper", () => {
                             "multimedia_id": "multimedia_id",
                             "multimedia_type": "multimedia_type",
                             "require": "required",
-                            "sequence_number": "position",
+                            "sequence_number": 0,
                             "title": "title"
                         },
                         {
@@ -46,7 +47,7 @@ describe("RequestMapper", () => {
                             "multimedia_id": "multimedia_id",
                             "multimedia_type": "multimedia_type",
                             "require": "required",
-                            "sequence_number": "position",
+                            "sequence_number": 1,
                             "title": "title"
                         }   
                     ]
@@ -87,7 +88,7 @@ describe("RequestMapper", () => {
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "required": "required",
-                        "position": "position",
+                        "position": 0,
                         "title": "title"
                     },
                     {
@@ -95,7 +96,7 @@ describe("RequestMapper", () => {
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "required": "required",
-                        "position": "position",
+                        "position": 1,
                         "title": "title"
                     }                      
                 ]
@@ -110,7 +111,7 @@ describe("RequestMapper", () => {
                             "multimedia_id": "multimedia_id",
                             "multimedia_type": "multimedia_type",
                             "require": "required",
-                            "sequence_number": "position",
+                            "sequence_number": 0,
                             "title": "title"
                         },
                         {
@@ -118,7 +119,7 @@ describe("RequestMapper", () => {
                             "multimedia_id": "multimedia_id",
                             "multimedia_type": "multimedia_type",
                             "require": "required",
-                            "sequence_number": "position",
+                            "sequence_number": 1,
                             "title": "title"
                         }   
                     ]
@@ -129,11 +130,31 @@ describe("RequestMapper", () => {
 
             expect(res).toEqual(expectedRes)
         })
+
+        it('throws error when non array stages', () => {
+            const body = {
+                "user_id": "id",
+                "title": "title",
+                "description": "description",
+                "stages": "5"
+            }
+
+            const expectedRes = {
+                "user_id": "id",
+                "course": {
+                    "title": "title",
+                    "description": "description",
+                }
+            }
+
+            expect(() => requestMapper.courseMappingPatch(body)).toThrow(ServerError)
+        })
     })
 
     describe("courseMappingPost", () => {
-        it('maps full response', () => {
+        it('maps full response with default values', () => {
             const body = {
+                "user_id": "user_id",
                 "title": "title",
                 "description": "description",
                 "stages": [
@@ -142,7 +163,7 @@ describe("RequestMapper", () => {
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "required": "required",
-                        "position": "position",
+                        "position": 0,
                         "title": "title"
                     },
                     {
@@ -150,41 +171,123 @@ describe("RequestMapper", () => {
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "required": "required",
-                        "position": "position",
+                        "position": 1,
                         "title": "title"
                     }                      
                 ]
             }
 
             const expectedRes = {
+                "user_id": "user_id",
                 "title": "title",
-                    "description": "description",
-                    "hashtags": "hashtags",
-                    "location": "internet",
-                    "type": "course",
-                    "lessons": [
-                        {
-                            "active": "active",
-                            "multimedia_id": "multimedia_id",
-                            "multimedia_type": "multimedia_type",
-                            "require": "required",
-                            "sequence_number": "position",
-                            "title": "title"
-                        },
-                        {
-                            "active": "active",
-                            "multimedia_id": "multimedia_id",
-                            "multimedia_type": "multimedia_type",
-                            "require": "required",
-                            "sequence_number": "position",
-                            "title": "title"
-                        }   
-                    ]
+                "description": "description",
+                "hashtags": "hashtags",
+                "location": "internet",
+                "type": "course",
+                "lessons": [
+                    {
+                        "active": "active",
+                        "multimedia_id": "multimedia_id",
+                        "multimedia_type": "multimedia_type",
+                        "require": "required",
+                        "sequence_number": 0,
+                        "title": "title"
+                    },
+                    {
+                        "active": "active",
+                        "multimedia_id": "multimedia_id",
+                        "multimedia_type": "multimedia_type",
+                        "require": "required",
+                        "sequence_number": 1,
+                        "title": "title"
+                    }   
+                ]   
             }
 
             const res = requestMapper.courseMappingPost(body)
 
             expect(res).toEqual(expectedRes)
+        })
+
+        it('maps full response with given values', () => {
+            const body = {
+                "user_id": "user_id",
+                "title": "title",
+                "description": "description",
+                "hashtags": "some_hashtags",
+                "location": "some_internet",
+                "course": "some_course",
+                "stages": [
+                    {
+                        "active": "active",
+                        "multimedia_id": "multimedia_id",
+                        "multimedia_type": "multimedia_type",
+                        "required": "required",
+                        "position": 0,
+                        "title": "title"
+                    },
+                    {
+                        "active": "active",
+                        "multimedia_id": "multimedia_id",
+                        "multimedia_type": "multimedia_type",
+                        "required": "required",
+                        "position": 1,
+                        "title": "title"
+                    }                      
+                ]
+            }
+
+            const expectedRes = {
+                "user_id": "user_id",
+                "title": "title",
+                "description": "description",
+                "hashtags": "some_hashtags",
+                "location": "some_internet",
+                "type": "some_course",
+                "lessons": [
+                    {
+                        "active": "active",
+                        "multimedia_id": "multimedia_id",
+                        "multimedia_type": "multimedia_type",
+                        "require": "required",
+                        "sequence_number": 0,
+                        "title": "title"
+                    },
+                    {
+                        "active": "active",
+                        "multimedia_id": "multimedia_id",
+                        "multimedia_type": "multimedia_type",
+                        "require": "required",
+                        "sequence_number": 1,
+                        "title": "title"
+                    }   
+                ]   
+            }
+
+            const res = requestMapper.courseMappingPost(body)
+
+            expect(res).toEqual(expectedRes)
+        })
+
+        it('fails with exception when stages is not in request', () => {
+            const body = {
+                "user_id": "user_id",
+                "title": "title",
+                "description": "description",
+            }
+
+            expect(() => requestMapper.courseMappingPost(body)).toThrow(ServerError)
+        })
+
+        it('fails with exception when stages is not an array', () => {
+            const body = {
+                "user_id": "user_id",
+                "title": "title",
+                "description": "description",
+                "stages": "5"
+            }
+
+            expect(() => requestMapper.courseMappingPost(body)).toThrow(ServerError)
         })
     })
 })

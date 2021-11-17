@@ -33,14 +33,22 @@
           "Courses"
         ],
         "summary": "Create new course",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "The user to create.",
+            "schema": {
+              "$ref": "#/definitions/course"
+            }
+          }
+        ],
         "responses": {
           "201": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "id": "id of created course"
-              }
-            }
+            "description": "OK"
           },
           "401": {
             "description": "Authorization error"
@@ -52,6 +60,15 @@
       }
     },
     "/course/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "type": "integer",
+          "required": true,
+          "description": "Numeric ID of the course to get"
+        }
+      ],
       "get": {
         "tags": [
           "Courses"
@@ -95,12 +112,7 @@
         "summary": "Create new user",
         "responses": {
           "201": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "id": "id of created user"
-              }
-            }
+            "description": "OK"
           },
           "401": {
             "description": "Authorization error"
@@ -129,6 +141,15 @@
       }
     },
     "/users/{email}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "email",
+          "type": "string",
+          "required": true,
+          "description": "Email of the user to get"
+        }
+      ],
       "get": {
         "tags": [
           "Users"
@@ -143,6 +164,180 @@
           },
           "500": {
             "description": "Server error"
+          }
+        }
+      }
+    },
+    "/exam": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "The user to create.",
+            "schema": {
+              "type": "object",
+              "required": [
+                "course_id",
+                "lesson_id"
+              ],
+              "properties": {
+                "user_id": {
+                  "type": "integer"
+                },
+                "course_id": {
+                  "type": "integer"
+                },
+                "lesson_id": {
+                  "type": "integer"
+                },
+                "exam": {
+                  "$ref": "#/definitions/exam"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Exams"
+        ],
+        "summary": "Create a new exam",
+        "responses": {
+          "201": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "course": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "hashtags": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "lessons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/lesson"
+          }
+        }
+      }
+    },
+    "lesson": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "require": {
+          "type": "boolean"
+        },
+        "acive": {
+          "type": "boolean"
+        },
+        "position": {
+          "type": "integer"
+        },
+        "multimedia_id": {
+          "type": "string"
+        },
+        "multimedia_type": {
+          "type": "string"
+        },
+        "exam": {
+          "$ref": "#/definitions/exam"
+        }
+      }
+    },
+    "exam": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "minimum_qualification": {
+          "type": "integer"
+        },
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "sequence_number": {
+                "type": "integer"
+              },
+              "type": {
+                "type": "string"
+              },
+              "score": {
+                "type": "integer"
+              },
+              "multiple_choice_question": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  },
+                  "amount_of_options": {
+                    "type": "integer"
+                  },
+                  "choices": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "text": {
+                          "type": "string"
+                        },
+                        "is_correct": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "develop_question": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
           }
         }
       }

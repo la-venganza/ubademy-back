@@ -1,4 +1,5 @@
 const ServerError = require("../errors/serverError")
+const { verifyExam } = require("../utils/examHelper")
 
 function lessonResolver(stages) {
     let lessons = []
@@ -25,16 +26,20 @@ function courseMappingPost(requestBody) {
         throw new ServerError('Error', 'Bad request - field stages not an array', 400)
     }
 
-    //TODO: una vez que empezemos con la parte de examenes, verificar que un examen tenga preguntas
+    stages.forEach(stage => {
+        if(!(typeof stage.exam === 'undefined')) {
+            verifyExam(stage.exam)
+        }
+    })
 
     const lessons = lessonResolver(stages)
 
     const body = {
         "user_id": requestBody.user_id,
-        "title": requestBody.title || "titulo del urso",
+        "title": requestBody.title || "titulo del curso",
         "description": requestBody.description || "descripcion del curso",
         "type": requestBody.course || "course",
-        "hashtags": requestBody.hashtags || "hasthags",
+        "hashtags": requestBody.hashtags || "hashtags",
         "location": requestBody.location || "internet",
         "lessons": lessons
     }
@@ -51,9 +56,11 @@ function courseMappingPatch(requestBody) {
         }
     }
 
-    if (!(typeof stages === 'undefined') || Array.isArray(stages)) {
+    if (!(typeof stages === 'undefined') && Array.isArray(stages)) {
         const lessons = lessonResolver(stages)
         body.course["lessons"] = lessons
+    } else if (!Array.isArray(stages) && !(typeof stages === 'undefined')) {
+        throw new ServerError('Error', 'Bad request - field stages not an array', 400)
     }
 
     if (!(typeof requestBody.description === 'undefined')) {
@@ -66,5 +73,4 @@ function courseMappingPatch(requestBody) {
 
     return body
 }
-
 module.exports = { courseMappingPost, courseMappingPatch }

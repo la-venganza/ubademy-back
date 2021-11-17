@@ -20,6 +20,7 @@ app.use(
   swaggerUi.serve,
   swaggerUi.setup(swaggerDocument),
 );
+
 app.use('/', routes);
 
 app.listen(port, () => {
