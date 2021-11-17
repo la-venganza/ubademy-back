@@ -1,4 +1,5 @@
 const ServerError = require("../errors/serverError")
+const { verifyExam } = require("../utils/examHelper")
 
 function lessonResolver(stages) {
     let lessons = []
@@ -25,7 +26,11 @@ function courseMappingPost(requestBody) {
         throw new ServerError('Error', 'Bad request - field stages not an array', 400)
     }
 
-    //TODO: una vez que empezemos con la parte de examenes, verificar que un examen tenga preguntas
+    stages.forEach(stage => {
+        if(!(typeof stage.exam === 'undefined')) {
+            verifyExam(stage.exam)
+        }
+    })
 
     const lessons = lessonResolver(stages)
 
@@ -68,5 +73,4 @@ function courseMappingPatch(requestBody) {
 
     return body
 }
-
 module.exports = { courseMappingPost, courseMappingPatch }

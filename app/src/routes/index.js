@@ -1,6 +1,7 @@
 const express = require('express');
 const course = require('./course');
 const user = require('./user')
+const exam = require('./exam')
 
 const router = express.Router();
 
@@ -21,5 +22,6 @@ router.get('/ping', (_req, res) => {
 
 router.use('/course', course);
 router.use('/user', user)
+router.use('/exam', exam)
 
 module.exports = router;
