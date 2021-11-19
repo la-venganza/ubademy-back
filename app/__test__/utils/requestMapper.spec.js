@@ -156,6 +156,8 @@ describe("RequestMapper", () => {
             const body = {
                 "user_id": "user_id",
                 "title": "title",
+                "type": "type",
+                "plan": "plan",
                 "description": "description",
                 "stages": [
                     {
@@ -183,7 +185,8 @@ describe("RequestMapper", () => {
                 "description": "description",
                 "hashtags": "hashtags",
                 "location": "internet",
-                "type": "course",
+                "type": "type",
+                "plan": "plan",
                 "lessons": [
                     {
                         "active": "active",
@@ -215,8 +218,9 @@ describe("RequestMapper", () => {
                 "title": "title",
                 "description": "description",
                 "hashtags": "some_hashtags",
+                "type": "type",
+                "plan": "plan",
                 "location": "some_internet",
-                "course": "some_course",
                 "stages": [
                     {
                         "active": "active",
@@ -243,7 +247,8 @@ describe("RequestMapper", () => {
                 "description": "description",
                 "hashtags": "some_hashtags",
                 "location": "some_internet",
-                "type": "some_course",
+                "type": "type",
+                "plan": "plan",
                 "lessons": [
                     {
                         "active": "active",
