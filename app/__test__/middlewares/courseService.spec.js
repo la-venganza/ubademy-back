@@ -190,3 +190,93 @@ describe("updateCourse", () => {
         expect(courseService.updateCourse(expectedRes)).rejects.toThrowError(Error)
     })
 })
+
+describe("addRegistration", () => {
+    const expectedRes = {
+        "user_id": "1"
+    }
+    it("posts registration", async () => {
+        instance.patch.mockResolvedValue({
+            data: expectedRes
+        }       
+        )
+
+        const res = await courseService.addRegistration(expectedRes)
+        expect(res).toEqual(expectedRes)
+    })
+
+    it("throws ServerError", async () => {
+        instance.patch.mockRejectedValueOnce({
+            response: "has response",
+            message: "message"
+        }
+        )
+
+        expect(courseService.addRegistration(expectedRes)).rejects.toThrowError(ServerError)
+        expect(courseService.addRegistration(expectedRes)).rejects.toThrowError("message")
+    })
+
+    it("throws ConnectionError", async () => {
+        instance.patch.mockRejectedValueOnce({
+            request: "has request",
+            message: "message"
+        }
+        )
+
+        expect(courseService.addRegistration(expectedRes)).rejects.toThrowError(ConnectionError)
+        expect(courseService.addRegistration(expectedRes)).rejects.toThrowError("message")
+    })
+
+    it("throws Error", async () => {
+        instance.patch.mockRejectedValueOnce({
+        }
+        )
+
+        expect(courseService.addRegistration(expectedRes)).rejects.toThrowError(Error)
+    })
+})
+
+describe("addCollaborator", () => {
+    const expectedRes = {
+        "user_id": "1"
+    }
+    it("posts collaborator", async () => {
+        instance.patch.mockResolvedValue({
+            data: expectedRes
+        }       
+        )
+
+        const res = await courseService.addCollaborator(expectedRes)
+        expect(res).toEqual(expectedRes)
+    })
+
+    it("throws ServerError", async () => {
+        instance.patch.mockRejectedValueOnce({
+            response: "has response",
+            message: "message"
+        }
+        )
+
+        expect(courseService.addCollaborator(expectedRes)).rejects.toThrowError(ServerError)
+        expect(courseService.addCollaborator(expectedRes)).rejects.toThrowError("message")
+    })
+
+    it("throws ConnectionError", async () => {
+        instance.patch.mockRejectedValueOnce({
+            request: "has request",
+            message: "message"
+        }
+        )
+
+        expect(courseService.addCollaborator(expectedRes)).rejects.toThrowError(ConnectionError)
+        expect(courseService.addCollaborator(expectedRes)).rejects.toThrowError("message")
+    })
+
+    it("throws Error", async () => {
+        instance.patch.mockRejectedValueOnce({
+        }
+        )
+
+        expect(courseService.addCollaborator(expectedRes)).rejects.toThrowError(Error)
+    })
+})
