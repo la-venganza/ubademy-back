@@ -105,7 +105,7 @@ describe("createCourse", () => {
     const expectedRes = {
         "title": "course 1"
     }
-    it("posts course", async () => {
+    it("patches course", async () => {
         instance.post.mockResolvedValue({
             data: expectedRes
         }       

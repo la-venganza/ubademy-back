@@ -149,47 +149,46 @@ describe("createExam", () => {
     })
 })
 
-// describe("updateCourse", () => {
-//     const expectedRes = {
-//         "title": "course 1"
-//     }
-//     it("posts course", async () => {
-//         instance.patch.mockResolvedValue({
-//             data: expectedRes
-//         }       
-//         )
+describe("patchExam", () => {
+    const expectedRes = {
+        "title": "exam 1"
+    }
+    it("patches exam", async () => {
+        instance.patch.mockResolvedValue({
+            data: expectedRes
+        })
 
-//         const res = await courseService.updateCourse(expectedRes)
-//         expect(res).toEqual(expectedRes)
-//     })
+        const res = await examService.patchExam(expectedRes)
+        expect(res).toEqual(expectedRes)
+    })
 
-//     it("throws ServerError", async () => {
-//         instance.patch.mockRejectedValueOnce({
-//             response: "has response",
-//             message: "message"
-//         }
-//         )
+    it("throws ServerError", async () => {
+        instance.patch.mockRejectedValueOnce({
+            response: "has response",
+            message: "message"
+        }
+        )
 
-//         expect(courseService.updateCourse(expectedRes)).rejects.toThrowError(ServerError)
-//         expect(courseService.updateCourse(expectedRes)).rejects.toThrowError("message")
-//     })
+        expect(examService.patchExam(expectedRes)).rejects.toThrowError(ServerError)
+        expect(examService.patchExam(expectedRes)).rejects.toThrowError("message")
+    })
 
-//     it("throws ConnectionError", async () => {
-//         instance.patch.mockRejectedValueOnce({
-//             request: "has request",
-//             message: "message"
-//         }
-//         )
+    it("throws ConnectionError", async () => {
+        instance.patch.mockRejectedValueOnce({
+            request: "has request",
+            message: "message"
+        }
+        )
 
-//         expect(courseService.updateCourse(expectedRes)).rejects.toThrowError(ConnectionError)
-//         expect(courseService.updateCourse(expectedRes)).rejects.toThrowError("message")
-//     })
+        expect(examService.patchExam(expectedRes)).rejects.toThrowError(ConnectionError)
+        expect(examService.patchExam(expectedRes)).rejects.toThrowError("message")
+    })
 
-//     it("throws Error", async () => {
-//         instance.patch.mockRejectedValueOnce({
-//         }
-//         )
+    it("throws Error", async () => {
+        instance.patch.mockRejectedValueOnce({
+        }
+        )
 
-//         expect(courseService.updateCourse(expectedRes)).rejects.toThrowError(Error)
-//     })
-// })
+        expect(examService.patchExam(expectedRes)).rejects.toThrowError(Error)
+    })
+})
