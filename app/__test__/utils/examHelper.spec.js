@@ -36,7 +36,7 @@ describe("ExamHelper", () => {
       })
     })
 
-    describe("examMappingPost", () => {
+    describe("examMapping", () => {
         it('maps full response', () => {
             const body = {
                 "user_id": "id",
@@ -96,7 +96,7 @@ describe("ExamHelper", () => {
                 }
             }
 
-            const res = examHelper.examMappingPost(body)
+            const res = examHelper.examMapping(body)
 
             expect(res).toEqual(expectedRes)
         })
@@ -112,7 +112,7 @@ describe("ExamHelper", () => {
                 }
             }
 
-            expect(() => examHelper.examMappingPost(body)).toThrow(ServerError)
+            expect(() => examHelper.examMapping(body)).toThrow(ServerError)
         })
     })
 })

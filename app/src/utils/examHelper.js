@@ -6,7 +6,7 @@ function verifyExam(exam) {
     }
 }
 
-function examMappingPost(requestBody) {
+function examMapping(requestBody) {
     verifyExam(requestBody.exam)
 
     body = {
@@ -17,8 +17,4 @@ function examMappingPost(requestBody) {
     return body
 }
 
-function examMappingPatch(requestBody) {
-    //TODO
-}
-
-module.exports = { examMappingPost, examMappingPatch, verifyExam }
+module.exports = { examMapping, verifyExam }
