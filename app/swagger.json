@@ -131,7 +131,7 @@
               ],
               "properties": {
                 "user_id": {
-                  "type": "integer"
+                  "type": "string"
                 }
               }
             }
@@ -178,7 +178,7 @@
               ],
               "properties": {
                 "user_id": {
-                  "type": "integer"
+                  "type": "string"
                 }
               }
             }
