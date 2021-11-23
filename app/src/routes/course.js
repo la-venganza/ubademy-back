@@ -172,4 +172,56 @@ router.put('/:id', async function(req, res) {
     }
 });
 
+router.post('/:id/registration', async function(req, res) {
+    // Verificar request y mandar al back de python
+    try {
+        const uid = await verifyIdToken(req.cookies.firebaseAuth)
+        
+        const response = await courseService.addRegistration(req.params.id, body)
+
+        // Send to back
+        res.status(201).send(response)
+    } catch (e) {
+        const body = {
+            error: e.name,
+            message: e.message
+        }
+        if (e instanceof ConnectionError) {
+            res.status(500).send(body)
+        } else if (e instanceof AuthError) {
+            res.status(401).send(body)
+        } else if (e instanceof ServerError) {
+            res.status(e.status).send(body)
+        } else {
+            res.status(500).send(body)
+        }
+    }
+});
+
+router.post('/:id/collaboration', async function(req, res) {
+    // Verificar request y mandar al back de python
+    try {
+        const uid = await verifyIdToken(req.cookies.firebaseAuth)
+        
+        const response = await courseService.addCollaborator(req.params.id, body)
+
+        // Send to back
+        res.status(201).send(response)
+    } catch (e) {
+        const body = {
+            error: e.name,
+            message: e.message
+        }
+        if (e instanceof ConnectionError) {
+            res.status(500).send(body)
+        } else if (e instanceof AuthError) {
+            res.status(401).send(body)
+        } else if (e instanceof ServerError) {
+            res.status(e.status).send(body)
+        } else {
+            res.status(500).send(body)
+        }
+    }
+});
+
 module.exports = router;

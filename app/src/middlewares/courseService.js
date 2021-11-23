@@ -38,4 +38,22 @@ async function updateCourse (id, body) {
     }
 }
 
-module.exports = {createCourse, getCourses, getCourseById, updateCourse}
+async function addRegistration (id, body) {
+    try {
+        const res = await instance.post('/api/v1/courses/' + id + '/registration', body)
+        return res.data
+    } catch (e) {
+        handleError(e)
+    }
+}
+
+async function addCollaborator (id, body) {
+    try {
+        const res = await instance.post('/api/v1/courses/' + id + '/collaborator', body)
+        return res.data
+    } catch (e) {
+        handleError(e)
+    }
+}
+
+module.exports = {createCourse, getCourses, getCourseById, updateCourse, addRegistration, addCollaborator }

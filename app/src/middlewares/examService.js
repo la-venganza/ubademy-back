@@ -7,7 +7,7 @@ async function createExam (body) {
     try {
         path = '/api/v1/courses/' + body.course_id + '/lessons/' + body.lesson_id + '/exams'
 
-        mappedBody = examHelper.examMappingPost(body)
+        mappedBody = examHelper.examMapping(body)
 
         const res = await instance.post(path, mappedBody)
         return res.data
@@ -16,5 +16,29 @@ async function createExam (body) {
     }
 }
 
-module.exports = { createExam }
+async function getExam (body) {
+    try {
+        path = '/api/v1/courses/' + body.course_id + '/lessons/' + body.lesson_id + '/exams/' + body.exam_id
+
+        const res = await instance.get(path)
+        return res.data
+    } catch (e) {
+        handleError(e)
+    }
+}
+
+async function patchExam (body) {
+    try {
+        path = '/api/v1/courses/' + body.course_id + '/lessons/' + body.lesson_id + '/exams/' + body.exam_id
+
+        mappedBody = examHelper.examMapping(body)
+
+        const res = await instance.patch(path, mappedBody)
+        return res.data
+    } catch (e) {
+        handleError(e)
+    }
+}
+
+module.exports = { createExam, patchExam, getExam }
 

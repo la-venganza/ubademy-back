@@ -104,6 +104,100 @@
         }
       }
     },
+    "/course/{id}/registration": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "type": "integer",
+          "required": true,
+          "description": "Numeric ID of the course"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Courses"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "required": [
+                "user_id"
+              ],
+              "properties": {
+                "user_id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "summary": "Register as a student to course",
+        "responses": {
+          "201": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/course/{id}/collaborator": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "type": "integer",
+          "required": true,
+          "description": "Numeric ID of the course"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Courses"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "required": [
+                "user_id"
+              ],
+              "properties": {
+                "user_id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "summary": "Add a collaborator to course",
+        "responses": {
+          "201": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/user": {
       "post": {
         "tags": [
@@ -122,7 +216,7 @@
           }
         }
       },
-      "put": {
+      "patch": {
         "tags": [
           "Users"
         ],
@@ -176,8 +270,6 @@
         "parameters": [
           {
             "in": "body",
-            "name": "user",
-            "description": "The user to create.",
             "schema": {
               "type": "object",
               "required": [
@@ -207,6 +299,100 @@
         "summary": "Create a new exam",
         "responses": {
           "201": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "required": [
+                "course_id",
+                "lesson_id",
+                "exam_id"
+              ],
+              "properties": {
+                "user_id": {
+                  "type": "integer"
+                },
+                "course_id": {
+                  "type": "integer"
+                },
+                "lesson_id": {
+                  "type": "integer"
+                },
+                "exam_id": {
+                  "type": "integer"
+                },
+                "exam": {
+                  "$ref": "#/definitions/exam"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Exams"
+        ],
+        "summary": "Update an exam",
+        "responses": {
+          "202": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Exams"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "required": [
+                "course_id",
+                "lesson_id",
+                "exam_id"
+              ],
+              "properties": {
+                "user_id": {
+                  "type": "integer"
+                },
+                "course_id": {
+                  "type": "integer"
+                },
+                "lesson_id": {
+                  "type": "integer"
+                },
+                "exam_id": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "summary": "Get exam's content by id",
+        "responses": {
+          "200": {
             "description": "OK"
           },
           "401": {
