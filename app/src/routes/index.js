@@ -2,6 +2,7 @@ const express = require('express');
 const course = require('./course');
 const user = require('./user')
 const exam = require('./exam')
+const suscription = require('./suscription')
 
 const router = express.Router();
 
