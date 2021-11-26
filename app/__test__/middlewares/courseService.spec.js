@@ -105,7 +105,7 @@ describe("createCourse", () => {
     const expectedRes = {
         "title": "course 1"
     }
-    it("patches course", async () => {
+    it("posts course", async () => {
         instance.post.mockResolvedValue({
             data: expectedRes
         }       
@@ -150,7 +150,7 @@ describe("updateCourse", () => {
     const expectedRes = {
         "title": "course 1"
     }
-    it("posts course", async () => {
+    it("patches course", async () => {
         instance.patch.mockResolvedValue({
             data: expectedRes
         }       
