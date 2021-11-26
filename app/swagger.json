@@ -278,7 +278,7 @@
               ],
               "properties": {
                 "user_id": {
-                  "type": "integer"
+                  "type": "string"
                 },
                 "course_id": {
                   "type": "integer"
@@ -325,7 +325,7 @@
               ],
               "properties": {
                 "user_id": {
-                  "type": "integer"
+                  "type": "string"
                 },
                 "course_id": {
                   "type": "integer"
@@ -375,7 +375,7 @@
               ],
               "properties": {
                 "user_id": {
-                  "type": "integer"
+                  "type": "string"
                 },
                 "course_id": {
                   "type": "integer"
@@ -403,7 +403,67 @@
           }
         }
       }
-    }
+    },
+    "/exam/{id}": {
+      "post": {
+        
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "exam_id",
+            "type": "integer",
+            "required": true,
+            "description": "ID for the exam to post a solution for"
+          },
+          {
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "required": [
+                "course_id",
+                "lesson_id",
+                "user_id"
+              ],
+              "properties": {
+                "user_id": {
+                  "type": "sring"
+                },
+                "course_id": {
+                  "type": "integer"
+                },
+                "lesson_id": {
+                  "type": "integer"
+                },
+                "answers": [
+                  {
+                    "question_id": "integer",
+                    "choice_id": "integer",
+                    "input_answer": "string"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Exams"
+        ],
+        "summary": "Create a solution for an exam",
+        "responses": {
+          "201": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
   },
   "definitions": {
     "course": {
