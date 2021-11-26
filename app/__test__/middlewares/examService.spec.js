@@ -5,101 +5,53 @@ const ServerError = require('../../src/errors/serverError')
 
 jest.mock('../../src/utils/axiosHelper')
 
-// describe("getCourses", () => {
-//     it("gets courses", async () => {
-//         const expectedRes = {
-//             results: [{
-//                 "title": "course 1"
-//             },
-//             {
-//                 "title": "course 2"            
-//             }]
-//         }
+describe("getExam", () => {
+    it("gets Exam", async () => {
+        const expectedRes = {
+            "exam": {
+                "questions": []
+            }
+        }
 
-//         instance.get.mockResolvedValue({
-//             data: expectedRes
-//         }       
-//         )
+        instance.get.mockResolvedValue({
+            data: expectedRes
+        }       
+        )
 
-//         const res = await courseService.getCourses()
-//         expect(res).toEqual(expectedRes)
-//     })
+        const res = await examService.getExam()
+        expect(res).toEqual(expectedRes)
+    })
 
-//     it("throws ServerError", async () => {
-//         instance.get.mockRejectedValueOnce({
-//             response: "has response",
-//             message: "message"
-//         }
-//         )
+    it("throws ServerError", async () => {
+        instance.get.mockRejectedValueOnce({
+            response: "has response",
+            message: "message"
+        }
+        )
 
-//         expect(courseService.getCourses()).rejects.toThrowError(ServerError)
-//         expect(courseService.getCourses()).rejects.toThrowError("message")
-//     })
+        expect(examService.getExam()).rejects.toThrowError(ServerError)
+        expect(examService.getExam()).rejects.toThrowError("message")
+    })
 
-//     it("throws ConnectionError", async () => {
-//         instance.get.mockRejectedValueOnce({
-//             request: "has request",
-//             message: "message"
-//         }
-//         )
+    it("throws ConnectionError", async () => {
+        instance.get.mockRejectedValueOnce({
+            request: "has request",
+            message: "message"
+        }
+        )
 
-//         expect(courseService.getCourses()).rejects.toThrowError(ConnectionError)
-//         expect(courseService.getCourses()).rejects.toThrowError("message")
-//     })
+        expect(examService.getExam()).rejects.toThrowError(ConnectionError)
+        expect(examService.getExam()).rejects.toThrowError("message")
+    })
 
-//     it("throws Error", async () => {
-//         instance.get.mockRejectedValueOnce({
-//         }
-//         )
+    it("throws Error", async () => {
+        instance.get.mockRejectedValueOnce({
+        }
+        )
 
-//         expect(courseService.getCourses()).rejects.toThrowError(Error)
-//     })
-// })
-
-// describe("getCourseById", () => {
-//     const expectedRes = {
-//         "title": "course 1"
-//     }
-//     it("gets course", async () => {
-//         instance.get.mockResolvedValue({
-//             data: expectedRes
-//         }       
-//         )
-
-//         const res = await courseService.getCourseById(1)
-//         expect(res).toEqual(expectedRes)
-//     })
-
-//     it("throws ServerError", async () => {
-//         instance.get.mockRejectedValueOnce({
-//             response: "has response",
-//             message: "message"
-//         }
-//         )
-
-//         expect(courseService.getCourseById(1)).rejects.toThrowError(ServerError)
-//         expect(courseService.getCourseById(1)).rejects.toThrowError("message")
-//     })
-
-//     it("throws ConnectionError", async () => {
-//         instance.get.mockRejectedValueOnce({
-//             request: "has request",
-//             message: "message"
-//         }
-//         )
-
-//         expect(courseService.getCourseById(1)).rejects.toThrowError(ConnectionError)
-//         expect(courseService.getCourseById(1)).rejects.toThrowError("message")
-//     })
-
-//     it("throws Error", async () => {
-//         instance.get.mockRejectedValueOnce({
-//         }
-//         )
-
-//         expect(courseService.getCourseById(1)).rejects.toThrowError(Error)
-//     })
-// })
+        expect(examService.getExam()).rejects.toThrowError(Error)
+    })
+})
 
 describe("createExam", () => {
     const expectedRes = {
@@ -190,5 +142,51 @@ describe("patchExam", () => {
         )
 
         expect(examService.patchExam(expectedRes)).rejects.toThrowError(Error)
+    })
+})
+
+describe("solveExam", () => {
+    it("posts Exam solution attempt", async () => {
+        const expectedRes = {
+            "answers": []
+        }
+
+        instance.get.mockResolvedValue({
+            data: expectedRes
+        }       
+        )
+
+        const res = await examService.solveExam()
+        expect(res).toEqual(expectedRes)
+    })
+
+    it("throws ServerError", async () => {
+        instance.get.mockRejectedValueOnce({
+            response: "has response",
+            message: "message"
+        }
+        )
+
+        expect(examService.solveExam()).rejects.toThrowError(ServerError)
+        expect(examService.solveExam()).rejects.toThrowError("message")
+    })
+
+    it("throws ConnectionError", async () => {
+        instance.get.mockRejectedValueOnce({
+            request: "has request",
+            message: "message"
+        }
+        )
+
+        expect(examService.solveExam()).rejects.toThrowError(ConnectionError)
+        expect(examService.solveExam()).rejects.toThrowError("message")
+    })
+
+    it("throws Error", async () => {
+        instance.get.mockRejectedValueOnce({
+        }
+        )
+
+        expect(examService.solveExam()).rejects.toThrowError(Error)
     })
 })
