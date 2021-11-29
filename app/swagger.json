@@ -528,7 +528,7 @@
         "tags": [
           "Suscriptions"
         ],
-        "summary": "Get suscription of a user",
+        "summary": "Get suscriptions of a user",
         "responses": {
           "200": {
             "description": "OK"
