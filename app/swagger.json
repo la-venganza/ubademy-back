@@ -278,7 +278,7 @@
               ],
               "properties": {
                 "user_id": {
-                  "type": "integer"
+                  "type": "string"
                 },
                 "course_id": {
                   "type": "integer"
@@ -325,7 +325,7 @@
               ],
               "properties": {
                 "user_id": {
-                  "type": "integer"
+                  "type": "string"
                 },
                 "course_id": {
                   "type": "integer"
@@ -375,7 +375,7 @@
               ],
               "properties": {
                 "user_id": {
-                  "type": "integer"
+                  "type": "string"
                 },
                 "course_id": {
                   "type": "integer"
@@ -393,6 +393,189 @@
         "summary": "Get exam's content by id",
         "responses": {
           "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/exam/{id}": {
+      "post": {
+        
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "exam_id",
+            "type": "integer",
+            "required": true,
+            "description": "ID for the exam to post a solution for"
+          },
+          {
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "required": [
+                "course_id",
+                "lesson_id",
+                "user_id",
+                "answers"
+              ],
+              "properties": {
+                "user_id": {
+                  "type": "sring"
+                },
+                "course_id": {
+                  "type": "integer"
+                },
+                "lesson_id": {
+                  "type": "integer"
+                },
+                "answers": [
+                  {
+                    "question_id": "integer",
+                    "choice_id": "integer",
+                    "input_answer": "string"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Exams"
+        ],
+        "summary": "Create a solution for an exam",
+        "responses": {
+          "201": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/suscription/{user_id}": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "type": "integer",
+            "required": true,
+            "description": "ID for the user that needs a suscription"
+          },
+          {
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "required": [
+                "user_id"
+              ],
+              "properties": {
+                "user_id": {
+                  "type": "string"
+                },
+                "suscription": "string",
+                "end_date": "2021-11-29"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Suscriptions"
+        ],
+        "summary": "Change suscription of a user",
+        "responses": {
+          "201": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "type": "integer",
+            "required": true,
+            "description": "ID for the user that has a suscription"
+          }
+        ],
+        "tags": [
+          "Suscriptions"
+        ],
+        "summary": "Get suscriptions of a user",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "type": "integer",
+            "required": true,
+            "description": "ID for the user that needs to change a suscription"
+          },
+          {
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "required": [
+                "user_id"
+              ],
+              "properties": {
+                "user_id": {
+                  "type": "string"
+                },
+                "active": true,
+                "end_date": "2021-11-29"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Suscriptions"
+        ],
+        "summary": "Change suscription of a user",
+        "responses": {
+          "202": {
             "description": "OK"
           },
           "401": {
