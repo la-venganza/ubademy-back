@@ -27,9 +27,14 @@ async function createSuscription (user_id) {
 async function patchSuscription (body, user_id) {
     try {
         // Falta la logica con el smart contract - por ahora lo dejamos directo
-        const mappedBody = {
-            "active": body.active,
-            "end_date": body.end_date
+        let mappedBody = {}
+    
+        if (!(typeof body.active === 'undefined')) {
+            mappedBody.active = body.active
+        }
+    
+        if (!(typeof body.end_date === 'undefined')) {
+            mappedBody.end_date = body.end_date
         }
 
         const res = await instance.patch('/api/v1/' + user_id + '/suscriptions/' + body.suscription_name, mappedBody)
