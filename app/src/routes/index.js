@@ -24,5 +24,6 @@ router.get('/ping', (_req, res) => {
 router.use('/course', course);
 router.use('/user', user)
 router.use('/exam', exam)
+router.use('/suscription', suscription)
 
 module.exports = router;

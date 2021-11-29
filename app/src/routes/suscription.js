@@ -7,11 +7,11 @@ const ServerError = require('../errors/serverError')
 
 const router = express.Router();
 
-router.post('/', async function(req, res) {
+router.post('/:id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        const response = await suscriptionService.createSuscription(req.body)
+        const response = await suscriptionService.createSuscription(req.params.id)
 
         res.status(201).send(response)
     } catch (e) {
@@ -31,11 +31,11 @@ router.post('/', async function(req, res) {
     }
 })
 
-router.patch('/', async function(req, res) {
+router.patch('/:id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        const response = await suscriptionService.patchSuscription(req.body)
+        const response = await suscriptionService.patchSuscription(req.body, req.params.id)
 
         res.status(202).send(response)
     } catch (e) {
@@ -55,11 +55,11 @@ router.patch('/', async function(req, res) {
     }
 })
 
-router.get('/', async function(req, res) {
+router.get('/:id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        const response = await suscriptionService.getSuscription(req.body)
+        const response = await suscriptionService.getSuscription(req.body, req.params.id)
 
         res.status(200).send(response)
     } catch (e) {

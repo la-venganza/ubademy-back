@@ -464,6 +464,128 @@
           }
         }
       }
+    },
+    "/suscription/{user_id}": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "type": "integer",
+            "required": true,
+            "description": "ID for the user that needs a suscription"
+          },
+          {
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "required": [
+                "user_id"
+              ],
+              "properties": {
+                "user_id": {
+                  "type": "string"
+                },
+                "suscription": "string",
+                "end_date": "2021-11-29"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Suscriptions"
+        ],
+        "summary": "Change suscription of a user",
+        "responses": {
+          "201": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "type": "integer",
+            "required": true,
+            "description": "ID for the user that has a suscription"
+          }
+        ],
+        "tags": [
+          "Suscriptions"
+        ],
+        "summary": "Get suscription of a user",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "type": "integer",
+            "required": true,
+            "description": "ID for the user that needs to change a suscription"
+          },
+          {
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "required": [
+                "user_id"
+              ],
+              "properties": {
+                "user_id": {
+                  "type": "string"
+                },
+                "active": true,
+                "end_date": "2021-11-29"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Suscriptions"
+        ],
+        "summary": "Change suscription of a user",
+        "responses": {
+          "202": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    }
   },
   "definitions": {
     "course": {
