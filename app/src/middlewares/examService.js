@@ -20,6 +20,8 @@ async function solveExam (body, exam_id) {
     try {
         path = '/api/v1/courses/' + body.course_id + '/lessons/' + body.lesson_id + '/exams/' + exam_id
 
+        const mappedBody = examHelper.verifySolution(body)
+
         const res = await instance.post(path, body)
         return res.data
     } catch (e) {

@@ -425,7 +425,8 @@
               "required": [
                 "course_id",
                 "lesson_id",
-                "user_id"
+                "user_id",
+                "answers"
               ],
               "properties": {
                 "user_id": {

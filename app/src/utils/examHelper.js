@@ -6,6 +6,12 @@ function verifyExam(exam) {
     }
 }
 
+function verifySolution(exam) {
+    if (typeof exam.answers === 'undefined' || !Array.isArray(exam.answers)) {
+        throw new ServerError('Error', 'Bad request - field answers not an array', 400)
+    }
+}
+
 function examMapping(requestBody) {
     verifyExam(requestBody.exam)
 
@@ -17,4 +23,4 @@ function examMapping(requestBody) {
     return body
 }
 
-module.exports = { examMapping, verifyExam }
+module.exports = { examMapping, verifyExam, verifySolution }
