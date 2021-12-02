@@ -6,11 +6,11 @@ async function getBalance (user_id) {
     try {
         //TODO pegarle al microservicio de smart contract
 
-        res.data = {
+        res = {
             balance: 500
         }
 
-        return res.data
+        return res
     } catch (e) {
         handleError(e)
     }
@@ -20,11 +20,11 @@ async function addBalance (body, user_id) {
     try {
         //TODO pegarle al microservicio de smart contract
 
-        res.data = {
+        res = {
             balance: body.balance
         }
 
-        return res.data
+        return res
     } catch (e) {
         handleError(e)
     }

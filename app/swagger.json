@@ -430,7 +430,7 @@
               ],
               "properties": {
                 "user_id": {
-                  "type": "sring"
+                  "type": "string"
                 },
                 "course_id": {
                   "type": "integer"
@@ -438,13 +438,14 @@
                 "lesson_id": {
                   "type": "integer"
                 },
-                "answers": [
-                  {
+                "answers": {
+                  "type": "array",
+                  "items": {
                     "question_id": "integer",
                     "choice_id": "integer",
                     "input_answer": "string"
                   }
-                ]
+                }
               }
             }
           }

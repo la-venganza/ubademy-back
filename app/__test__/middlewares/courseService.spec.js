@@ -196,7 +196,7 @@ describe("addRegistration", () => {
         "user_id": "1"
     }
     it("posts registration", async () => {
-        instance.patch.mockResolvedValue({
+        instance.post.mockResolvedValue({
             data: expectedRes
         }       
         )
@@ -206,7 +206,7 @@ describe("addRegistration", () => {
     })
 
     it("throws ServerError", async () => {
-        instance.patch.mockRejectedValueOnce({
+        instance.post.mockRejectedValueOnce({
             response: "has response",
             message: "message"
         }
@@ -217,7 +217,7 @@ describe("addRegistration", () => {
     })
 
     it("throws ConnectionError", async () => {
-        instance.patch.mockRejectedValueOnce({
+        instance.post.mockRejectedValueOnce({
             request: "has request",
             message: "message"
         }
@@ -228,7 +228,7 @@ describe("addRegistration", () => {
     })
 
     it("throws Error", async () => {
-        instance.patch.mockRejectedValueOnce({
+        instance.post.mockRejectedValueOnce({
         }
         )
 
@@ -241,7 +241,7 @@ describe("addCollaborator", () => {
         "user_id": "1"
     }
     it("posts collaborator", async () => {
-        instance.patch.mockResolvedValue({
+        instance.post.mockResolvedValue({
             data: expectedRes
         }       
         )
@@ -251,7 +251,7 @@ describe("addCollaborator", () => {
     })
 
     it("throws ServerError", async () => {
-        instance.patch.mockRejectedValueOnce({
+        instance.post.mockRejectedValueOnce({
             response: "has response",
             message: "message"
         }
@@ -262,7 +262,7 @@ describe("addCollaborator", () => {
     })
 
     it("throws ConnectionError", async () => {
-        instance.patch.mockRejectedValueOnce({
+        instance.post.mockRejectedValueOnce({
             request: "has request",
             message: "message"
         }
@@ -273,7 +273,7 @@ describe("addCollaborator", () => {
     })
 
     it("throws Error", async () => {
-        instance.patch.mockRejectedValueOnce({
+        instance.post.mockRejectedValueOnce({
         }
         )
 
