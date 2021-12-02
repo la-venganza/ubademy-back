@@ -2,7 +2,8 @@ const express = require('express');
 const course = require('./course');
 const user = require('./user')
 const exam = require('./exam')
-const suscription = require('./suscription')
+const subscription = require('./subscription')
+const wallet = require('./wallet')
 
 const router = express.Router();
 
@@ -24,6 +25,7 @@ router.get('/ping', (_req, res) => {
 router.use('/course', course);
 router.use('/user', user)
 router.use('/exam', exam)
-router.use('/suscription', suscription)
+router.use('/subscription', subscription)
+router.use('/wallet', wallet)
 
 module.exports = router;

@@ -1,6 +1,6 @@
 const express = require('express');
 const verifyIdToken =  require('../middlewares/firebase')
-const suscriptionService = require('../middlewares/suscriptionService')
+const subscriptionService = require('../middlewares/subscriptionService')
 const ConnectionError = require('../errors/connectionError')
 const AuthError = require('../errors/authError')
 const ServerError = require('../errors/serverError')
@@ -11,7 +11,9 @@ router.post('/:id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        const response = await suscriptionService.createSuscription(req.params.id)
+        //Logica de wallet
+
+        const response = await subscriptionService.createSubscription(req.params.id)
 
         res.status(201).send(response)
     } catch (e) {
@@ -35,7 +37,7 @@ router.patch('/:id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        const response = await suscriptionService.patchSuscription(req.body, req.params.id)
+        const response = await subscriptionService.patchSubscription(req.body, req.params.id)
 
         res.status(202).send(response)
     } catch (e) {
@@ -59,7 +61,7 @@ router.get('/:id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        const response = await suscriptionService.getSuscription(req.body, req.params.id)
+        const response = await subscriptionService.getSubscription(req.body, req.params.id)
 
         res.status(200).send(response)
     } catch (e) {
