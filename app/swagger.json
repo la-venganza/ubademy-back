@@ -496,8 +496,13 @@
                 "user_id": {
                   "type": "string"
                 },
-                "subscription": "string",
-                "end_date": "2021-11-29"
+                "subscription": {
+                  "type": "string"
+                },
+                "end_date": {
+                  "type": "string",
+                  "format": "date"
+                }
               }
             }
           }
@@ -570,8 +575,13 @@
                 "user_id": {
                   "type": "string"
                 },
-                "active": true,
-                "end_date": "2021-11-29"
+                "active": {
+                  "type": "boolean"
+                },
+                "end_date": {
+                  "type": "string",
+                  "format": "date"
+                }
               }
             }
           }
