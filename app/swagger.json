@@ -472,7 +472,7 @@
         }
       }
     },
-    "/suscription/{user_id}": {
+    "/subscription/{user_id}": {
       "post": {
         "consumes": [
           "application/json"
@@ -483,7 +483,7 @@
             "name": "user_id",
             "type": "integer",
             "required": true,
-            "description": "ID for the user that needs a suscription"
+            "description": "ID for the user that needs a subscription"
           },
           {
             "in": "body",
@@ -503,9 +503,9 @@
           }
         ],
         "tags": [
-          "Suscriptions"
+          "Subscriptions"
         ],
-        "summary": "Change suscription of a user",
+        "summary": "Change subscription of a user",
         "responses": {
           "201": {
             "description": "OK"
@@ -528,13 +528,13 @@
             "name": "user_id",
             "type": "integer",
             "required": true,
-            "description": "ID for the user that has a suscription"
+            "description": "ID for the user that has a subscription"
           }
         ],
         "tags": [
-          "Suscriptions"
+          "Subscriptions"
         ],
-        "summary": "Get suscriptions of a user",
+        "summary": "Get subscriptions of a user",
         "responses": {
           "200": {
             "description": "OK"
@@ -557,7 +557,7 @@
             "name": "user_id",
             "type": "integer",
             "required": true,
-            "description": "ID for the user that needs to change a suscription"
+            "description": "ID for the user that needs to change a subscription"
           },
           {
             "in": "body",
@@ -577,9 +577,9 @@
           }
         ],
         "tags": [
-          "Suscriptions"
+          "Subscriptions"
         ],
-        "summary": "Change suscription of a user",
+        "summary": "Change subscription of a user",
         "responses": {
           "202": {
             "description": "OK"

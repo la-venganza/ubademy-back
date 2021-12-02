@@ -2,9 +2,9 @@
 const instance = require('../utils/axiosHelper')
 const handleError = require('../utils/errorHandler')
 
-async function getSuscription (body, user_id) {
+async function getSubscription (body, user_id) {
     try {
-        const res = await instance.get('/api/v1/' + user_id + '/suscriptions/')
+        const res = await instance.get('/api/v1/' + user_id + '/subscriptions/')
 
         return res.data
     } catch (e) {
@@ -12,11 +12,11 @@ async function getSuscription (body, user_id) {
     }
 }
 
-async function createSuscription (user_id) {
+async function createSubscription (user_id) {
     try {
         // Falta la logica con el smart contract - por ahora lo dejamos directo
         
-        const res = await instance.post('/api/v1/' + user_id + '/suscriptions/')
+        const res = await instance.post('/api/v1/' + user_id + '/subscriptions/')
 
         return res.data
     } catch (e) {
@@ -24,7 +24,7 @@ async function createSuscription (user_id) {
     }
 }
 
-async function patchSuscription (body, user_id) {
+async function patchSubscription (body, user_id) {
     try {
         // Falta la logica con el smart contract - por ahora lo dejamos directo
         let mappedBody = {}
@@ -37,7 +37,7 @@ async function patchSuscription (body, user_id) {
             mappedBody["end_date"] = body.end_date
         }
 
-        const res = await instance.patch('/api/v1/' + user_id + '/suscriptions/' + body.suscription_name, mappedBody)
+        const res = await instance.patch('/api/v1/' + user_id + '/subscriptions/' + body.suscription_name, mappedBody)
 
         return res.data
     } catch (e) {
@@ -45,4 +45,4 @@ async function patchSuscription (body, user_id) {
     }
 }
 
-module.exports = { createSuscription, getSuscription, patchSuscription}
+module.exports = { createSubscription, getSubscription, patchSubscription}
