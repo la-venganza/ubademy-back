@@ -16,18 +16,4 @@ async function getBalance (user_id) {
     }
 }
 
-async function addBalance (body, user_id) {
-    try {
-        //TODO pegarle al microservicio de smart contract
-
-        res = {
-            balance: body.balance
-        }
-
-        return res
-    } catch (e) {
-        handleError(e)
-    }
-}
-
-module.exports = { getBalance, addBalance }
+module.exports = { getBalance }
