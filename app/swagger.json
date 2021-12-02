@@ -406,7 +406,6 @@
     },
     "/exam/{id}": {
       "post": {
-        
         "consumes": [
           "application/json"
         ],
@@ -441,9 +440,15 @@
                 "answers": {
                   "type": "array",
                   "items": {
-                    "question_id": "integer",
-                    "choice_id": "integer",
-                    "input_answer": "string"
+                    "question_id": {
+                      "type": "integer"
+                    },
+                    "choice_id": {
+                      "type": "integer"
+                    },
+                    "input_answer": {
+                      "type": "string"
+                    }
                   }
                 }
               }
@@ -577,6 +582,77 @@
         "summary": "Change suscription of a user",
         "responses": {
           "202": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/wallet": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_id": {
+                  "type": "string"
+                },
+                "balance": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Wallet"
+        ],
+        "summary": "Add balance to wallet",
+        "responses": {
+          "201": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Wallet"
+        ],
+        "summary": "Get balance of a user",
+        "responses": {
+          "200": {
             "description": "OK"
           },
           "401": {
