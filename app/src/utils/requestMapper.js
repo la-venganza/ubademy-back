@@ -12,6 +12,7 @@ function lessonResolver(stages) {
             "multimedia_type": element.multimedia_type,
             "sequence_number": element.position,
             "require": element.required,
+            "exam": element.exam
         }
         lessons.push(lesson)
     })
