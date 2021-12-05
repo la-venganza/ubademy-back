@@ -2,9 +2,10 @@
 const instance = require('../utils/axiosHelper')
 const handleError = require('../utils/errorHandler')
 
-async function getCourses () {
+async function getCourses (params) {
     try {
-        const res = await instance.get('/api/v1/courses/')
+        page = params.page || 1
+        const res = await instance.get('/api/v1/courses?page=' + page)
         return res.data
     } catch (e) {
         handleError(e)

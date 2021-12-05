@@ -57,6 +57,33 @@
             "description": "Server error"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Courses"
+        ],
+        "summary": "Get courses",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
       }
     },
     "/course/{id}": {
@@ -86,7 +113,7 @@
           }
         }
       },
-      "put": {
+      "patch": {
         "tags": [
           "Courses"
         ],
