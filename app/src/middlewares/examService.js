@@ -1,4 +1,6 @@
 // Middleware para resolver llamadas a python
+const ServerError = require('../errors/serverError')
+const { param } = require('../routes/exam')
 const instance = require('../utils/axiosHelper')
 const handleError = require('../utils/errorHandler')
 const examHelper = require('../utils/examHelper')
@@ -53,6 +55,21 @@ async function getExam (body) {
     }
 }
 
+async function searchExam (params) {
+    try {
+        if (typeof params.user_id === 'undefined') {
+            throw new ServerError('Error - user_id query param is undefined')
+        }
+        page = params.page || 1
+        path = '/api/v1/courses/lessons/exams?user_id=' + params.user_id + '&page=' + page
+
+        const res = await instance.get(path)
+        return res.data
+    } catch (e) {
+        handleError(e)
+    }
+}
+
 async function patchExam (body) {
     try {
         path = '/api/v1/courses/' + body.course_id + '/lessons/' + body.lesson_id + '/exams/' + body.exam_id
@@ -66,5 +83,5 @@ async function patchExam (body) {
     }
 }
 
-module.exports = { createExam, patchExam, getExam, solveExam, gradeExam }
+module.exports = { createExam, patchExam, getExam, solveExam, gradeExam, searchExam }
 

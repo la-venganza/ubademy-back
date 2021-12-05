@@ -135,4 +135,28 @@ router.get('/:exam_id/course/:course_id/lesson/:lesson_id/user/:user_id', async 
     }
 })
 
+router.get('/', async function(req, res) {
+    try {
+        const uid = await verifyIdToken(req.cookies.firebaseAuth)
+            
+        const response = await examService.searchExam(req.query)
+
+        res.status(200).send(response)
+    } catch (e) {
+        const body = {
+            error: e.name,
+            message: e.message
+        }
+        if (e instanceof ConnectionError) {
+            res.status(500).send(body)
+        } else if (e instanceof AuthError) {
+            res.status(401).send(body)
+        } else if (e instanceof ServerError) {
+            res.status(e.status).send(body)
+        } else {
+            res.status(500).send(body)
+        }
+    }
+})
+
 module.exports = router;
