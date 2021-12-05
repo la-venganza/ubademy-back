@@ -486,7 +486,7 @@
           {
             "in": "path",
             "name": "user_id",
-            "type": "integer",
+            "type": "string",
             "required": true,
             "description": "ID for the user that needs a subscription"
           },
@@ -608,22 +608,18 @@
         }
       }
     },
-    "/wallet": {
+    "/wallet/:user_id": {
       "get": {
         "consumes": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "user_id": {
-                  "type": "string"
-                }
-              }
-            }
+            "in": "path",
+            "name": "user_id",
+            "type": "string",
+            "required": true,
+            "description": "ID for the user that needs a subscription"
           }
         ],
         "tags": [
