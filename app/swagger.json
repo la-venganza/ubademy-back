@@ -608,7 +608,7 @@
         }
       }
     },
-    "/wallet/:user_id": {
+    "/wallet/{user_id}": {
       "get": {
         "consumes": [
           "application/json"
