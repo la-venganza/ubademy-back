@@ -490,6 +490,39 @@
             "description": "Server error"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Exams"
+        ],
+        "summary": "Search exams",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "user_id",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "integer"
+          }          
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
       }
      },
      "/exam/{exam_id}/course/{course_id}/lesson/{lesson_id}/user/{user_id}": {
