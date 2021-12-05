@@ -87,8 +87,8 @@ router.get('/:exam_id/course/:course_id/lesson/:lesson_id/user/:user_id', async 
         body = {
             "user_id": req.params.user_id,
             "course_id": req.params.course_id,
-            "lesson_id": req.lesson_id,
-            "exam_id": req.exam_id
+            "lesson_id": req.params.lesson_id,
+            "exam_id": req.params.exam_id
         }
             
         const response = await examService.getExam(body)
