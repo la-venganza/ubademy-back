@@ -359,8 +359,8 @@
           }
         }
       }
-     }
-     "/exam/{exam_id}/course/{course_id}/lesson/{lesson_id}/user/{user_id}: {
+     },
+     "/exam/{exam_id}/course/{course_id}/lesson/{lesson_id}/user/{user_id}": {
       "get": {
         "tags": [
           "Exams"

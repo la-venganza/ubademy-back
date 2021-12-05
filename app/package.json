@@ -10,6 +10,10 @@
     "collectCoverage": true,
     "coverageDirectory": "coverage"
   },
+  "engines": {
+    "npm": ">=6.0.0",
+    "node": ">=14.0.0"
+  },
   "scripts": {
     "start": "nodemon server.js",
     "start:dev": "PORT=3000 nodemon server.js",
