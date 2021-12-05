@@ -10,6 +10,16 @@ async function getUserByEmail (email) {
         handleError(e)
     }
 }
+
+async function getUserById (id) {
+    try {
+       const res = await instance.get('/api/v1/' + id)
+       return res.data
+   } catch (e) {
+       handleError(e)
+   }
+}
+
 async function createUser (body) {
     try {
         const res = await instance.post('/api/v1/users', body)
@@ -28,4 +38,4 @@ async function updateUser (id, body) {
     }
 }
 
-module.exports = {getUserByEmail, createUser, updateUser}
+module.exports = {getUserByEmail, createUser, updateUser, getUserById }
