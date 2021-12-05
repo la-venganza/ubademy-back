@@ -18,7 +18,7 @@ async function createExam (body) {
 
 async function solveExam (body, exam_id) {
     try {
-        path = '/api/v1/courses/' + body.course_id + '/lessons/' + body.lesson_id + '/exams/' + exam_id
+        path = '/api/v1/courses/' + body.course_id + '/lessons/' + body.lesson_id + '/exams/' + exam_id + '/solution'
 
         const mappedBody = examHelper.verifySolution(body)
 
