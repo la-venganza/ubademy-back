@@ -80,7 +80,7 @@ router.patch('/', async function(req, res) {
     }
 })
 
-router.get('/', async function(req, res) {
+router.get('/:exam_id/course/:course_id/lesson/:lesson_id/user/:user_id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
