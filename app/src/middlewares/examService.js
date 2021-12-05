@@ -20,9 +20,22 @@ async function solveExam (body, exam_id) {
     try {
         path = '/api/v1/courses/' + body.course_id + '/lessons/' + body.lesson_id + '/exams/' + exam_id + '/solution'
 
-        const mappedBody = examHelper.verifySolution(body)
+        examHelper.verifySolution(body)
 
         const res = await instance.post(path, body)
+        return res.data
+    } catch (e) {
+        handleError(e)
+    }
+}
+
+async function gradeExam (body, exam_id) {
+    try {
+        path = '/api/v1/courses/' + body.course_id + '/lessons/' + body.lesson_id + '/exams/' + exam_id + '/solution'
+
+        examHelper.verifyGrading(body)
+
+        const res = await instance.patch(path, body)
         return res.data
     } catch (e) {
         handleError(e)
@@ -53,5 +66,5 @@ async function patchExam (body) {
     }
 }
 
-module.exports = { createExam, patchExam, getExam, solveExam }
+module.exports = { createExam, patchExam, getExam, solveExam, gradeExam }
 
