@@ -358,36 +358,41 @@
             "description": "Server error"
           }
         }
-      },
+      }
+     }
+     "/exam/{exam_id}/course/{course_id}/lesson/{lesson_id}/user/{user_id}: {
       "get": {
         "tags": [
           "Exams"
         ],
         "parameters": [
           {
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "required": [
-                "course_id",
-                "lesson_id",
-                "exam_id"
-              ],
-              "properties": {
-                "user_id": {
-                  "type": "string"
-                },
-                "course_id": {
-                  "type": "integer"
-                },
-                "lesson_id": {
-                  "type": "integer"
-                },
-                "exam_id": {
-                  "type": "integer"
-                }
-              }
-            }
+            "in": "path",
+            "name": "exam_id",
+            "type": "integer",
+            "required": true,
+            "description": "ID for the exam to get"
+          },
+          {
+            "in": "path",
+            "name": "course",
+            "type": "integer",
+            "required": true,
+            "description": "ID for the course to get exam from"
+          },
+          {
+            "in": "path",
+            "name": "lesson_id",
+            "type": "integer",
+            "required": true,
+            "description": "ID for the lesson to get exam from"
+          },
+          {
+            "in": "path",
+            "name": "user_id",
+            "type": "string",
+            "required": true,
+            "description": "ID for the user that requests the exam"
           }
         ],
         "summary": "Get exam's content by id",
