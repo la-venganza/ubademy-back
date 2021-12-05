@@ -62,7 +62,7 @@
         "tags": [
           "Courses"
         ],
-        "summary": "Get courses",
+        "summary": "Search courses",
         "consumes": [
           "application/json"
         ],
@@ -71,6 +71,11 @@
             "in": "query",
             "name": "page",
             "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "keyword",
+            "type": "string"
           }
         ],
         "responses": {

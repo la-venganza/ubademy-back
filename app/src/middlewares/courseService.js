@@ -5,7 +5,11 @@ const handleError = require('../utils/errorHandler')
 async function getCourses (params) {
     try {
         page = params.page || 1
-        const res = await instance.get('/api/v1/courses?page=' + page)
+        path = '/api/v1/courses?page=' + page
+        if (params.keyword) {
+            path += '&keyword=' + keyword
+        }
+        const res = await instance.get(path)
         return res.data
     } catch (e) {
         handleError(e)
