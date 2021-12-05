@@ -5,36 +5,15 @@ function lessonResolver(stages) {
     let lessons = []
 
     stages.forEach(element => {
-        let lesson = {}
-
-        if (!typeof element.active === 'undefined') {
-            lesson["active"] = element.active
+        let lesson = {
+            "active": element.active,
+            "multimedia_id": element.multimedia_id,
+            "title": element.title,
+            "multimedia_type": element.multimedia_type,
+            "sequence_number": element.position,
+            "require": element.required,
+            "exam": element.exam
         }
-
-        if (!typeof element.multimedia_id === 'undefined') {
-            lesson["multimedia_id"] = element.multimedia_id
-        }
-
-        if (!typeof element.title === 'undefined') {
-            lesson["title"] = element.title
-        }
-
-        if (!typeof element.multimedia_type === 'undefined') {
-            lesson["multimedia_type"] = element.multimedia_type
-        }
-
-        if (!typeof element.position === 'undefined') {
-            lesson["position"] = element.position
-        }
-
-        if (!typeof element.required === 'undefined') {
-            lesson["required"] = element.required
-        }
-
-        if (!typeof element.exam === 'undefined') {
-            lesson["exam"] = element.exam
-        }
-
         lessons.push(lesson)
     })
 
