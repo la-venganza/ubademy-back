@@ -91,7 +91,7 @@ router.get('/:exam_id/course/:course_id/lesson/:lesson_id/user/:user_id', async 
             "exam_id": req.exam_id
         }
             
-        const response = await examService.getExam(req.body)
+        const response = await examService.getExam(body)
 
         res.status(200).send(response)
     } catch (e) {
