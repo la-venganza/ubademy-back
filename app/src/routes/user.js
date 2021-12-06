@@ -83,7 +83,7 @@ router.put('/:id', async function(req, res) {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
         response = await userService.updateUser(req.params.id,req.body)
-        res.status(202).send(response)
+        res.status(201).send(response)
     } catch (e) {
         const body = {
             error: e.name,

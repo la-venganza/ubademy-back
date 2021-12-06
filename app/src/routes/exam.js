@@ -62,7 +62,7 @@ router.patch('/:id', async function(req, res) {
 
         const response = await examService.gradeExam(req.body, req.params.id)
 
-        res.status(202).send(response)
+        res.status(201).send(response)
     } catch (e) {
         const body = {
             error: e.name,
@@ -86,7 +86,7 @@ router.patch('/', async function(req, res) {
 
         const response = await examService.patchExam(req.body)
 
-        res.status(202).send(response)
+        res.status(201).send(response)
     } catch (e) {
         const body = {
             error: e.name,

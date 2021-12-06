@@ -13,7 +13,7 @@ router.get('/:id', async function(req, res) {
 
         const response = await walletService.getBalance(req.params.id)
 
-        res.status(202).send(response)
+        res.status(200).send(response)
     } catch (e) {
         const body = {
             error: e.name,

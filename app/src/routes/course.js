@@ -95,7 +95,7 @@ router.patch('/:id', async function(req, res) {
         const response = await courseService.updateCourse(req.params.id, body)
 
         // Send to back
-        res.status(202).send(response)
+        res.status(201).send(response)
     } catch (e) {
         const body = {
             error: e.name,
