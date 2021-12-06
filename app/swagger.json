@@ -57,6 +57,38 @@
             "description": "Server error"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Courses"
+        ],
+        "summary": "Search courses",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "keyword",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
       }
     },
     "/course/{id}": {
@@ -86,7 +118,7 @@
           }
         }
       },
-      "put": {
+      "patch": {
         "tags": [
           "Courses"
         ],
@@ -200,6 +232,42 @@
     },
     "/user": {
       "post": {
+        "parameters": [
+          {
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "first_name": {
+                  "type": "string"
+                },
+                "last_name": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "birth_date": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "phone_type": {
+                  "type": "string"
+                },
+                "phone_number": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email"
+                }
+              }
+            }
+          }
+        ],
         "tags": [
           "Users"
         ],
@@ -215,12 +283,72 @@
             "description": "Server error"
           }
         }
-      },
-      "patch": {
+      }
+    },
+    "/user/{user_id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "type": "string",
+          "required": true,
+          "description": "ID of the user"
+        }
+      ],
+      "get": {
         "tags": [
           "Users"
         ],
-        "summary": "Modify user's content by email",
+        "summary": "Get user by id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "first_name": {
+                  "type": "string"
+                },
+                "last_name": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "birth_date": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "phone_type": {
+                  "type": "string"
+                },
+                "phone_number": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Users"
+        ],
+        "summary": "Modify user's content by id",
         "responses": {
           "202": {
             "description": "User inormation updated correctly"
@@ -234,7 +362,7 @@
         }
       }
     },
-    "/users/{email}": {
+    "/user/{email}": {
       "parameters": [
         {
           "in": "path",
@@ -358,6 +486,39 @@
             "description": "Server error"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Exams"
+        ],
+        "summary": "Search exams",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "user_id",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "integer"
+          }          
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
       }
      },
      "/exam/{exam_id}/course/{course_id}/lesson/{lesson_id}/user/{user_id}": {
@@ -466,6 +627,61 @@
         "summary": "Create a solution for an exam",
         "responses": {
           "201": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "patch": {
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "exam_id",
+            "type": "integer",
+            "required": true,
+            "description": "ID for the exam to post a solution for"
+          },
+          {
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "required": [
+                "course_id",
+                "lesson_id",
+                "user_id",
+                "answers"
+              ],
+              "properties": {
+                "user_id": {
+                  "type": "string"
+                },
+                "exam_to_grade_id": {
+                  "type": "integer"
+                },
+                "enroll_course_id": {
+                  "type": "integer"
+                },
+                "grade": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Exams"
+        ],
+        "summary": "Grade an exam",
+        "responses": {
+          "202": {
             "description": "OK"
           },
           "401": {

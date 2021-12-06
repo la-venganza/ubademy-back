@@ -13,7 +13,7 @@ router.get('/', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        const response = await courseService.getCourses()
+        const response = await courseService.getCourses(req.query)
 
         res.status(200).send(response)
     } catch (e) {
@@ -38,65 +38,6 @@ router.get('/:id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        // Pedir al back de python
-        const originalBody = {
-            "id": 1,
-            "creator_id": 1,
-            "title": 'Titulo',
-            "description": 'Descripcion re copada',
-            "stages": [
-                {
-                    "position": 0,
-                    "active": true,
-                    "required": false,
-                    "multimedia_id": 'idhasheado12yt',
-                    "title": 'Stage 0 Title',
-                    "multimedia_type": 'Tipo',
-                },
-                {
-                    "position": 1,
-                    "active": true,
-                    "required": true,
-                    "multimedia_id": 'otrohash?',
-                    "title": 'Stage 1 Title',
-                    "multimedia_type": 'Otro tipo',
-                }
-            ]
-        }
-
-        const newBody = {
-            "user_id":"9b8fcc59-3298-4ab2-8f33-4b3b74053123",
-            "title":"Titulo",
-            "description":"Descripcion re copada",
-            "type": "type test",
-            "hashtags": "hasthags",
-            "location": "internet",
-            "lessons":[
-               {
-                  "position":0,
-                  "active":true,
-                  "required":false,
-                  "multimedia_id":"idhasheado12yt",
-                  "title":"Stage 0 Title",
-                  "multimedia_type":"Tipo",
-                  "sequence_number": 0,
-                  "require": true
-         
-               },
-               {
-                  "position":1,
-                  "active":true,
-                  "required":true,
-                  "multimedia_id":"otrohash?",
-                  "title":"Stage 1 Title",
-                  "multimedia_type":"Otro tipo",
-                  "sequence_number": 0,
-                  "require": true
-         
-         
-               }
-            ]
-         }
         const response = await courseService.getCourseById(req.params.id)
 
         res.status(200).send(response)
@@ -144,7 +85,7 @@ router.post('/', async function(req, res) {
     }
 });
 
-router.put('/:id', async function(req, res) {
+router.patch('/:id', async function(req, res) {
     // Verificar request y mandar al back de python
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
@@ -154,7 +95,7 @@ router.put('/:id', async function(req, res) {
         const response = await courseService.updateCourse(req.params.id, body)
 
         // Send to back
-        res.status(202).send(response)
+        res.status(201).send(response)
     } catch (e) {
         const body = {
             error: e.name,

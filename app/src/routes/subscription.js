@@ -39,7 +39,7 @@ router.patch('/:id', async function(req, res) {
 
         const response = await subscriptionService.patchSubscription(req.body, req.params.id)
 
-        res.status(202).send(response)
+        res.status(201).send(response)
     } catch (e) {
         const body = {
             error: e.name,

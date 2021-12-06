@@ -12,6 +12,24 @@ function verifySolution(exam) {
     }
 }
 
+function verifyGrading(grading) {
+    if (typeof grading.user_id === 'undefined') {
+        throw new ServerError('Error', 'Bad request - missing user_id', 400)
+    }
+
+    if (typeof grading.exam_to_grade_id === 'undefined') {
+        throw new ServerError('Error', 'Bad request - missing exam_to_grade_id', 400)
+    }
+
+    if (typeof grading.enroll_course_id === 'undefined') {
+        throw new ServerError('Error', 'Bad request - missing enroll_course_id', 400)
+    }
+
+    if (typeof grading.grade === 'undefined') {
+        throw new ServerError('Error', 'Bad request - missing grade', 400)
+    }
+}
+
 function examMapping(requestBody) {
     verifyExam(requestBody.exam)
 
@@ -23,4 +41,4 @@ function examMapping(requestBody) {
     return body
 }
 
-module.exports = { examMapping, verifyExam, verifySolution }
+module.exports = { examMapping, verifyExam, verifySolution, verifyGrading }
