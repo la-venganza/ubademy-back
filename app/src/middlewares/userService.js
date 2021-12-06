@@ -13,7 +13,7 @@ async function getUserByEmail (email) {
 
 async function getUserById (id) {
     try {
-       const res = await instance.get('/api/v1/' + id)
+       const res = await instance.get('/api/v1/users/' + id)
        return res.data
    } catch (e) {
        handleError(e)
