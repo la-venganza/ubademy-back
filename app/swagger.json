@@ -340,10 +340,6 @@
                 },
                 "phone_number": {
                   "type": "string"
-                },
-                "email": {
-                  "type": "string",
-                  "format": "email"
                 }
               }
             }
