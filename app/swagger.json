@@ -799,6 +799,9 @@
                 "active": {
                   "type": "boolean"
                 },
+                "subscription": {
+                  "type": "string"
+                },
                 "end_date": {
                   "type": "string",
                   "format": "date"
