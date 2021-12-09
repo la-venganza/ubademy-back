@@ -4,10 +4,20 @@ const handleError = require('../utils/errorHandler')
 
 async function getCourses (params) {
     try {
-        page = params.page || 1
-        path = '/api/v1/courses?page=' + page
+        path = '/api/v1/courses'
+        if (params.page) {
+            path = '?page=' + params.page
+        } else {
+            path = '?page=1'
+        }
         if (params.keyword) {
-            path += '&keyword=' + keyword
+            path += '&keyword=' + params.keyword
+        }
+        if (params.category) {
+            path += '&category=' + params.category
+        }
+        if (params.plan) {
+            path += '&plan=' + params.plan
         }
         const res = await instance.get(path)
         return res.data
