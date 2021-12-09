@@ -7,7 +7,7 @@ async function getCourses (params) {
         page = params.page || 1
         path = '/api/v1/courses?page=' + page
         if (params.keyword) {
-            path += '&keyword=' + keyword
+            path += '&keyword=' + params.keyword
         }
         const res = await instance.get(path)
         return res.data
