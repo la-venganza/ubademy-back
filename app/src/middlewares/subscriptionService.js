@@ -2,7 +2,7 @@
 const instance = require('../utils/axiosHelper')
 const handleError = require('../utils/errorHandler')
 
-async function getSubscription (body, user_id) {
+async function getSubscription (user_id) {
     try {
         const res = await instance.get('/api/v1/' + user_id + '/subscriptions/')
 
@@ -12,11 +12,11 @@ async function getSubscription (body, user_id) {
     }
 }
 
-async function createSubscription (user_id) {
+async function createSubscription (body, user_id) {
     try {
         // Falta la logica con el smart contract - por ahora lo dejamos directo
         
-        const res = await instance.post('/api/v1/' + user_id + '/subscriptions/')
+        const res = await instance.post('/api/v1/' + user_id + '/subscriptions/', body)
 
         return res.data
     } catch (e) {

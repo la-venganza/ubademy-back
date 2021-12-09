@@ -13,7 +13,7 @@ router.post('/:id', async function(req, res) {
 
         //Logica de wallet
 
-        const response = await subscriptionService.createSubscription(req.params.id)
+        const response = await subscriptionService.createSubscription(req.body, req.params.id)
 
         res.status(201).send(response)
     } catch (e) {
@@ -61,7 +61,7 @@ router.get('/:id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        const response = await subscriptionService.getSubscription(req.body, req.params.id)
+        const response = await subscriptionService.getSubscription(req.params.id)
 
         res.status(200).send(response)
     } catch (e) {
