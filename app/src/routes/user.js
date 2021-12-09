@@ -30,12 +30,12 @@ router.get('/:id', async function(req, res) {
     }
 });
 
-router.get('/:email', async function(req, res) {
+router.get('', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
         
         // Pedir al back de python
-        const response = await userService.getUserByEmail(req.params.email)
+        const response = await userService.getUserByEmail(req.query.email)
         res.status(200).send(response)
     } catch (e) {
         const body = {
