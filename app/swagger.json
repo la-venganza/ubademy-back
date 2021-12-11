@@ -735,7 +735,7 @@
         }
       }
     },
-    "/subscription/{subscription_id}": {
+    "/subscription/{user_id}": {
       "post": {
         "consumes": [
           "application/json"
@@ -869,7 +869,7 @@
         }
       }
     },
-    "/subscription_plans/{user_id}": {
+    "/subscription_plans/{subscription_id}": {
       "get": {
         "consumes": [
           "application/json"
