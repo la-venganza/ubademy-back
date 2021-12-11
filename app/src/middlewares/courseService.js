@@ -6,9 +6,9 @@ async function getCourses (params) {
     try {
         path = '/api/v1/courses'
         if (params.page) {
-            path = '?page=' + params.page
+            path += '?page=' + params.page
         } else {
-            path = '?page=1'
+            path += '?page=1'
         }
         if (params.keyword) {
             path += '&keyword=' + params.keyword
