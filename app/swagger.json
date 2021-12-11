@@ -514,6 +514,16 @@
           },
           {
             "in": "query",
+            "name": "active_students",
+            "type": "boolean"
+          }   ,
+          {
+            "in": "query",
+            "name": "graded_status",
+            "type": "boolean"
+          }   ,
+          {
+            "in": "query",
             "name": "page",
             "type": "integer"
           }          
