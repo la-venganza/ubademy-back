@@ -76,6 +76,16 @@
             "in": "query",
             "name": "keyword",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "plan",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "category",
+            "type": "string"
           }
         ],
         "responses": {
