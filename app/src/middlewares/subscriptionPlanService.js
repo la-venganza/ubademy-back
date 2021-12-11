@@ -12,9 +12,9 @@ async function getSubscriptions () {
     }
 }
 
-async function getSubscriptionPlan (user_id) {
+async function getSubscriptionPlan (subscription_id) {
     try {
-        const res = await instance.get('/api/v1/subscription_plans/' + user_id)
+        const res = await instance.get('/api/v1/subscription_plans/' + subscription_id)
 
         return res.data
     } catch (e) {

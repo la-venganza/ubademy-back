@@ -847,6 +847,59 @@
         }
       }
     },
+    "/subscription_plans/{user_id}": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "subscription_id",
+            "type": "integer",
+            "required": true,
+            "description": "ID for the subscription"
+          }
+        ],
+        "tags": [
+          "Subscription_plans"
+        ],
+        "summary": "Get subscriptions plan by id",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/subscription_plans": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "tags": [
+          "Subscription_plans"
+        ],
+        "summary": "Get subscriptions plans",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/wallet/{user_id}": {
       "get": {
         "consumes": [
