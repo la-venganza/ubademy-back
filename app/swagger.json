@@ -27,6 +27,28 @@
     "application/json"
   ],
   "paths": {
+    "/course/types": {
+      "get": {
+        "tags": [
+          "Courses"
+        ],
+        "summary": "Search courses' types",
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/course": {
       "post": {
         "tags": [
