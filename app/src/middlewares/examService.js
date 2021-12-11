@@ -60,8 +60,16 @@ async function searchExam (params) {
         if (typeof params.user_id === 'undefined') {
             throw new ServerError('Error - user_id query param is undefined')
         }
-        page = params.page || 1
-        path = '/api/v1/courses/lessons/exams?user_id=' + params.user_id + '&page=' + page
+        path = '/api/v1/courses/lessons/exams?user_id=' + params.user_id
+        if (params.active_students) {
+            path += '&active_students=' + params.active_students
+        }
+        if (params.graded_status) {
+            path += '&graded_status=' + params.graded_status
+        }
+        if (params.page) {
+            path += '&page=' + params.page
+        }
 
         const res = await instance.get(path)
         return res.data

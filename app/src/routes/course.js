@@ -165,4 +165,29 @@ router.post('/:id/collaboration', async function(req, res) {
     }
 });
 
+router.get('/types', async function(req, res) {
+    // Verifica que el token de firebase sea valido
+    try {
+        const uid = await verifyIdToken(req.cookies.firebaseAuth)
+
+        const response = await courseService.getTypes()
+
+        res.status(200).send(response)
+    } catch (e) {
+        const body = {
+            error: e.name,
+            message: e.message
+        }
+        if (e instanceof ConnectionError) {
+            res.status(500).send(body)
+        } else if (e instanceof AuthError) {
+            res.status(401).send(body)
+        } else if (e instanceof ServerError) {
+            res.status(e.status).send(body)
+        } else {
+            res.status(500).send(body)
+        }
+    }
+});
+
 module.exports = router;

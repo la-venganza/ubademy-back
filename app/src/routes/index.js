@@ -3,6 +3,7 @@ const course = require('./course');
 const user = require('./user')
 const exam = require('./exam')
 const subscription = require('./subscription')
+const subscription_plans = require('./subscription_plans')
 const wallet = require('./wallet')
 
 const router = express.Router();
@@ -26,6 +27,7 @@ router.use('/course', course);
 router.use('/user', user)
 router.use('/exam', exam)
 router.use('/subscription', subscription)
+router.use('/subscription_plans', subscription_plans)
 router.use('/wallet', wallet)
 
 module.exports = router;

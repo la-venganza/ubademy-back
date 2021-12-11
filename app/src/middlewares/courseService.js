@@ -71,4 +71,13 @@ async function addCollaborator (id, body) {
     }
 }
 
-module.exports = {createCourse, getCourses, getCourseById, updateCourse, addRegistration, addCollaborator }
+async function getTypes () {
+    try {
+        const res = await instance.get('/api/v1/courses/types')
+        return res.data
+    } catch (e) {
+        handleError(e)
+    }
+}
+
+module.exports = {createCourse, getCourses, getCourseById, updateCourse, addRegistration, addCollaborator, getTypes }
