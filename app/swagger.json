@@ -735,7 +735,7 @@
         }
       }
     },
-    "/subscription/{user_id}": {
+    "/subscription/{subscription_id}": {
       "post": {
         "consumes": [
           "application/json"
