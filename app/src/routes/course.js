@@ -118,7 +118,7 @@ router.post('/:id/registration', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
         
-        const response = await courseService.addRegistration(req.params.id, body)
+        const response = await courseService.addRegistration(req.params.id, req.body)
 
         // Send to back
         res.status(201).send(response)
@@ -144,7 +144,7 @@ router.post('/:id/collaboration', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
         
-        const response = await courseService.addCollaborator(req.params.id, body)
+        const response = await courseService.addCollaborator(req.params.id, req.body)
 
         // Send to back
         res.status(201).send(response)
