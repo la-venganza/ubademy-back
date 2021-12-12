@@ -35,10 +35,10 @@ router.get('/login/:email', async function(req, res) {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
         
         // Pedir al back de python
-        const response = await userService.getUserByEmail(req.params.email)
+        let response = await userService.getUserByEmail(req.params.email)
 
         if (req.query.properties) {
-            const response = await userService.getUserById(response.body.results[0].user_id, req.query)
+            response = await userService.getUserById(response.body.results[0].user_id, req.query)
         }
 
         res.status(200).send(response)
