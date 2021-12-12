@@ -38,8 +38,8 @@ router.get('/login/:email', async function(req, res) {
         let response = await userService.getUserByEmail(req.params.email)
 
         if (req.query.properties) {
-            parsedResponse = JSON.parse(response)
-            response = await userService.getUserById(parsedResponse.body.results[0].user_id, req.query)
+            parsedResponse = JSON.parse(JSON.stringify(response))
+            response = await userService.getUserById(parsedResponse.results[0].user_id, req.query)
         }
 
         res.status(200).send(response)
