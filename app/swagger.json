@@ -41,10 +41,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       }
@@ -73,10 +79,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       },
@@ -115,10 +127,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       }
@@ -143,10 +161,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       },
@@ -160,10 +184,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       }
@@ -207,10 +237,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       }
@@ -254,10 +290,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       }
@@ -309,10 +351,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       }
@@ -325,6 +373,12 @@
           "type": "string",
           "required": true,
           "description": "ID of the user"
+        },
+        {
+          "in": "query",
+          "name": "properties",
+          "type": "string",
+          "required": false
         }
       ],
       "get": {
@@ -337,10 +391,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       },
@@ -386,10 +446,16 @@
             "description": "User inormation updated correctly"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       }
@@ -414,10 +480,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       }
@@ -462,10 +534,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       },
@@ -512,10 +590,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       },
@@ -555,10 +639,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       }
@@ -604,10 +694,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       }
@@ -672,10 +768,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       },
@@ -727,10 +829,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       }
@@ -779,10 +887,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       },
@@ -808,10 +922,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       },
@@ -861,10 +981,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       }
@@ -892,10 +1018,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       }
@@ -914,10 +1046,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       }
@@ -945,10 +1083,16 @@
             "description": "OK"
           },
           "401": {
-            "description": "Authorization error"
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
           }
         }
       }
@@ -1075,6 +1219,13 @@
             }
           }
         }
+      }
+    },
+    "error": {
+      "type": "object",
+      "properties": {
+          "error": "string",
+          "message": "string"
       }
     }
   }

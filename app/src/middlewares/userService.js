@@ -11,12 +11,16 @@ async function getUserByEmail (email) {
     }
 }
 
-async function getUserById (id) {
+async function getUserById (id, query) {
     try {
-       const res = await instance.get('/api/v1/users/' + id)
-       return res.data
+        path = '/api/v1/users/' + id
+        if (query.properties) {
+            path += '?properties=' + query.properties
+        }
+        const res = await instance.get(path)
+        return res.data
    } catch (e) {
-       handleError(e)
+        handleError(e)
    }
 }
 
