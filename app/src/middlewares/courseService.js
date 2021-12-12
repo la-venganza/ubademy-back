@@ -6,9 +6,9 @@ async function getCourses (params) {
     try {
         path = '/api/v1/courses'
         if (params.page) {
-            path = '?page=' + params.page
+            path += '?page=' + params.page
         } else {
-            path = '?page=1'
+            path += '?page=1'
         }
         if (params.keyword) {
             path += '&keyword=' + params.keyword
@@ -71,4 +71,13 @@ async function addCollaborator (id, body) {
     }
 }
 
-module.exports = {createCourse, getCourses, getCourseById, updateCourse, addRegistration, addCollaborator }
+async function getTypes () {
+    try {
+        const res = await instance.get('/api/v1/courses/types')
+        return res.data
+    } catch (e) {
+        handleError(e)
+    }
+}
+
+module.exports = {createCourse, getCourses, getCourseById, updateCourse, addRegistration, addCollaborator, getTypes }
