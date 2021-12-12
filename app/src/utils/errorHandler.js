@@ -4,8 +4,9 @@ const ServerError = require('../errors/serverError')
 function handleError(error){
     if (error.response) {
         //custom errors for server status response
-        console.log("there was a response ")
-        message = error.message + ' | ' + error.detail.msg
+        message = error.message + ' | ' + error.detail.msg + ' | ' + error.status
+        console.log("there was a response")
+        console.log(message)
         throw new ServerError(error, message, error.status || 500)
     } else if (error.request) {
         //custom error for unresponsive server
