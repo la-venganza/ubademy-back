@@ -460,7 +460,7 @@
         }
       }
     },
-    "/user/{email}": {
+    "/user/login/{email}": {
       "parameters": [
         {
           "in": "path",
@@ -468,6 +468,11 @@
           "type": "string",
           "required": true,
           "description": "Email of the user to get"
+        },
+        {
+          "in": "query",
+          "name": "properties",
+          "type": "string"
         }
       ],
       "get": {
