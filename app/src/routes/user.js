@@ -36,6 +36,11 @@ router.get('/login/:email', async function(req, res) {
         
         // Pedir al back de python
         const response = await userService.getUserByEmail(req.params.email)
+
+        if (req.query.properties) {
+            const response = await userService.getUserById(response.body.results[0].user_id, req.query)
+        }
+
         res.status(200).send(response)
     } catch (e) {
         const body = {
