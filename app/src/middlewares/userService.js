@@ -42,4 +42,13 @@ async function updateUser (id, body) {
     }
 }
 
-module.exports = {getUserByEmail, createUser, updateUser, getUserById }
+async function getAdminByEmail (email) {
+     try {
+        const res = await instance.get('/api/v1/users?email=' + email)
+        return res.data
+    } catch (e) {
+        handleError(e)
+    }
+}
+
+module.exports = {getUserByEmail, createUser, updateUser, getUserById, getAdminByEmail }
