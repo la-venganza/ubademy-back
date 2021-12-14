@@ -62,6 +62,15 @@ async function addRegistration (id, body) {
     }
 }
 
+async function undoRegistration (id, body) {
+    try {
+        const res = await instance.patch('/api/v1/courses/' + id + '/registration', body)
+        return res.data
+    } catch (e) {
+        handleError(e)
+    }
+}
+
 async function addCollaborator (id, body) {
     try {
         const res = await instance.post('/api/v1/courses/' + id + '/collaborator', body)
