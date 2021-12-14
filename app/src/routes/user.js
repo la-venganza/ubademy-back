@@ -67,11 +67,6 @@ router.get('/admin/:email', async function(req, res) {
         // Pedir al back de python
         let response = await userService.getAdminByEmail(req.params.email)
 
-        if (req.query.properties) {
-            parsedResponse = JSON.parse(JSON.stringify(response))
-            response = await userService.getUserById(parsedResponse.results[0].user_id, req.query)
-        }
-
         res.status(200).send(response)
     } catch (e) {
         const body = {
