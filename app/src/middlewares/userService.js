@@ -45,6 +45,7 @@ async function updateUser (id, body) {
 async function getAdminByEmail (email) {
      try {
         const res = await instance.get('/api/v1/users?email=' + email)
+
         return res.data
     } catch (e) {
         handleError(e)
