@@ -69,7 +69,7 @@ router.get('/admin/:email', async function(req, res) {
 
         parsedResponse = JSON.parse(JSON.stringify(response))
         if (!parsedResponse.results[0].is_admin) {
-            throw new AuthError(nil, "You are not an admin user", 401)
+            throw new AuthError(Error, "You are not an admin user", 401)
         }
 
         res.status(200).send(response)
