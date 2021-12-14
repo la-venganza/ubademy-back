@@ -60,6 +60,36 @@ router.get('/login/:email', async function(req, res) {
     }
 });
 
+router.get('/admin/:email', async function(req, res) {
+    try {
+        const uid = await verifyIdToken(req.cookies.firebaseAuth)
+        
+        // Pedir al back de python
+        let response = await userService.getAdminByEmail(req.params.email)
+
+        if (req.query.properties) {
+            parsedResponse = JSON.parse(JSON.stringify(response))
+            response = await userService.getUserById(parsedResponse.results[0].user_id, req.query)
+        }
+
+        res.status(200).send(response)
+    } catch (e) {
+        const body = {
+            error: e.name,
+            message: e.message
+        }
+        if (e instanceof ConnectionError) {
+            res.status(500).send(body)
+        } else if (e instanceof AuthError) {
+            res.status(401).send(body)
+        } else if (e instanceof ServerError) {
+            res.status(e.status).send(body)
+        } else {
+            res.status(500).send(body)
+        }
+    }
+});
+
 router.post('/', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
