@@ -38,7 +38,7 @@ router.get('/:id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        const response = await courseService.getCourseById(req.params.id)
+        const response = await courseService.getCourseById(req.params.id, req.query)
 
         res.status(200).send(response)
     } catch (e) {

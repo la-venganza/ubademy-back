@@ -145,7 +145,7 @@
       "parameters": [
         {
           "in": "path",
-          "name": "id",
+          "name": "course_id",
           "type": "integer",
           "required": true,
           "description": "Numeric ID of the course to get"
@@ -155,7 +155,16 @@
         "tags": [
           "Courses"
         ],
-        "summary": "Get course's content",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "user_id",
+            "type": "string",
+            "required": true,
+            "description": "Numeric ID of the user requesting tthe course"
+          }
+        ],
+        "summary": "Get course's content (Infomation is different depending user type)",
         "responses": {
           "200": {
             "description": "OK"

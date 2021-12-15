@@ -26,9 +26,13 @@ async function getCourses (params) {
     }
 }
 
-async function getCourseById (id) {
+async function getCourseById (id, query) {
     try {
-        const res = await instance.get('/api/v1/courses/' + id)
+        path = '/api/v1/courses/' + id
+        if (query.user_id) {
+            path += '?user_id=' + query.user_id
+        }
+        const res = await instance.get(path)
         return res.data
     } catch (e) {
         handleError(e)
