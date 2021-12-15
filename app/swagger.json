@@ -1263,8 +1263,12 @@
     "error": {
       "type": "object",
       "properties": {
-          "error": "string",
-          "message": "string"
+        "error": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }      
       }
     }
   }
