@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const passport = require('passport');
 const cookieParser = require('cookie-parser')
 const swaggerUi = require('swagger-ui-express');
@@ -14,6 +15,8 @@ const port = process.env.PORT || 3000;
 
 app.use(cookieParser());
 app.use(express.json())
+app.use(cors())
+app.options('*', cors())
 
 app.use(
   '/api-docs',
