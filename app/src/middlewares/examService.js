@@ -44,9 +44,12 @@ async function gradeExam (body, exam_id) {
     }
 }
 
-async function getExamByTakenId (body) {
+async function getExamByTakenId (params, query) {
     try {
-        path = '/api/v1/courses/' + body.course_id + '/lessons/' + body.lesson_id + '/exams/' + body.exam_id
+        path = '/api/v1/courses/' + params.course_id + '/lessons/' + params.lesson_id + '/exams/' + params.exam_id + '/solution/' + params.exam_taken_id
+        if (query.user_id) {
+            path += '?user_id=' + query.user_id
+        }
 
         const res = await instance.get(path)
         return res.data
@@ -102,5 +105,5 @@ async function patchExam (body) {
     }
 }
 
-module.exports = { createExam, patchExam, getExam, solveExam, gradeExam, searchExam }
+module.exports = { createExam, patchExam, getExamByTakenId, getExam, solveExam, gradeExam, searchExam }
 
