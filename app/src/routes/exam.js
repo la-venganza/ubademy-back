@@ -107,15 +107,8 @@ router.patch('/', async function(req, res) {
 router.get('/:exam_id/course/:course_id/lesson/:lesson_id/user/:user_id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
-        
-        body = {
-            "user_id": req.params.user_id,
-            "course_id": req.params.course_id,
-            "lesson_id": req.params.lesson_id,
-            "exam_id": req.params.exam_id
-        }
             
-        const response = await examService.getExam(body)
+        const response = await examService.getExam(requ.params)
 
         res.status(200).send(response)
     } catch (e) {

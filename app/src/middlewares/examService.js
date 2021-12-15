@@ -44,9 +44,20 @@ async function gradeExam (body, exam_id) {
     }
 }
 
-async function getExam (body) {
+async function getExamByTakenId (body) {
     try {
         path = '/api/v1/courses/' + body.course_id + '/lessons/' + body.lesson_id + '/exams/' + body.exam_id
+
+        const res = await instance.get(path)
+        return res.data
+    } catch (e) {
+        handleError(e)
+    }
+}
+
+async function getExam (params) {
+    try {
+        path = '/api/v1/courses/' + params.course_id + '/lessons/' + params.lesson_id + '/exams/' + params.exam_id
 
         const res = await instance.get(path)
         return res.data
