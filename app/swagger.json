@@ -161,7 +161,7 @@
             "name": "user_id",
             "type": "string",
             "required": true,
-            "description": "Numeric ID of the user requesting tthe course"
+            "description": "ID of the user requesting the course"
           }
         ],
         "summary": "Get course's content (Infomation is different depending user type)",
