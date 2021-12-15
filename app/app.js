@@ -13,7 +13,13 @@ const app = express();
 
 const port = process.env.PORT || 3000;
 
-app.use(cors());
+const corsOptions = {
+  "origin": "*",
+  "methods": "GET, HEAD, PUT, PATCH, POST, DELETE",
+  // other options
+}
+
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json())
 
@@ -23,7 +29,7 @@ app.use(
   swaggerUi.setup(swaggerDocument),
 );
 
-app.use('/', cors(), routes);
+app.use('/', routes);
 
 app.listen(port, () => {
   console.log(`Ubademy back app listening at http://localhost:${port}`);
