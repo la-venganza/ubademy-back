@@ -14,7 +14,6 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors());
-app.options('*', cors())
 app.use(cookieParser());
 app.use(express.json())
 
