@@ -249,6 +249,48 @@
             }
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Courses"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "required": [
+                "user_id"
+              ],
+              "properties": {
+                "user_id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "summary": "Unregister as a student to course",
+        "responses": {
+          "201": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
       }
     },
     "/course/{id}/collaborator": {
