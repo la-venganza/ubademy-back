@@ -280,3 +280,95 @@ describe("addCollaborator", () => {
         expect(courseService.addCollaborator(expectedRes)).rejects.toThrowError(Error)
     })
 })
+
+describe("undoRegistration", () => {
+    const expectedRes = {
+        "user_id": "1"
+    }
+    it("patches registration", async () => {
+        instance.patch.mockResolvedValue({
+            data: expectedRes
+        }       
+        )
+
+        const res = await courseService.undoRegistration(expectedRes)
+        expect(res).toEqual(expectedRes)
+    })
+
+    it("throws ServerError", async () => {
+        instance.patch.mockRejectedValueOnce({
+            response: "has response",
+            message: "message"
+        }
+        )
+
+        expect(courseService.undoRegistration(expectedRes)).rejects.toThrowError(ServerError)
+        expect(courseService.undoRegistration(expectedRes)).rejects.toThrowError("message")
+    })
+
+    it("throws ConnectionError", async () => {
+        instance.patch.mockRejectedValueOnce({
+            request: "has request",
+            message: "message"
+        }
+        )
+
+        expect(courseService.undoRegistration(expectedRes)).rejects.toThrowError(ConnectionError)
+        expect(courseService.undoRegistration(expectedRes)).rejects.toThrowError("message")
+    })
+
+    it("throws Error", async () => {
+        instance.patch.mockRejectedValueOnce({
+        }
+        )
+
+        expect(courseService.undoRegistration(expectedRes)).rejects.toThrowError(Error)
+    })
+})
+
+describe("getTypes", () => {
+    const expectedRes = {
+        "course_types": [
+            "string"
+        ]
+    }
+    it("patches registration", async () => {
+        instance.get.mockResolvedValue({
+            data: expectedRes
+        }       
+        )
+
+        const res = await courseService.getTypes()
+        expect(res).toEqual(expectedRes)
+    })
+
+    it("throws ServerError", async () => {
+        instance.get.mockRejectedValueOnce({
+            response: "has response",
+            message: "message"
+        }
+        )
+
+        expect(courseService.getTypes()).rejects.toThrowError(ServerError)
+        expect(courseService.getTypes()).rejects.toThrowError("message")
+    })
+
+    it("throws ConnectionError", async () => {
+        instance.get.mockRejectedValueOnce({
+            request: "has request",
+            message: "message"
+        }
+        )
+
+        expect(courseService.getTypes()).rejects.toThrowError(ConnectionError)
+        expect(courseService.getTypes()).rejects.toThrowError("message")
+    })
+
+    it("throws Error", async () => {
+        instance.get.mockRejectedValueOnce({
+        }
+        )
+
+        expect(courseService.getTypes()).rejects.toThrowError(Error)
+    })
+})
