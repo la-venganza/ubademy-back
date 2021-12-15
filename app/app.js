@@ -23,7 +23,7 @@ app.use(
   swaggerUi.setup(swaggerDocument),
 );
 
-app.use('/', routes);
+app.use('/', cors(), routes);
 
 app.listen(port, () => {
   console.log(`Ubademy back app listening at http://localhost:${port}`);
