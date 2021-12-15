@@ -533,6 +533,38 @@
         }
       }
     },
+    "/user/all": {
+      "parameters": [
+        {
+          "in": "query",
+          "name": "max_results",
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get users",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
     "/exam": {
       "post": {
         "consumes": [

@@ -2,6 +2,19 @@
 const instance = require('../utils/axiosHelper')
 const handleError = require('../utils/errorHandler')
 
+async function getUsers (query) {
+    try {
+        path = '/api/v1/users'
+        if (query.properties) {
+            path += '?max_results=' + query.max_results
+        }
+        const res = await instance.get(path)
+        return res.data
+   } catch (e) {
+        handleError(e)
+   }
+}
+
 async function getUserByEmail (email) {
      try {
         const res = await instance.get('/api/v1/users?email=' + email)
@@ -52,4 +65,4 @@ async function getAdminByEmail (email) {
     }
 }
 
-module.exports = {getUserByEmail, createUser, updateUser, getUserById, getAdminByEmail }
+module.exports = { getUsers, getUserByEmail, createUser, updateUser, getUserById, getAdminByEmail }
