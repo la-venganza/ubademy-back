@@ -93,4 +93,4 @@ async function getTypes () {
     }
 }
 
-module.exports = {createCourse, getCourses, getCourseById, updateCourse, addRegistration, addCollaborator, getTypes }
+module.exports = {createCourse, getCourses, getCourseById, updateCourse, addRegistration, undoRegistration, addCollaborator, getTypes }

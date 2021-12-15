@@ -156,7 +156,7 @@ describe("updateCourse", () => {
         }       
         )
 
-        const res = await courseService.updateCourse(expectedRes)
+        const res = await courseService.updateCourse(1, expectedRes)
         expect(res).toEqual(expectedRes)
     })
 
@@ -167,8 +167,8 @@ describe("updateCourse", () => {
         }
         )
 
-        expect(courseService.updateCourse(expectedRes)).rejects.toThrowError(ServerError)
-        expect(courseService.updateCourse(expectedRes)).rejects.toThrowError("message")
+        expect(courseService.updateCourse(1, expectedRes)).rejects.toThrowError(ServerError)
+        expect(courseService.updateCourse(1, expectedRes)).rejects.toThrowError("message")
     })
 
     it("throws ConnectionError", async () => {
@@ -178,8 +178,8 @@ describe("updateCourse", () => {
         }
         )
 
-        expect(courseService.updateCourse(expectedRes)).rejects.toThrowError(ConnectionError)
-        expect(courseService.updateCourse(expectedRes)).rejects.toThrowError("message")
+        expect(courseService.updateCourse(1, expectedRes)).rejects.toThrowError(ConnectionError)
+        expect(courseService.updateCourse(1, expectedRes)).rejects.toThrowError("message")
     })
 
     it("throws Error", async () => {
@@ -187,7 +187,7 @@ describe("updateCourse", () => {
         }
         )
 
-        expect(courseService.updateCourse(expectedRes)).rejects.toThrowError(Error)
+        expect(courseService.updateCourse(1, expectedRes)).rejects.toThrowError(Error)
     })
 })
 

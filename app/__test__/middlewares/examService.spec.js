@@ -257,3 +257,52 @@ describe("solveExam", () => {
         expect(examService.solveExam(expectedRes)).rejects.toThrowError(Error)
     })
 })
+
+describe("gradeExam", () => {
+    const expectedRes = {
+        "user_id": "string",
+        "exam_to_grade_id": 0,
+        "enroll_course_id": 0,
+        "grade": 10
+    }
+
+    it("posts Exam solution attempt", async () => {
+        instance.post.mockResolvedValue({
+            data: expectedRes
+        }
+        )
+
+        const res = await examService.solveExam(expectedRes, 1)
+        expect(res).toEqual(expectedRes)
+    })
+
+    it("throws ServerError", async () => {
+        instance.post.mockRejectedValueOnce({
+            response: "has response",
+            message: "message"
+        }
+        )
+
+        expect(examService.solveExam(expectedRes, 1)).rejects.toThrowError(ServerError)
+        expect(examService.solveExam(expectedRes, 1)).rejects.toThrowError("message")
+    })
+
+    it("throws ConnectionError", async () => {
+        instance.post.mockRejectedValueOnce({
+            request: "has request",
+            message: "message"
+        }
+        )
+
+        expect(examService.solveExam(expectedRes, 1)).rejects.toThrowError(ConnectionError)
+        expect(examService.solveExam(expectedRes, 1)).rejects.toThrowError("message")
+    })
+
+    it("throws Error", async () => {
+        instance.post.mockRejectedValueOnce({
+        }
+        )
+
+        expect(examService.solveExam(expectedRes, 1)).rejects.toThrowError(Error)
+    })
+})
