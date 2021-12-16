@@ -201,11 +201,11 @@ router.get('/admin/balance', async function(req, res) {
     }
 })
 
-router.get('/admin/redraw', async function(req, res) {
+router.get('/admin/withdraw', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        const response = await walletService.ownerRedraw(req.body)
+        const response = await walletService.ownerWithdraw(req.body)
 
         res.status(200).send(response)
     } catch (e) {

@@ -1,5 +1,5 @@
 // Middleware para resolver llamadas a SC
-const SCinstance = require('../utils/axiosHelper')
+const SCinstance = require('../utils/SCaxiosHelper')
 const handleError = require('../utils/errorHandler')
 
 async function getBalance (wallet_id) {
@@ -97,7 +97,7 @@ async function getOwnerBalance () {
     }
 }
 
-async function ownerRedraw (body) {
+async function ownerWithdraw (body) {
     try {
 
         const res = await SCinstance.post('/ownerRedraw', body)
@@ -109,4 +109,4 @@ async function ownerRedraw (body) {
 }
 
 module.exports = { getBalance, deposit, getWallet, createWallet, getTeacherBalance, 
-                   payTeacher, teacherWithdraw, getOwnerBalance, ownerRedraw }
+                   payTeacher, teacherWithdraw, getOwnerBalance, ownerWithdraw }
