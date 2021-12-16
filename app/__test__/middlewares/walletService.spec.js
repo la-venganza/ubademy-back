@@ -13,7 +13,7 @@ describe("getBalance", () => {
 
         instance.get.mockResolvedValue({
             data: expectedRes
-        }       
+        }
         )
 
         const res = await walletService.getBalance(10)
@@ -22,8 +22,15 @@ describe("getBalance", () => {
 
     it("throws ServerError", async () => {
         instance.get.mockRejectedValueOnce({
-            response: "has response",
-            message: "message"
+            "detail": [
+                {
+                    "loc": [
+                        "string"
+                    ],
+                    "msg": "string",
+                    "type": "string"
+                }
+            ]
         }
         )
 
