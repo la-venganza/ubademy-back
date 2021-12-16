@@ -32,8 +32,15 @@ describe("getSubscription", () => {
 
     it("throws ServerError", async () => {
         instance.get.mockRejectedValueOnce({
-            response: "has response",
-            message: "message"
+            "detail": [
+                {
+                    "loc": [
+                        "string"
+                    ],
+                    "msg": "string",
+                    "type": "string"
+                }
+            ]
         }
         )
 
@@ -65,17 +72,17 @@ describe("createSubscription", () => {
     const sentReq = {
         "subscription": "string",
         "end_date": "2021-12-15"
-      }
+    }
     it("posts subscription", async () => {
         const expectedRes = {
             "active": true,
             "end_date": "2021-12-15",
             "subscription": {
-              "id": 0,
-              "title": "string"
+                "id": 0,
+                "title": "string"
             },
             "start_date": "2021-12-15"
-          }
+        }
 
         instance.post.mockResolvedValue({
             data: expectedRes
@@ -88,8 +95,15 @@ describe("createSubscription", () => {
 
     it("throws ServerError", async () => {
         instance.post.mockRejectedValueOnce({
-            response: "has response",
-            message: "message"
+            "detail": [
+                {
+                    "loc": [
+                        "string"
+                    ],
+                    "msg": "string",
+                    "type": "string"
+                }
+            ]
         }
         )
 
@@ -121,17 +135,17 @@ describe("patchSubscription", () => {
     const sentReq = {
         "subscription": "string",
         "end_date": "2021-12-15"
-      }
+    }
     it("patches subscription", async () => {
         const expectedRes = {
             "active": true,
             "end_date": "2021-12-15",
             "subscription": {
-              "id": 0,
-              "title": "string"
+                "id": 0,
+                "title": "string"
             },
             "start_date": "2021-12-15"
-          }
+        }
 
         instance.patch.mockResolvedValue({
             data: expectedRes
@@ -144,8 +158,15 @@ describe("patchSubscription", () => {
 
     it("throws ServerError", async () => {
         instance.patch.mockRejectedValueOnce({
-            response: "has response",
-            message: "message"
+            "detail": [
+                {
+                    "loc": [
+                        "string"
+                    ],
+                    "msg": "string",
+                    "type": "string"
+                }
+            ]
         }
         )
 

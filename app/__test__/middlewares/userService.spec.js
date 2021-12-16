@@ -19,7 +19,7 @@ describe("getUserByEmail", () => {
 
         instance.get.mockResolvedValue({
             data: expectedRes
-        }       
+        }
         )
 
         const res = await userService.getUserByEmail("email@test.com")
@@ -28,8 +28,15 @@ describe("getUserByEmail", () => {
 
     it("throws ServerError", async () => {
         instance.get.mockRejectedValueOnce({
-            response: "has response",
-            message: "message"
+            "detail": [
+                {
+                    "loc": [
+                        "string"
+                    ],
+                    "msg": "string",
+                    "type": "string"
+                }
+            ]
         }
         )
 
@@ -70,7 +77,7 @@ describe("createUser", () => {
     it("posts user", async () => {
         instance.post.mockResolvedValue({
             data: expectedRes
-        }       
+        }
         )
 
         const res = await userService.createUser(expectedRes)
@@ -79,8 +86,15 @@ describe("createUser", () => {
 
     it("throws ServerError", async () => {
         instance.post.mockRejectedValueOnce({
-            response: "has response",
-            message: "message"
+            "detail": [
+                {
+                    "loc": [
+                        "string"
+                    ],
+                    "msg": "string",
+                    "type": "string"
+                }
+            ]
         }
         )
 
@@ -121,7 +135,7 @@ describe("updateUser", () => {
     it("puts user", async () => {
         instance.patch.mockResolvedValue({
             data: expectedRes
-        }       
+        }
         )
 
         const res = await userService.updateUser(expectedRes)
@@ -130,8 +144,15 @@ describe("updateUser", () => {
 
     it("throws ServerError", async () => {
         instance.patch.mockRejectedValueOnce({
-            response: "has response",
-            message: "message"
+            "detail": [
+                {
+                    "loc": [
+                        "string"
+                    ],
+                    "msg": "string",
+                    "type": "string"
+                }
+            ]
         }
         )
 

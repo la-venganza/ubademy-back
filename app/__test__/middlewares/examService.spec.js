@@ -23,9 +23,16 @@ describe("getExam", () => {
 
     it("throws ServerError", async () => {
         instance.get.mockRejectedValueOnce({
-            response: "has response",
-            message: "message"
-        }
+            "detail": [
+              {
+                "loc": [
+                  "string"
+                ],
+                "msg": "string",
+                "type": "string"
+              }
+            ]
+          }
         )
 
         expect(examService.getExam(expectedRes)).rejects.toThrowError(ServerError)
@@ -97,12 +104,19 @@ describe("createExam", () => {
 
     it("throws ServerError", async () => {
         instance.post.mockRejectedValueOnce({
-            response: "has response",
-            message: "message"
-        }
+            "detail": [
+              {
+                "loc": [
+                  "string"
+                ],
+                "msg": "string",
+                "type": "string"
+              }
+            ]
+          }
         )
 
-        expect(examService.createExam(expectedRes)).rejects.toThrowError(ServerError)
+        expect(examService.createExam(expectedRes)).rejects.toThrowError(Error)
         expect(examService.createExam(expectedRes)).rejects.toThrowError("message")
     })
 
@@ -185,9 +199,16 @@ describe("patchExam", () => {
 
     it("throws ConnectionError", async () => {
         instance.patch.mockRejectedValueOnce({
-            request: "has request",
-            message: "message"
-        }
+            "detail": [
+              {
+                "loc": [
+                  "string"
+                ],
+                "msg": "string",
+                "type": "string"
+              }
+            ]
+          }
         )
 
         expect(examService.patchExam(expectedRes)).rejects.toThrowError(ConnectionError)
@@ -229,9 +250,16 @@ describe("solveExam", () => {
 
     it("throws ServerError", async () => {
         instance.post.mockRejectedValueOnce({
-            response: "has response",
-            message: "message"
-        }
+            "detail": [
+              {
+                "loc": [
+                  "string"
+                ],
+                "msg": "string",
+                "type": "string"
+              }
+            ]
+          }
         )
 
         expect(examService.solveExam(expectedRes)).rejects.toThrowError(ServerError)
@@ -267,42 +295,49 @@ describe("gradeExam", () => {
     }
 
     it("posts Exam solution attempt", async () => {
-        instance.post.mockResolvedValue({
+        instance.patch.mockResolvedValue({
             data: expectedRes
         }
         )
 
-        const res = await examService.solveExam(expectedRes, 1)
+        const res = await examService.gradeExam(expectedRes, 1)
         expect(res).toEqual(expectedRes)
     })
 
     it("throws ServerError", async () => {
-        instance.post.mockRejectedValueOnce({
-            response: "has response",
-            message: "message"
-        }
+        instance.patch.mockRejectedValueOnce({
+            "detail": [
+              {
+                "loc": [
+                  "string"
+                ],
+                "msg": "string",
+                "type": "string"
+              }
+            ]
+          }
         )
 
-        expect(examService.solveExam(expectedRes, 1)).rejects.toThrowError(ServerError)
-        expect(examService.solveExam(expectedRes, 1)).rejects.toThrowError("message")
+        expect(examService.gradeExam(expectedRes, 1)).rejects.toThrowError(ServerError)
+        expect(examService.gradeExam(expectedRes, 1)).rejects.toThrowError("message")
     })
 
     it("throws ConnectionError", async () => {
-        instance.post.mockRejectedValueOnce({
+        instance.patch.mockRejectedValueOnce({
             request: "has request",
             message: "message"
         }
         )
 
-        expect(examService.solveExam(expectedRes, 1)).rejects.toThrowError(ConnectionError)
-        expect(examService.solveExam(expectedRes, 1)).rejects.toThrowError("message")
+        expect(examService.gradeExam(expectedRes, 1)).rejects.toThrowError(ConnectionError)
+        expect(examService.gradeExam(expectedRes, 1)).rejects.toThrowError("message")
     })
 
     it("throws Error", async () => {
-        instance.post.mockRejectedValueOnce({
+        instance.patch.mockRejectedValueOnce({
         }
         )
 
-        expect(examService.solveExam(expectedRes, 1)).rejects.toThrowError(Error)
+        expect(examService.gradeExam(expectedRes, 1)).rejects.toThrowError(Error)
     })
 })

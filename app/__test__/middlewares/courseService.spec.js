@@ -6,34 +6,47 @@ const ServerError = require('../../src/errors/serverError')
 jest.mock('../../src/utils/axiosHelper')
 
 describe("getCourses", () => {
+    const sentReq = {
+        "keyword": "string",
+        "category": "category",
+        "plan": "plan",
+        "page": 1
+    }
     it("gets courses", async () => {
         const expectedRes = {
             results: [{
                 "title": "course 1"
             },
             {
-                "title": "course 2"            
+                "title": "course 2"
             }]
         }
 
         instance.get.mockResolvedValue({
             data: expectedRes
-        }       
+        }
         )
 
-        const res = await courseService.getCourses()
+        const res = await courseService.getCourses(sentReq)
         expect(res).toEqual(expectedRes)
     })
 
     it("throws ServerError", async () => {
         instance.get.mockRejectedValueOnce({
-            response: "has response",
-            message: "message"
+            "detail": [
+                {
+                    "loc": [
+                        "string"
+                    ],
+                    "msg": "string",
+                    "type": "string"
+                }
+            ]
         }
         )
 
-        expect(courseService.getCourses()).rejects.toThrowError(ServerError)
-        expect(courseService.getCourses()).rejects.toThrowError("message")
+        expect(courseService.getCourses(sentReq)).rejects.toThrowError(ServerError)
+        expect(courseService.getCourses(sentReq)).rejects.toThrowError("message")
     })
 
     it("throws ConnectionError", async () => {
@@ -43,8 +56,8 @@ describe("getCourses", () => {
         }
         )
 
-        expect(courseService.getCourses()).rejects.toThrowError(ConnectionError)
-        expect(courseService.getCourses()).rejects.toThrowError("message")
+        expect(courseService.getCourses(sentReq)).rejects.toThrowError(ConnectionError)
+        expect(courseService.getCourses(sentReq)).rejects.toThrowError("message")
     })
 
     it("throws Error", async () => {
@@ -52,7 +65,7 @@ describe("getCourses", () => {
         }
         )
 
-        expect(courseService.getCourses()).rejects.toThrowError(Error)
+        expect(courseService.getCourses(sentReq)).rejects.toThrowError(Error)
     })
 })
 
@@ -60,25 +73,35 @@ describe("getCourseById", () => {
     const expectedRes = {
         "title": "course 1"
     }
+    const sentQuery = {
+        "user_id": "string"
+    }
     it("gets course", async () => {
         instance.get.mockResolvedValue({
             data: expectedRes
-        }       
+        }
         )
 
-        const res = await courseService.getCourseById(1)
+        const res = await courseService.getCourseById(1, sentQuery)
         expect(res).toEqual(expectedRes)
     })
 
     it("throws ServerError", async () => {
         instance.get.mockRejectedValueOnce({
-            response: "has response",
-            message: "message"
+            "detail": [
+                {
+                    "loc": [
+                        "string"
+                    ],
+                    "msg": "string",
+                    "type": "string"
+                }
+            ]
         }
         )
 
-        expect(courseService.getCourseById(1)).rejects.toThrowError(ServerError)
-        expect(courseService.getCourseById(1)).rejects.toThrowError("message")
+        expect(courseService.getCourseById(1, sentQuery)).rejects.toThrowError(ServerError)
+        expect(courseService.getCourseById(1, sentQuery)).rejects.toThrowError("message")
     })
 
     it("throws ConnectionError", async () => {
@@ -88,8 +111,8 @@ describe("getCourseById", () => {
         }
         )
 
-        expect(courseService.getCourseById(1)).rejects.toThrowError(ConnectionError)
-        expect(courseService.getCourseById(1)).rejects.toThrowError("message")
+        expect(courseService.getCourseById(1, sentQuery)).rejects.toThrowError(ConnectionError)
+        expect(courseService.getCourseById(1, sentQuery)).rejects.toThrowError("message")
     })
 
     it("throws Error", async () => {
@@ -97,7 +120,7 @@ describe("getCourseById", () => {
         }
         )
 
-        expect(courseService.getCourseById(1)).rejects.toThrowError(Error)
+        expect(courseService.getCourseById(1, sentQuery)).rejects.toThrowError(Error)
     })
 })
 
@@ -108,7 +131,7 @@ describe("createCourse", () => {
     it("posts course", async () => {
         instance.post.mockResolvedValue({
             data: expectedRes
-        }       
+        }
         )
 
         const res = await courseService.createCourse(expectedRes)
@@ -117,8 +140,15 @@ describe("createCourse", () => {
 
     it("throws ServerError", async () => {
         instance.post.mockRejectedValueOnce({
-            response: "has response",
-            message: "message"
+            "detail": [
+                {
+                    "loc": [
+                        "string"
+                    ],
+                    "msg": "string",
+                    "type": "string"
+                }
+            ]
         }
         )
 
@@ -153,7 +183,7 @@ describe("updateCourse", () => {
     it("patches course", async () => {
         instance.patch.mockResolvedValue({
             data: expectedRes
-        }       
+        }
         )
 
         const res = await courseService.updateCourse(1, expectedRes)
@@ -162,8 +192,15 @@ describe("updateCourse", () => {
 
     it("throws ServerError", async () => {
         instance.patch.mockRejectedValueOnce({
-            response: "has response",
-            message: "message"
+            "detail": [
+                {
+                    "loc": [
+                        "string"
+                    ],
+                    "msg": "string",
+                    "type": "string"
+                }
+            ]
         }
         )
 
@@ -198,7 +235,7 @@ describe("addRegistration", () => {
     it("posts registration", async () => {
         instance.post.mockResolvedValue({
             data: expectedRes
-        }       
+        }
         )
 
         const res = await courseService.addRegistration(expectedRes)
@@ -207,8 +244,15 @@ describe("addRegistration", () => {
 
     it("throws ServerError", async () => {
         instance.post.mockRejectedValueOnce({
-            response: "has response",
-            message: "message"
+            "detail": [
+                {
+                    "loc": [
+                        "string"
+                    ],
+                    "msg": "string",
+                    "type": "string"
+                }
+            ]
         }
         )
 
@@ -243,7 +287,7 @@ describe("addCollaborator", () => {
     it("posts collaborator", async () => {
         instance.post.mockResolvedValue({
             data: expectedRes
-        }       
+        }
         )
 
         const res = await courseService.addCollaborator(expectedRes)
@@ -252,8 +296,15 @@ describe("addCollaborator", () => {
 
     it("throws ServerError", async () => {
         instance.post.mockRejectedValueOnce({
-            response: "has response",
-            message: "message"
+            "detail": [
+                {
+                    "loc": [
+                        "string"
+                    ],
+                    "msg": "string",
+                    "type": "string"
+                }
+            ]
         }
         )
 
@@ -288,7 +339,7 @@ describe("undoRegistration", () => {
     it("patches registration", async () => {
         instance.patch.mockResolvedValue({
             data: expectedRes
-        }       
+        }
         )
 
         const res = await courseService.undoRegistration(expectedRes)
@@ -297,8 +348,15 @@ describe("undoRegistration", () => {
 
     it("throws ServerError", async () => {
         instance.patch.mockRejectedValueOnce({
-            response: "has response",
-            message: "message"
+            "detail": [
+                {
+                    "loc": [
+                        "string"
+                    ],
+                    "msg": "string",
+                    "type": "string"
+                }
+            ]
         }
         )
 
@@ -332,10 +390,10 @@ describe("getTypes", () => {
             "string"
         ]
     }
-    it("patches registration", async () => {
+    it("gets types", async () => {
         instance.get.mockResolvedValue({
             data: expectedRes
-        }       
+        }
         )
 
         const res = await courseService.getTypes()
@@ -344,8 +402,15 @@ describe("getTypes", () => {
 
     it("throws ServerError", async () => {
         instance.get.mockRejectedValueOnce({
-            response: "has response",
-            message: "message"
+            "detail": [
+                {
+                    "loc": [
+                        "string"
+                    ],
+                    "msg": "string",
+                    "type": "string"
+                }
+            ]
         }
         )
 
