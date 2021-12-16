@@ -4,4 +4,8 @@ const instance = axios.create({
     baseURL: process.env.BACK_PY,
 });
 
-module.exports = instance
+const SCinstance = axios.create({
+    baseURL: process.env.BACK_SC,
+})
+
+module.exports = { instance, SCinstance }

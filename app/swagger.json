@@ -1048,9 +1048,6 @@
                 "user_id"
               ],
               "properties": {
-                "user_id": {
-                  "type": "string"
-                },
                 "subscription": {
                   "type": "string"
                 },
@@ -1135,13 +1132,7 @@
             "in": "body",
             "schema": {
               "type": "object",
-              "required": [
-                "user_id"
-              ],
               "properties": {
-                "user_id": {
-                  "type": "string"
-                },
                 "active": {
                   "type": "boolean"
                 },
