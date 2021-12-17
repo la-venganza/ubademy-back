@@ -118,7 +118,16 @@ router.post('/:id/registration', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        
+        const course = await courseService.getCourseById(req.params.id)
+
+        let teacher_id = ''
+        if (course.data != '') {
+            const parsedCourse = JSON.parse(JSON.stringify(subscriptions.data))
+            teacher_id = parsedCourse.creator_id
+        }
+
+        // Falta definir el endpoint
+        // await walletService.payTeacher(teacher_id)
         
         const response = await courseService.addRegistration(req.params.id, req.body)
 
