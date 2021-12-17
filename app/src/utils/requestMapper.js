@@ -40,7 +40,7 @@ function courseMappingPost(requestBody) {
         "title": requestBody.title || "titulo del curso",
         "description": requestBody.description || "descripcion del curso",
         "type": requestBody.type || "course",
-        "plan": requestBody.plan || "free",
+        "subscription_required": requestBody.plan || "free",
         "hashtags": requestBody.hashtags || "hashtags",
         "location": requestBody.location || "internet",
         "lessons": lessons
