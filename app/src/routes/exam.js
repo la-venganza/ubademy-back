@@ -134,6 +134,8 @@ router.get('/:exam_id/course/:course_id/lesson/:lesson_id/solution/:exam_taken_i
             
         const response = await examService.getExamByTakenId(req.params, req.query)
 
+        console.log(response);
+
         res.status(200).send(response)
     } catch (e) {
         const body = {
