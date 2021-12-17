@@ -130,9 +130,9 @@ router.get('/:exam_id/course/:course_id/lesson/:lesson_id/user/:user_id', async 
 
 router.get('/:exam_id/course/:course_id/lesson/:lesson_id/solution/:exam_taken_id', async function(req, res) {
     try {
-        const uid = await verifyIdToken(req.cookies.firebaseAuth)
+        // const uid = await verifyIdToken(req.cookies.firebaseAuth)
             
-        const response = await examService.getExam(req.params, req.query)
+        const response = await examService.getExamByTakenId(req.params, req.query)
 
         res.status(200).send(response)
     } catch (e) {
