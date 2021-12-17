@@ -55,7 +55,12 @@ router.get('/:id', async function(req, res) {
 
 router.get('/login/:email', async function(req, res) {
     try {
-        const uid = await verifyIdToken(req.cookies.firebaseAuth)
+        let uid = ''
+        if (req.cookies.firebaseAuth) {
+            uid = await verifyIdToken(req.cookies.firebaseAuth)
+        } else {
+            uid = await verifyIdToken(req.headers.get('X-Auth-Token'))
+        }
         
         // Pedir al back de python
         let response = await userService.getUserByEmail(req.params.email)
@@ -85,7 +90,12 @@ router.get('/login/:email', async function(req, res) {
 
 router.get('/admin/:email', async function(req, res) {
     try {
-        const uid = await verifyIdToken(req.cookies.firebaseAuth)
+        let uid = ''
+        if (req.cookies.firebaseAuth) {
+            uid = await verifyIdToken(req.cookies.firebaseAuth)
+        } else {
+            uid = await verifyIdToken(req.headers.get('X-Auth-Token'))
+        }
         
         // Pedir al back de python
         let response = await userService.getAdminByEmail(req.params.email)
