@@ -126,8 +126,8 @@ router.post('/:id/registration', async function(req, res) {
             teacher_id = parsedCourse.creator_id
         }
 
-        // Falta definir el endpoint
-        // await walletService.payTeacher(teacher_id)
+        const payment = await walletService.payTeacher(teacher_id)
+        console.log(payment);
         
         const response = await courseService.addRegistration(req.params.id, req.body)
 

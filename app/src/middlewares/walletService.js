@@ -64,7 +64,7 @@ async function payTeacher (wallet_id) {
         return res.data
     } catch (e) {
         if (e.status == 500) {
-
+            console.log('Error conectando al servicio')
         }
     }
 }
