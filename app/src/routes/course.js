@@ -117,6 +117,8 @@ router.post('/:id/registration', async function(req, res) {
     // Verificar request y mandar al back de python
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
+
+        
         
         const response = await courseService.addRegistration(req.params.id, req.body)
 
