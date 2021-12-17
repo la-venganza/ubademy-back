@@ -9,7 +9,7 @@
       "url": "https://fi.uba.ar/"
     }
   },
-  "host": "localhost:3000",
+  "host": "ubademy-la-venganza-back.herokuapp.com",
   "basePath": "/",
   "tags": [
     {
@@ -855,7 +855,7 @@
           },
           {
             "in": "path",
-            "name": "course",
+            "name": "course_id",
             "type": "integer",
             "required": true,
             "description": "ID for the course to get exam from"
@@ -870,7 +870,7 @@
           {
             "in": "path",
             "name": "exam_taken_id",
-            "type": "id",
+            "type": "integer",
             "required": true,
             "description": "ID for the exam solution"
           },
