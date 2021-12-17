@@ -754,17 +754,17 @@
             "in": "query",
             "name": "active_students",
             "type": "boolean"
-          }   ,
+          },
           {
             "in": "query",
             "name": "graded_status",
             "type": "boolean"
-          }   ,
+          },
           {
             "in": "query",
             "name": "page",
             "type": "integer"
-          }          
+          }
         ],
         "responses": {
           "200": {
@@ -784,8 +784,8 @@
           }
         }
       }
-     },
-     "/exam/{exam_id}/course/{course_id}/lesson/{lesson_id}/user/{user_id}": {
+    },
+    "/exam/{exam_id}/course/{course_id}/lesson/{lesson_id}/user/{user_id}": {
       "get": {
         "tags": [
           "Exams"
@@ -937,17 +937,23 @@
                 },
                 "answers": {
                   "type": "array",
-                  "items": {
-                    "question_id": {
-                      "type": "integer"
+                  "items": [
+                    {
+                      "question_id": {
+                        "type": "integer"
+                      }
                     },
-                    "choice_id": {
-                      "type": "integer"
+                    {
+                      "choice_id": {
+                        "type": "integer"
+                      }
                     },
-                    "input_answer": {
-                      "type": "string"
+                    {
+                      "input_answer": {
+                        "type": "string"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -1423,7 +1429,7 @@
         },
         "message": {
           "type": "string"
-        }      
+        }
       }
     }
   }
