@@ -2,11 +2,19 @@
 const instance = require('../utils/axiosHelper')
 const handleError = require('../utils/errorHandler')
 
-async function getUsers (query) {
+async function getUsers(query) {
     try {
         path = '/api/v1/users'
-        if (query.properties) {
-            path += '?max_results=' + query.max_results
+        if (query.page) {
+            path += '?page=' + query.page
+        } else {
+            path += '?page=1'
+        }
+        if (query.keyword) {
+            path += '&keyword=' + query.keyword
+        }
+        if (query.max_results) {
+            path += '&max_results=' + query.max_results
         }
         const res = await instance.get(path)
         return res.data
