@@ -16,7 +16,7 @@ async function deposit (wallet_id, body) {
     try {
         const mappedBody = {
             "teacherId": wallet_id,
-            "amountInEthers": body.amount
+            "amountInEthers": body.amount || 0
         }
 
         const res = await SCinstance.post('/deposit', mappedBody)

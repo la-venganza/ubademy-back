@@ -15,11 +15,15 @@ router.post('/:id', async function(req, res) {
 
         const subscriptions = await subscriptionPlanService.getSubscriptions()
 
-        const parsedSubscriptions = JSON.parse(JSON.stringify(subscriptions))
-        let subscription_price = parsedSubscriptions.forEach(item => {
-            if (item.title == req.body.subscription)
-                return item.price
-        })
+        let subscription_price = 0
+        if (subscriptions.data != '') {
+            const parsedSubscriptions = JSON.parse(JSON.stringify(subscriptions))
+            subscription_price = parsedSubscriptions.forEach(item => {
+                if (item.title === req.body.subscription)
+                    return item.price
+            })
+        }
+        
         
         const depositBody = {
             "amount": subscription_price
