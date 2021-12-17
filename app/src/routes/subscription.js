@@ -24,13 +24,16 @@ router.post('/:id', async function(req, res) {
             })
         }
         
-        
         const depositBody = {
             "amount": subscription_price
         }
 
         // Falta logica de callback -> hay que pasar un endpoint para resolucion de pago
-        walletService.deposit(uid, depositBody)
+        const SCresponse = await walletService.deposit(uid, depositBody)
+
+        if (SCresponse.status == 500) {
+            throw new ServerError(Error, SCresponse.message, '')
+        }
 
         // Despues si falla por callback se resuelve el tema de que fallo el pago en otro endpoint
         const response = await subscriptionService.createSubscription(req.body, req.params.id)

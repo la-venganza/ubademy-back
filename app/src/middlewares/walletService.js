@@ -99,7 +99,6 @@ async function getOwnerBalance () {
 
 async function ownerWithdraw (body) {
     try {
-
         const res = await SCinstance.post('/ownerWithdraw', body)
         
         return res.data
