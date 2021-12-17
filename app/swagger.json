@@ -9,7 +9,7 @@
       "url": "https://fi.uba.ar/"
     }
   },
-  "host": "localhost:3000",
+  "host": env.process.BACK_PY,
   "basePath": "/",
   "tags": [
     {
