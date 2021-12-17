@@ -7,11 +7,11 @@ const ServerError = require('../errors/serverError')
 
 const router = express.Router();
 
-router.get('/balance', async function(req, res) {
+router.get('/balance/:id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        const response = await walletService.getBalance(uid)
+        const response = await walletService.getBalance(req.params.id)
 
         res.status(200).send(response)
     } catch (e) {
@@ -55,11 +55,11 @@ router.post('/deposit', async function(req, res) {
     }
 })
 
-router.get('/', async function(req, res) {
+router.get('/:id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        const response = await walletService.getWallet(uid)
+        const response = await walletService.getWallet(req.params.id)
 
         res.status(200).send(response)
     } catch (e) {
@@ -79,11 +79,11 @@ router.get('/', async function(req, res) {
     }
 })
 
-router.post('/', async function(req, res) {
+router.post('/:id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        const response = await walletService.createWallet(uid)
+        const response = await walletService.createWallet(req.params.id)
 
         res.status(200).send(response)
     } catch (e) {
@@ -103,11 +103,11 @@ router.post('/', async function(req, res) {
     }
 })
 
-router.get('/teacherBalance/:email', async function(req, res) {
+router.get('/teacherBalance/:id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        const response = await walletService.getTeacherBalance(uid)
+        const response = await walletService.getTeacherBalance(req.params.id)
 
         res.status(200).send(response)
     } catch (e) {
@@ -131,9 +131,7 @@ router.post('/payTeacher', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        // Falta resolver el tema de conseguir el teacher ID
-
-        const response = await walletService.payTeacher()
+        const response = await walletService.payTeacher(body)
 
         res.status(200).send(response)
     } catch (e) {
@@ -153,11 +151,11 @@ router.post('/payTeacher', async function(req, res) {
     }
 })
 
-router.post('/teacherWithdraw', async function(req, res) {
+router.post('/teacherWithdraw/:id', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        const response = await walletService.teacherWithdraw(uid, req.body)
+        const response = await walletService.teacherWithdraw(req.params.id, req.body)
 
         res.status(200).send(response)
     } catch (e) {
