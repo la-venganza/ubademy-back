@@ -46,6 +46,7 @@ async function gradeExam (body, exam_id) {
 
 async function getExamByTakenId (params, query) {
     try {
+        console.log(params);
         path = '/api/v1/courses/' + params.course_id + '/lessons/' + params.lesson_id + '/exams/' + params.exam_id + '/solution/' + params.exam_taken_id
         if (query.user_id) {
             path += '?user_id=' + query.user_id
