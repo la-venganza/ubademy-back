@@ -24,6 +24,8 @@ async function solveExam (body, exam_id) {
 
         examHelper.verifySolution(body)
 
+        console.log(body)
+
         const res = await instance.post(path, body)
         return res.data
     } catch (e) {
