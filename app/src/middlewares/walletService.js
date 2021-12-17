@@ -61,7 +61,7 @@ async function payTeacher (wallet_id) {
     try {
         const mappedBody = {
             "teacherId": wallet_id,
-            "amountInEthers": body.amount
+            "amountInEthers": body.amount || 0
         }
 
         const res = await SCinstance.post('/payTeacher', mappedBody)
