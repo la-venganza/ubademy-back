@@ -937,23 +937,20 @@
                 },
                 "answers": {
                   "type": "array",
-                  "items": [
-                    {
-                      "question_id": {
-                        "type": "integer"
-                      }
-                    },
-                    {
+                  "items": {
+                    "type": "object",
+                    "properties": {
                       "choice_id": {
                         "type": "integer"
-                      }
-                    },
-                    {
+                      },
+                      "question_id": {
+                        "type": "integer"
+                      },
                       "input_answer": {
                         "type": "string"
                       }
                     }
-                  ]
+                  }
                 }
               }
             }
