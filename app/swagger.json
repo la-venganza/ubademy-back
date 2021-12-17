@@ -9,7 +9,7 @@
       "url": "https://fi.uba.ar/"
     }
   },
-  "host": 'ubademy-la-venganza-back-py.herokuapp.com',
+  "host": "ubademy-la-venganza-back-py.herokuapp.com",
   "basePath": "/",
   "tags": [
     {
