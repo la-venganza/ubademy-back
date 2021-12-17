@@ -117,6 +117,17 @@ router.post('/:id/registration', async function(req, res) {
     // Verificar request y mandar al back de python
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
+
+        const course = await courseService.getCourseById(req.params.id)
+
+        let teacher_id = ''
+        if (course.data != '') {
+            const parsedCourse = JSON.parse(JSON.stringify(subscriptions.data))
+            teacher_id = parsedCourse.creator_id
+        }
+
+        const payment = await walletService.payTeacher(teacher_id)
+        console.log(payment);
         
         const response = await courseService.addRegistration(req.params.id, req.body)
 

@@ -164,7 +164,7 @@
             "description": "ID of the user requesting the course"
           }
         ],
-        "summary": "Get course's content (Infomation is different depending user type)",
+        "summary": "Get course's content (Information is different depending user type)",
         "responses": {
           "200": {
             "description": "OK"
@@ -1061,9 +1061,6 @@
                 "user_id"
               ],
               "properties": {
-                "user_id": {
-                  "type": "string"
-                },
                 "subscription": {
                   "type": "string"
                 },
@@ -1148,13 +1145,7 @@
             "in": "body",
             "schema": {
               "type": "object",
-              "required": [
-                "user_id"
-              ],
               "properties": {
-                "user_id": {
-                  "type": "string"
-                },
                 "active": {
                   "type": "boolean"
                 },
