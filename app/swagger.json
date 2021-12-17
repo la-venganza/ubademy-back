@@ -590,6 +590,16 @@
           "in": "query",
           "name": "max_results",
           "type": "integer"
+        },
+        {
+          "in": "query",
+          "name": "keyword",
+          "type": "string"
+        },
+        {
+          "in": "query",
+          "name": "page",
+          "type": "integer"
         }
       ],
       "get": {
