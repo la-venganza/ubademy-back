@@ -855,7 +855,7 @@
           },
           {
             "in": "path",
-            "name": "course",
+            "name": "course_id",
             "type": "integer",
             "required": true,
             "description": "ID for the course to get exam from"
