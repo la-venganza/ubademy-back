@@ -4,7 +4,8 @@ const ServerError = require('../errors/serverError')
 function handleError(error){
     if (error.response) {
         //custom errors for server status response
-        let message = '' + error.detail.type + ' | ' + error.detail.msg + ' | ' + error.status
+        parsedError = JSON.parse(JSON.stringify(error.response.data))
+        let message = '' + parsedError.detail.type + ' | ' + parsedError.detail.msg + ' | ' + error.status
         console.log("there was a response")
         console.log(message)
         throw new ServerError(error, message, error.status || 500)
