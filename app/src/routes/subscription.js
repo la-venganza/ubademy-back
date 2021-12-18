@@ -32,7 +32,7 @@ router.post('/:id', async function(req, res) {
         const SCresponse = await walletService.deposit(uid, depositBody)
 
         if (SCresponse.status == 500) {
-            throw new ServerError(Error, SCresponse.message, '')
+            throw new ServerError('Error', SCresponse.message, 500)
         }
 
         // Despues si falla por callback se resuelve el tema de que fallo el pago en otro endpoint

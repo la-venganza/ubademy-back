@@ -79,7 +79,7 @@ async function getExam (params) {
 async function searchExam (params) {
     try {
         if (typeof params.user_id === 'undefined') {
-            throw new ServerError('Error - user_id query param is undefined')
+            throw new ServerError('Error', 'user_id query param is undefined', 500)
         }
         path = '/api/v1/courses/lessons/exams?user_id=' + params.user_id
         if (params.active_students) {
