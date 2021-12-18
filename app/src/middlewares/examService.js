@@ -108,5 +108,21 @@ async function patchExam (body) {
     }
 }
 
-module.exports = { createExam, patchExam, getExamByTakenId, getExam, solveExam, gradeExam, searchExam }
+async function listBasicCourseExams (params, query) {
+    try {
+        if (typeof query.user_id === 'undefined') {
+            throw new ServerError('Error - user_id query param is undefined')
+        }
+        path = `/api/v1/courses/${params.course_id}/lessons/exams?user_id=${query.user_id}`
+        if (query.page) {
+            path += '&page=' + query.page
+        }
+        const res = await instance.get(path)
+        return res.data
+    } catch (e) {
+        handleError(e)
+    }
+}
 
+module.exports = { createExam, patchExam, getExamByTakenId, getExam, solveExam, gradeExam, searchExam,
+  listBasicCourseExams }
