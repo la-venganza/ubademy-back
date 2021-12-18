@@ -44,7 +44,7 @@ async function gradeExam (body, exam_id) {
             "grade": body.grade
         }
 
-        const res = await instance.patch(path, body)
+        const res = await instance.patch(path, mappedBody)
         return res.data
     } catch (e) {
         handleError(e)
