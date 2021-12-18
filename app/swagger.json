@@ -141,7 +141,7 @@
         }
       }
     },
-    "/course/{id}": {
+    "/course/{course_id}": {
       "parameters": [
         {
           "in": "path",
@@ -420,7 +420,7 @@
       "parameters": [
         {
           "in": "path",
-          "name": "id",
+          "name": "user_id",
           "type": "string",
           "required": true,
           "description": "ID of the user"
@@ -785,6 +785,54 @@
         }
       }
     },
+    "/exam/course/{course_id}": {
+      "get": {
+        "tags": [
+          "Exams"
+        ],
+        "summary": "Staff search exams basic info for course by id",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "course_id",
+            "type": "integer",
+            "required": true,
+            "description": "ID for the course to get exam from"
+          },
+          {
+            "in": "query",
+            "name": "user_id",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
     "/exam/{exam_id}/course/{course_id}/lesson/{lesson_id}/user/{user_id}": {
       "get": {
         "tags": [
@@ -800,7 +848,7 @@
           },
           {
             "in": "path",
-            "name": "course",
+            "name": "course_id",
             "type": "integer",
             "required": true,
             "description": "ID for the course to get exam from"
@@ -902,7 +950,7 @@
         }
       }
     },
-    "/exam/{id}": {
+    "/exam/{exam_id}": {
       "post": {
         "consumes": [
           "application/json"
