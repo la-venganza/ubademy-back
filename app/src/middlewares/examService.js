@@ -37,6 +37,13 @@ async function gradeExam (body, exam_id) {
 
         examHelper.verifyGrading(body)
 
+        let mappedBody = {
+            "user_id": body.user_id,
+            "exam_to_grade_id": body.exam_to_grade_id,
+            "enroll_course_id": body.enroll_course_id,
+            "grade": body.grade
+        }
+
         const res = await instance.patch(path, body)
         return res.data
     } catch (e) {
