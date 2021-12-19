@@ -8,22 +8,22 @@ async function getBalance (wallet_id) {
 
         return res.data
     } catch (e) {
-        handleError(e)
+        handleSCError(e)
     }
 }
 
 async function deposit (wallet_id, body) {
     try {
         const mappedBody = {
-            "teacherId": wallet_id,
-            "amountInEthers": body.amount || 0
+            "senderId": wallet_id,
+            "amountInEthers": body.amount || '0'
         }
 
         const res = await SCinstance.post('/deposit', mappedBody)
         
         return res.data
     } catch (e) {
-        handleError(e)
+        handleSCError(e)
     }
 }
 
@@ -33,7 +33,7 @@ async function getWallet (wallet_id) {
         
         return res.data
     } catch (e) {
-        handleError(e)
+        handleSCError(e)
     }
 }
 
@@ -57,7 +57,7 @@ async function getTeacherBalance (wallet_id) {
         
         return res.data
     } catch (e) {
-        handleError(e)
+        handleSCError(e)
     }
 }
 
@@ -84,7 +84,7 @@ async function teacherWithdraw (wallet_id, body) {
         
         return res.data
     } catch (e) {
-        handleError(e)
+        handleSCError(e)
     }
 }
 
@@ -94,7 +94,7 @@ async function getOwnerBalance () {
         
         return res.data
     } catch (e) {
-        handleError(e)
+        handleSCError(e)
     }
 }
 
@@ -104,7 +104,7 @@ async function ownerWithdraw (body) {
         
         return res.data
     } catch (e) {
-        handleError(e)
+        handleSCError(e)
     }
 }
 
