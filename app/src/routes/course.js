@@ -115,12 +115,15 @@ router.post('/:id/registration', async (req, res) => {
       courseSubscription = parsedCourse.subscription_required.id;
     }
 
-    const subscriptions = await subscriptionPlanService.getSubscriptionPlan(courseSubscription);
+    let subscription = ''
+    if (courseSubscription != 1) {
+      subscription = await subscriptionPlanService.getSubscriptionPlan(courseSubscription);
+    }
 
     let subscription_price = '0';
-    if (subscriptions.data != '') {
-      const parsedSubscriptions = JSON.parse(JSON.stringify(subscriptions));
-      subscription_price = parsedSubscriptions.price
+    if (subscription.data != '') {
+      const parsedSubscription = JSON.parse(JSON.stringify(subscription));
+      subscription_price = parsedSubscription.price
     }
 
     const depositBody = {
