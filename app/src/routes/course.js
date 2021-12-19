@@ -112,18 +112,15 @@ router.post('/:id/registration', async (req, res) => {
     if (course.data != '') {
       const parsedCourse = JSON.parse(JSON.stringify(course));
       teacher_id = parsedCourse.creator_id;
-      courseSubscription = parsedCourse.subscription_required.title;
+      courseSubscription = parsedCourse.subscription_required.id;
     }
 
-    const subscriptions = await subscriptionPlanService.getSubscriptions();
+    const subscriptions = await subscriptionPlanService.getSubscriptionPlan(courseSubscription);
 
     let subscription_price = '0';
     if (subscriptions.data != '') {
       const parsedSubscriptions = JSON.parse(JSON.stringify(subscriptions));
-      parsedSubscriptions.subscription_plans.forEach((item) => {
-        if (item.title === courseSubscription) { 
-          subscription_price = item.price; }
-      });
+      subscription_price = parsedSubscriptions.price
     }
 
     const depositBody = {
@@ -132,7 +129,9 @@ router.post('/:id/registration', async (req, res) => {
 
     const response = await courseService.addRegistration(req.params.id, req.body);
 
-    const payment = await walletService.payTeacher(teacher_id, depositBody);
+    if (subscription_price != 0) {
+      const payment = await walletService.payTeacher(teacher_id, depositBody);
+    }
 
     // Send to back
     res.status(201).send(response);
