@@ -2,7 +2,7 @@ class ConnectionError extends Error {
     
     constructor(e, message) {
         // Pasa los argumentos restantes (incluidos los específicos del proveedor) al constructor padre
-        super(e)
+        super(message)
     
         // Mantiene un seguimiento adecuado de la pila para el lugar donde se lanzó nuestro error (solo disponible en V8)
         if (Error.captureStackTrace) {

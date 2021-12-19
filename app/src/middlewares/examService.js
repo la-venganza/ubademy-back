@@ -39,7 +39,14 @@ async function gradeExam (body, exam_id) {
 
         examHelper.verifyGrading(body)
 
-        const res = await instance.patch(path, body)
+        let mappedBody = {
+            "user_id": body.user_id,
+            "exam_to_grade_id": body.exam_to_grade_id,
+            "enroll_course_id": body.enroll_course_id,
+            "grade": body.grade
+        }
+
+        const res = await instance.patch(path, mappedBody)
         return res.data
     } catch (e) {
         handleError(e)
@@ -75,7 +82,7 @@ async function getExam (params) {
 async function searchExam (params) {
     try {
         if (typeof params.user_id === 'undefined') {
-            throw new ServerError('Error - user_id query param is undefined')
+            throw new ServerError('Error', 'user_id query param is undefined', 500)
         }
         path = '/api/v1/courses/lessons/exams?user_id=' + params.user_id
         if (params.active_students) {
