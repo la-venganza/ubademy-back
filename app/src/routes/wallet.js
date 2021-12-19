@@ -118,7 +118,7 @@ router.get('/teacherBalance/:id', async (req, res) => {
 
 router.post('/payTeacher', async (req, res) => {
   try {
-    const response = await walletService.payTeacher(body);
+    const response = await walletService.payTeacher(req.body);
 
     res.status(200).send(response);
   } catch (e) {
