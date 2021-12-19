@@ -11,8 +11,6 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const uid = await verifyIdToken(req.cookies.firebaseAuth);
-
     const response = await courseService.getCourses(req.query);
 
     res.status(200).send(response);
@@ -36,8 +34,6 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   // Verifica que el token de firebase sea valido
   try {
-    const uid = await verifyIdToken(req.cookies.firebaseAuth);
-
     const response = await courseService.getCourseById(req.params.id, req.query);
 
     res.status(200).send(response);
@@ -61,8 +57,6 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   // Verificar request y mandar al back de python
   try {
-    const uid = await verifyIdToken(req.cookies.firebaseAuth);
-
     const body = courseMapper.courseMappingPost(req.body);
 
     const response = await courseService.createCourse(body);
@@ -88,8 +82,6 @@ router.post('/', async (req, res) => {
 router.patch('/:id', async (req, res) => {
   // Verificar request y mandar al back de python
   try {
-    const uid = await verifyIdToken(req.cookies.firebaseAuth);
-
     const body = courseMapper.courseMappingPatch(req.body);
 
     const response = await courseService.updateCourse(req.params.id, body);
@@ -148,8 +140,6 @@ router.post('/:id/registration', async (req, res) => {
 router.patch('/:id/registration', async (req, res) => {
   // Verificar request y mandar al back de python
   try {
-    const uid = await verifyIdToken(req.cookies.firebaseAuth);
-
     const response = await courseService.undoRegistration(req.params.id, req.body);
 
     // Send to back
@@ -174,8 +164,6 @@ router.patch('/:id/registration', async (req, res) => {
 router.post('/:id/collaboration', async (req, res) => {
   // Verificar request y mandar al back de python
   try {
-    const uid = await verifyIdToken(req.cookies.firebaseAuth);
-
     const response = await courseService.addCollaborator(req.params.id, req.body);
 
     // Send to back
@@ -200,8 +188,6 @@ router.post('/:id/collaboration', async (req, res) => {
 router.get('/types', async (req, res) => {
   // Verifica que el token de firebase sea valido
   try {
-    const uid = await verifyIdToken(req.cookies.firebaseAuth);
-
     const response = await courseService.getTypes();
 
     res.status(200).send(response);
