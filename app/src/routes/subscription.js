@@ -1,5 +1,4 @@
 const express = require('express');
-const verifyIdToken = require('../middlewares/firebase');
 const subscriptionService = require('../middlewares/subscriptionService');
 const subscriptionPlanService = require('../middlewares/subscriptionPlanService');
 const walletService = require('../middlewares/walletService');
@@ -29,7 +28,7 @@ router.post('/:id', async (req, res) => {
     const SCresponse = await walletService.deposit(req.uid, depositBody);
 
     if (SCresponse.status === 500) {
-      throw new ServerError(Error, SCresponse.message, '');
+      throw new ServerError('Error', SCresponse.message, 500);
     }
 
     // Despues si falla por callback se resuelve el tema de que fallo el pago en otro endpoint
