@@ -8,7 +8,7 @@ const wallet = require('./wallet');
 const tokenVerificationMiddleware = require('../middlewares/tokenVerification');
 
 const router = express.Router();
-// router.use(tokenVerificationMiddleware);
+router.use(tokenVerificationMiddleware);
 // Health check routes
 router.get('/', (_req, res) => {
   res.json({ message: 'You are not logged in' });
