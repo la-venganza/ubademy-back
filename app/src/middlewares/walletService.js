@@ -68,11 +68,7 @@ async function payTeacher (wallet_id, body) {
             "amountInEthers": body.amount || '0'
         }
 
-        console.log(mappedBody)
-
         const res = await SCinstance.post('/payTeacher', mappedBody)
-
-        console.log(res.data)
 
         return res.data
     } catch (e) {
