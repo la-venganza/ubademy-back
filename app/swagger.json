@@ -1356,7 +1356,7 @@
         "tags": [
           "Wallet"
         ],
-        "summary": "Get wallet address of a user",
+        "summary": "Get wallet balance of a user",
         "responses": {
           "200": {
             "description": "OK"
@@ -1516,7 +1516,7 @@
         "tags": [
           "Wallet"
         ],
-        "summary": "Get wallet address of a user",
+        "summary": "Withdraw admin balance to a wallet address",
         "responses": {
           "200": {
             "description": "OK"
