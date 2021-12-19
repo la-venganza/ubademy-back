@@ -39,8 +39,6 @@ async function getWallet (wallet_id) {
 
 async function createWallet (wallet_id) {
     try {
-        console.log("LOG")
-
         const res = await SCinstance.post('/wallet/' + wallet_id, {})
 
         console.log(res)
