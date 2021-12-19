@@ -25,6 +25,7 @@ router.get('/balance/:id', async (req, res) => {
     } else {
       res.status(500).send(body);
     }
+  }
 })
 
 router.post('/deposit', async function(req, res) {
@@ -47,7 +48,6 @@ router.post('/deposit', async function(req, res) {
             res.status(500).send(body)
         }
     }
-  }
 });
 
 router.get('/:id', async (req, res) => {

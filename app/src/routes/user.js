@@ -115,7 +115,7 @@ router.post('/', async function(req, res) {
 
         const wallet = await walletService.createWallet(parsedResponse.user_id)
 
-        console.log(wallet)
+        console.log(wallet);
 
         res.status(201).send(response)
     } catch (e) {
@@ -133,7 +133,6 @@ router.post('/', async function(req, res) {
             res.status(500).send(body)
         }
     }
-  }
 });
 
 router.put('/:id', async (req, res) => {
