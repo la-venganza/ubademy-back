@@ -1,5 +1,7 @@
 const express = require('express');
 const verifyIdToken = require('../middlewares/firebase');
+const subscriptionPlanService = require('../middlewares/subscriptionPlanService');
+const walletService = require('../middlewares/walletService');
 const courseService = require('../middlewares/courseService');
 const courseMapper = require('../utils/requestMapper');
 
@@ -110,11 +112,29 @@ router.post('/:id/registration', async (req, res) => {
   try {
     const course = await courseService.getCourseById(req.params.id, req.body);
     let teacher_id = '';
+    let courseSubscription = ''
     if (course.data != '') {
-      const parsedCourse = JSON.parse(JSON.stringify(course.data));
+      const parsedCourse = JSON.parse(JSON.stringify(course));
       teacher_id = parsedCourse.creator_id;
+      courseSubscription = parsedCourse.subscription_required.title;
     }
-    const payment = await walletService.payTeacher(teacher_id);
+
+    const subscriptions = await subscriptionPlanService.getSubscriptions();
+
+    let subscription_price = '0';
+    if (subscriptions.data != '') {
+      const parsedSubscriptions = JSON.parse(JSON.stringify(subscriptions));
+      parsedSubscriptions.subscription_plans.forEach((item) => {
+        if (item.title === courseSubscription) { 
+          subscription_price = item.price; }
+      });
+    }
+
+    const depositBody = {
+      amount: `${subscription_price/10}`,
+    };
+
+    const payment = await walletService.payTeacher(teacher_id, depositBody);
 
     const response = await courseService.addRegistration(req.params.id, req.body);
 

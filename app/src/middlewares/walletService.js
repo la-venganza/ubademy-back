@@ -61,10 +61,15 @@ async function getTeacherBalance (wallet_id) {
     }
 }
 
-async function payTeacher (wallet_id) {
+async function payTeacher (wallet_id, body) {
     try {
-        const res = await SCinstance.post('/suscription/' + wallet_id, {})
-        
+        const mappedBody = {
+            "teacherId": wallet_id,
+            "amountInEthers": body.amount || '0'
+        }
+
+        const res = await SCinstance.post('/payTeacher/', mappedBody)
+
         return res.data
     } catch (e) {
         if (e.status == 500) {
