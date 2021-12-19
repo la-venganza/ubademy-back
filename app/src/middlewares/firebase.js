@@ -1,6 +1,6 @@
 const { initializeApp } = require('firebase-admin/app');
-const firebaseAuth = require("firebase-admin/auth")
-const AuthError = require('../errors/authError')
+const firebaseAuth = require('firebase-admin/auth');
+const AuthError = require('../errors/authError');
 require('dotenv').config();
 
 const firebaseConfig = {
@@ -9,20 +9,20 @@ const firebaseConfig = {
   projectId: `${process.env.FIREBASE_PROJECTID}`,
   storageBucket: `${process.env.FIREBASE_STORAGEBUCKET}`,
   messagingSenderId: `${process.env.FIREBASE_MESSAGINGSENDERID}`,
-  appId:`${process.env.FIREBASE_APPID}`
+  appId: `${process.env.FIREBASE_APPID}`,
 };
 
 const app = initializeApp(firebaseConfig);
 
 const auth = firebaseAuth.getAuth(app);
 
-async function verifyIdToken (token) {
+async function verifyIdToken(token) {
   try {
-    const decodedToken = await auth.verifyIdToken(token)
-    return decodedToken
-   } catch (e) {
-    throw new AuthError(e, 'Firebase')
-   }
+    const decodedToken = await auth.verifyIdToken(token);
+    return decodedToken;
+  } catch (e) {
+    throw new AuthError(e, 'Firebase');
+  }
 }
 
-module.exports = verifyIdToken
+module.exports = verifyIdToken;

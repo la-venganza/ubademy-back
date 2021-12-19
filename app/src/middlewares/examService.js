@@ -118,7 +118,7 @@ async function patchExam (body) {
 async function listBasicCourseExams (params, query) {
     try {
         if (typeof query.user_id === 'undefined') {
-            throw new ServerError('Error - user_id query param is undefined')
+            throw new ServerError('Error', 'user_id query param is undefined', 400)
         }
         path = `/api/v1/courses/${params.course_id}/lessons/exams?user_id=${query.user_id}`
         if (query.page) {

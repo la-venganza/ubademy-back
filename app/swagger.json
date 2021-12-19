@@ -1049,6 +1049,12 @@
                 "answers"
               ],
               "properties": {
+                "course_id": {
+                  "type": "integer"
+                },
+                "lesson_id": {
+                  "type": "integer"
+                },
                 "user_id": {
                   "type": "string"
                 },
