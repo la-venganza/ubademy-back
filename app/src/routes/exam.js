@@ -132,7 +132,9 @@ router.get('/:exam_id/course/:course_id/lesson/:lesson_id/solution/:exam_taken_i
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
             
-        const response = await examService.getExam(req.params, req.query)
+        const response = await examService.getExamByTakenId(req.params, req.query)
+
+        console.log(response);
 
         res.status(200).send(response)
     } catch (e) {
@@ -157,6 +159,30 @@ router.get('/', async function(req, res) {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
             
         const response = await examService.searchExam(req.query)
+
+        res.status(200).send(response)
+    } catch (e) {
+        const body = {
+            error: e.name,
+            message: e.message
+        }
+        if (e instanceof ConnectionError) {
+            res.status(500).send(body)
+        } else if (e instanceof AuthError) {
+            res.status(401).send(body)
+        } else if (e instanceof ServerError) {
+            res.status(e.status).send(body)
+        } else {
+            res.status(500).send(body)
+        }
+    }
+})
+
+router.get('/course/:course_id', async function(req, res) {
+    try {
+        const uid = await verifyIdToken(req.cookies.firebaseAuth)
+
+        const response = await examService.listBasicCourseExams(req.params, req.query)
 
         res.status(200).send(response)
     } catch (e) {

@@ -24,6 +24,8 @@ async function solveExam (body, exam_id) {
 
         examHelper.verifySolution(body)
 
+        console.log(body)
+
         const res = await instance.post(path, body)
         return res.data
     } catch (e) {
@@ -53,6 +55,7 @@ async function gradeExam (body, exam_id) {
 
 async function getExamByTakenId (params, query) {
     try {
+        console.log(params);
         path = '/api/v1/courses/' + params.course_id + '/lessons/' + params.lesson_id + '/exams/' + params.exam_id + '/solution/' + params.exam_taken_id
         if (query.user_id) {
             path += '?user_id=' + query.user_id
@@ -112,5 +115,21 @@ async function patchExam (body) {
     }
 }
 
-module.exports = { createExam, patchExam, getExamByTakenId, getExam, solveExam, gradeExam, searchExam }
+async function listBasicCourseExams (params, query) {
+    try {
+        if (typeof query.user_id === 'undefined') {
+            throw new ServerError('Error - user_id query param is undefined')
+        }
+        path = `/api/v1/courses/${params.course_id}/lessons/exams?user_id=${query.user_id}`
+        if (query.page) {
+            path += '&page=' + query.page
+        }
+        const res = await instance.get(path)
+        return res.data
+    } catch (e) {
+        handleError(e)
+    }
+}
 
+module.exports = { createExam, patchExam, getExamByTakenId, getExam, solveExam, gradeExam, searchExam,
+  listBasicCourseExams }

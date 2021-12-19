@@ -9,7 +9,7 @@
       "url": "https://fi.uba.ar/"
     }
   },
-  "host": "localhost:3000",
+  "host": "ubademy-la-venganza-back.herokuapp.com",
   "basePath": "/",
   "tags": [
     {
@@ -141,7 +141,7 @@
         }
       }
     },
-    "/course/{id}": {
+    "/course/{course_id}": {
       "parameters": [
         {
           "in": "path",
@@ -420,7 +420,7 @@
       "parameters": [
         {
           "in": "path",
-          "name": "id",
+          "name": "user_id",
           "type": "string",
           "required": true,
           "description": "ID of the user"
@@ -590,6 +590,16 @@
           "in": "query",
           "name": "max_results",
           "type": "integer"
+        },
+        {
+          "in": "query",
+          "name": "keyword",
+          "type": "string"
+        },
+        {
+          "in": "query",
+          "name": "page",
+          "type": "integer"
         }
       ],
       "get": {
@@ -744,17 +754,17 @@
             "in": "query",
             "name": "active_students",
             "type": "boolean"
-          }   ,
+          },
           {
             "in": "query",
             "name": "graded_status",
             "type": "boolean"
-          }   ,
+          },
           {
             "in": "query",
             "name": "page",
             "type": "integer"
-          }          
+          }
         ],
         "responses": {
           "200": {
@@ -774,8 +784,56 @@
           }
         }
       }
-     },
-     "/exam/{exam_id}/course/{course_id}/lesson/{lesson_id}/user/{user_id}": {
+    },
+    "/exam/course/{course_id}": {
+      "get": {
+        "tags": [
+          "Exams"
+        ],
+        "summary": "Staff search exams basic info for course by id",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "course_id",
+            "type": "integer",
+            "required": true,
+            "description": "ID for the course to get exam from"
+          },
+          {
+            "in": "query",
+            "name": "user_id",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
+    "/exam/{exam_id}/course/{course_id}/lesson/{lesson_id}/user/{user_id}": {
       "get": {
         "tags": [
           "Exams"
@@ -790,7 +848,7 @@
           },
           {
             "in": "path",
-            "name": "course",
+            "name": "course_id",
             "type": "integer",
             "required": true,
             "description": "ID for the course to get exam from"
@@ -845,7 +903,7 @@
           },
           {
             "in": "path",
-            "name": "course",
+            "name": "course_id",
             "type": "integer",
             "required": true,
             "description": "ID for the course to get exam from"
@@ -892,7 +950,7 @@
         }
       }
     },
-    "/exam/{id}": {
+    "/exam/{exam_id}": {
       "post": {
         "consumes": [
           "application/json"
@@ -928,14 +986,17 @@
                 "answers": {
                   "type": "array",
                   "items": {
-                    "question_id": {
-                      "type": "integer"
-                    },
-                    "choice_id": {
-                      "type": "integer"
-                    },
-                    "input_answer": {
-                      "type": "string"
+                    "type": "object",
+                    "properties": {
+                      "choice_id": {
+                        "type": "integer"
+                      },
+                      "question_id": {
+                        "type": "integer"
+                      },
+                      "input_answer": {
+                        "type": "string"
+                      }
                     }
                   }
                 }
@@ -1601,7 +1662,7 @@
         },
         "message": {
           "type": "string"
-        }      
+        }
       }
     }
   }
