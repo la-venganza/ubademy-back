@@ -81,8 +81,7 @@ router.get('/admin/:email', async (req, res) => {
     // Pedir al back de python
     const response = await userService.getAdminByEmail(req.params.email);
 
-    const parsedResponse = JSON.parse(JSON.stringify(response));
-    if (!parsedResponse.results[0].is_admin) {
+    if (!response.results[0].is_admin) {
       throw new AuthError(Error, 'You are not an admin user', 401);
     }
 
@@ -108,9 +107,7 @@ router.post('/', async function(req, res) {
     try {
         const response = await userService.createUser(req.body)
 
-        parsedResponse = JSON.parse(JSON.stringify(response))
-
-        const wallet = await walletService.createWallet(parsedResponse.user_id)
+        const wallet = await walletService.createWallet(response.user_id)
 
         res.status(201).send(response)
     } catch (e) {
