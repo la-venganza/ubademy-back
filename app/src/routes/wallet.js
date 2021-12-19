@@ -35,7 +35,7 @@ router.post('/deposit', async function(req, res) {
     try {
         const uid = await verifyIdToken(req.cookies.firebaseAuth)
 
-        const response = await walletService.deposit(uid, body)
+        const response = await walletService.deposit(uid, req.body)
 
         res.status(200).send(response)
     } catch (e) {
