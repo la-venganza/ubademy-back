@@ -110,20 +110,18 @@ router.post('/:id/registration', async (req, res) => {
     let teacher_id = '';
     let courseSubscription = ''
     if (course.data != '') {
-      const parsedCourse = JSON.parse(JSON.stringify(course));
-      teacher_id = parsedCourse.creator_id;
-      courseSubscription = parsedCourse.subscription_required;
+      teacher_id = course.creator_id;
+      courseSubscription = course.subscription_required;
     }
 
     let subscription = ''
-    if (courseSubscription.title != "Free") {
+    if (courseSubscription.title != "Free" && courseSubscription != '') {
       subscription = await subscriptionPlanService.getSubscriptionPlan(courseSubscription.id);
     }
 
-    let subscription_price = '0';
+    let subscription_price = 0;
     if (subscription.data != '') {
-      const parsedSubscription = JSON.parse(JSON.stringify(subscription));
-      subscription_price = parsedSubscription.price
+      subscription_price = subscription.price
     }
 
     const depositBody = {

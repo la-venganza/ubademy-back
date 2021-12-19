@@ -14,8 +14,7 @@ router.post('/:id', async (req, res) => {
 
     let subscription_price = '0';
     if (subscriptions.data != '') {
-      const parsedSubscriptions = JSON.parse(JSON.stringify(subscriptions));
-      parsedSubscriptions.subscription_plans.forEach((item) => {
+      subscriptions.subscription_plans.forEach((item) => {
         if (item.title === req.body.subscription) { 
           subscription_price = item.price; }
       });
