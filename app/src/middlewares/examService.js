@@ -2,7 +2,7 @@
 const ServerError = require('../errors/serverError')
 const { param } = require('../routes/exam')
 const instance = require('../utils/axiosHelper')
-const handleError = require('../utils/errorHandler')
+const {handleError} = require('../utils/errorHandler')
 const examHelper = require('../utils/examHelper')
 
 async function createExam (body) {

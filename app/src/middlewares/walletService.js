@@ -1,6 +1,6 @@
 // Middleware para resolver llamadas a SC
 const SCinstance = require('../utils/SCaxiosHelper')
-const handleError = require('../utils/errorHandler')
+const { handleError, handleSCError } = require('../utils/errorHandler')
 
 async function getBalance (wallet_id) {
     try {
@@ -39,11 +39,15 @@ async function getWallet (wallet_id) {
 
 async function createWallet (wallet_id) {
     try {
-        const res = await SCinstance.post('/wallet/' + wallet_id)
+        console.log("LOG")
+
+        const res = await SCinstance.post('/wallet/' + wallet_id, {})
+
+        console.log(res)
 
         return res.data
     } catch (e) {
-        handleError(e)
+        handleSCError(e)
     }
 }
 
@@ -59,7 +63,7 @@ async function getTeacherBalance (wallet_id) {
 
 async function payTeacher (wallet_id) {
     try {
-        const res = await SCinstance.post('/suscription/' + wallet_id)
+        const res = await SCinstance.post('/suscription/' + wallet_id, {})
         
         return res.data
     } catch (e) {

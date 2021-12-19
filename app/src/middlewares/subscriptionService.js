@@ -1,6 +1,6 @@
 // Middleware para resolver llamadas a python
 const instance = require('../utils/axiosHelper')
-const handleError = require('../utils/errorHandler')
+const {handleError} = require('../utils/errorHandler')
 
 async function getSubscription (user_id) {
     try {

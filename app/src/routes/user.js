@@ -126,11 +126,13 @@ router.get('/admin/:email', async function(req, res) {
 
 router.post('/', async function(req, res) {
     try {
-        // const uid = await verifyIdToken(req.cookies.firebaseAuth)
-        
+        const uid = await verifyIdToken(req.cookies.firebaseAuth)
+
         const response = await userService.createUser(req.body)
 
         parsedResponse = JSON.parse(JSON.stringify(response))
+
+        console.log(response)
 
         const wallet = await walletService.createWallet(parsedResponse.user_id)
 
