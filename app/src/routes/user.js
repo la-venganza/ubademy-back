@@ -51,8 +51,11 @@ router.get('/:id', async (req, res) => {
 
 router.get('/login/:email', async (req, res) => {
   try {
-    // Pedir al back de python
     let response = await userService.getUserByEmail(req.params.email);
+
+    if (response.results.length === 0) {
+      throw new ServerError('Error', 'User not found', 404);
+    }
 
     if (req.query.properties) {
       response = await userService.getUserById(response.results[0].user_id, req.query);
@@ -78,8 +81,11 @@ router.get('/login/:email', async (req, res) => {
 
 router.get('/admin/:email', async (req, res) => {
   try {
-    // Pedir al back de python
     const response = await userService.getAdminByEmail(req.params.email);
+
+    if (response.results.length === 0) {
+      throw new ServerError('Error', 'User not found', 404);
+    }
 
     if (!response.results[0].is_admin) {
       throw new AuthError(Error, 'You are not an admin user', 401);
@@ -128,7 +134,6 @@ router.post('/', async function(req, res) {
 });
 
 router.put('/:id', async (req, res) => {
-  // Verificar request y mandar al back de python
   try {
     const response = await userService.updateUser(req.params.id, req.body);
     res.status(201).send(response);
