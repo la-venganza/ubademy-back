@@ -7,7 +7,7 @@ function handleError(error){
         parsedError = JSON.parse(JSON.stringify(error.response.data))
         let message = ''
         if (error.response.status == 422) {
-            message = parsedError.detail[0].msg + ' | ' + error.response.status
+            message = parsedError.detail[0].msg + ' | ' + parsedError.detail[0].loc + ' | ' + error.response.status
         } else {
             message = parsedError.detail + ' | ' + error.response.status
         }
