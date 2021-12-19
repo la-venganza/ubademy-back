@@ -34,7 +34,6 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-  // Verifica que el token de firebase sea valido
   try {
     const response = await courseService.getCourseById(req.params.id, req.query);
 
@@ -57,7 +56,6 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  // Verificar request y mandar al back de python
   try {
     const body = courseMapper.courseMappingPost(req.body);
 
@@ -82,7 +80,6 @@ router.post('/', async (req, res) => {
 });
 
 router.patch('/:id', async (req, res) => {
-  // Verificar request y mandar al back de python
   try {
     const body = courseMapper.courseMappingPatch(req.body);
 
@@ -108,7 +105,6 @@ router.patch('/:id', async (req, res) => {
 });
 
 router.post('/:id/registration', async (req, res) => {
-  // Verificar request y mandar al back de python
   try {
     const course = await courseService.getCourseById(req.params.id, req.body);
     let teacher_id = '';
@@ -158,7 +154,6 @@ router.post('/:id/registration', async (req, res) => {
 });
 
 router.patch('/:id/registration', async (req, res) => {
-  // Verificar request y mandar al back de python
   try {
     const response = await courseService.undoRegistration(req.params.id, req.body);
 
@@ -182,7 +177,6 @@ router.patch('/:id/registration', async (req, res) => {
 });
 
 router.post('/:id/collaboration', async (req, res) => {
-  // Verificar request y mandar al back de python
   try {
     const response = await courseService.addCollaborator(req.params.id, req.body);
 
@@ -206,7 +200,6 @@ router.post('/:id/collaboration', async (req, res) => {
 });
 
 router.get('/types', async (req, res) => {
-  // Verifica que el token de firebase sea valido
   try {
     const response = await courseService.getTypes();
 
