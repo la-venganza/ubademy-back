@@ -12,7 +12,7 @@ router.post('/:id', async (req, res) => {
   try {
     const subscriptions = await subscriptionPlanService.getSubscriptions();
 
-    let subscription_price = '0';
+    let subscription_price = 0;
     if (subscriptions.data != '') {
       subscriptions.subscription_plans.forEach((item) => {
         if (item.title === req.body.subscription) { 
