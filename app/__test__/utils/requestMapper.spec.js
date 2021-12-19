@@ -157,7 +157,7 @@ describe("RequestMapper", () => {
                 "user_id": "user_id",
                 "title": "title",
                 "type": "type",
-                "plan": "plan",
+                "plan": "free",
                 "description": "description",
                 "stages": [
                     {
@@ -186,10 +186,11 @@ describe("RequestMapper", () => {
                 "hashtags": "hashtags",
                 "location": "internet",
                 "type": "type",
-                "plan": "plan",
+                "subscription_required": "free",
                 "lessons": [
                     {
                         "active": "active",
+                        "exam": undefined,
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "require": "required",
@@ -198,6 +199,7 @@ describe("RequestMapper", () => {
                     },
                     {
                         "active": "active",
+                        "exam": undefined,
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "require": "required",
@@ -224,6 +226,9 @@ describe("RequestMapper", () => {
                 "stages": [
                     {
                         "active": "active",
+                        "exam": {
+                            "questions": []
+                        },
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "required": "required",
@@ -232,6 +237,9 @@ describe("RequestMapper", () => {
                     },
                     {
                         "active": "active",
+                        "exam": {
+                            "questions": []
+                        },
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "required": "required",
@@ -248,10 +256,13 @@ describe("RequestMapper", () => {
                 "hashtags": "some_hashtags",
                 "location": "some_internet",
                 "type": "type",
-                "plan": "plan",
+                "subscription_required": "plan",
                 "lessons": [
                     {
                         "active": "active",
+                        "exam": {
+                            "questions": []
+                        },
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "require": "required",
@@ -260,6 +271,9 @@ describe("RequestMapper", () => {
                     },
                     {
                         "active": "active",
+                        "exam": {
+                            "questions": []
+                        },
                         "multimedia_id": "multimedia_id",
                         "multimedia_type": "multimedia_type",
                         "require": "required",
