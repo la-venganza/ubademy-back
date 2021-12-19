@@ -116,14 +116,16 @@ router.patch('/:id', async (req, res) => {
 router.post('/:id/registration', async (req, res) => {
   // Verificar request y mandar al back de python
   try {
-    // const uid = await verifyIdToken(req.cookies.firebaseAuth)
+    const uid = await verifyIdToken(req.cookies.firebaseAuth)
+
     const course = await courseService.getCourseById(req.params.id, req.body);
-    // let teacher_id = '';
-    // if (course.data != '') {
-    //   const parsedCourse = JSON.parse(JSON.stringify(subscriptions.data));
-    //   teacher_id = parsedCourse.creator_id;
-    // }
-    // const payment = await walletService.payTeacher(teacher_id);
+    let teacher_id = '';
+    if (course.data != '') {
+      const parsedCourse = JSON.parse(JSON.stringify(course.data));
+      teacher_id = parsedCourse.creator_id;
+    }
+    const payment = await walletService.payTeacher(teacher_id);
+
     const response = await courseService.addRegistration(req.params.id, req.body);
 
     // Send to back
