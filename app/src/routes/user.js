@@ -111,11 +111,7 @@ router.post('/', async function(req, res) {
 
         parsedResponse = JSON.parse(JSON.stringify(response))
 
-        console.log(response)
-
         const wallet = await walletService.createWallet(parsedResponse.user_id)
-
-        console.log(wallet);
 
         res.status(201).send(response)
     } catch (e) {
