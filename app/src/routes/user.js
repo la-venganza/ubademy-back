@@ -1,6 +1,7 @@
 const express = require('express');
 const verifyIdToken =  require('../middlewares/firebase')
 const userService = require('../middlewares/userService')
+const walletService = require('../middlewares/walletService')
 const ConnectionError = require('../errors/connectionError')
 const AuthError = require('../errors/authError')
 const ServerError = require('../errors/serverError')
@@ -125,9 +126,16 @@ router.get('/admin/:email', async function(req, res) {
 
 router.post('/', async function(req, res) {
     try {
-        const uid = await verifyIdToken(req.cookies.firebaseAuth)
+        // const uid = await verifyIdToken(req.cookies.firebaseAuth)
+        
+        const response = await userService.createUser(req.body)
 
-        response = await userService.createUser(req.body)
+        parsedResponse = JSON.parse(JSON.stringify(response))
+
+        const wallet = await walletService.createWallet(parsedResponse.user_id)
+
+        console.log(wallet)
+
         res.status(201).send(response)
     } catch (e) {
         const body = {

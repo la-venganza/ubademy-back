@@ -40,7 +40,7 @@ async function getWallet (wallet_id) {
 async function createWallet (wallet_id) {
     try {
         const res = await SCinstance.post('/wallet/' + wallet_id)
-        
+
         return res.data
     } catch (e) {
         handleError(e)
