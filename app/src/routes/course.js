@@ -116,7 +116,7 @@ router.patch('/:id', async (req, res) => {
 router.post('/:id/registration', async (req, res) => {
   // Verificar request y mandar al back de python
   try {
-    // const uid = await verifyIdToken(req.cookies.firebaseAuth)
+    const uid = await verifyIdToken(req.cookies.firebaseAuth)
     const course = await courseService.getCourseById(req.params.id, req.body);
     // let teacher_id = '';
     // if (course.data != '') {
