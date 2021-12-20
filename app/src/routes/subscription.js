@@ -24,8 +24,6 @@ router.post('/:id', async (req, res) => {
       amount: `${subscription_price}`,
     };
 
-    console.log(req.body.subscription)
-
     // Falta logica de callback -> hay que pasar un endpoint para resolucion de pago
     // Por ser una red de test no estaria haciendo falta al parecer
     if (req.body.subscription.toLowerCase() != 'free' && req.body.subscription.toLowerCase() != '') {
