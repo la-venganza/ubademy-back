@@ -131,7 +131,7 @@ router.post('/:id/registration', async (req, res) => {
     const response = await courseService.addRegistration(req.params.id, req.body);
 
     if (subscription_price != 0) {
-      const payment = await walletService.payTeacher(teacher_id, depositBody);
+      await walletService.payTeacher(teacher_id, depositBody);
     }
 
     // Send to back
