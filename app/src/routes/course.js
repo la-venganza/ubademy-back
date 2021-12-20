@@ -115,7 +115,7 @@ router.post('/:id/registration', async (req, res) => {
     }
 
     let subscription = ''
-    if (courseSubscription.title != "Free" && courseSubscription != '') {
+    if (courseSubscription.title.toLowerCase() != "free" && courseSubscription != '') {
       subscription = await subscriptionPlanService.getSubscriptionPlan(courseSubscription.id);
     }
 
