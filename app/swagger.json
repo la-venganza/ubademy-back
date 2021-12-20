@@ -1193,7 +1193,7 @@
             "name": "user_id",
             "type": "integer",
             "required": true,
-            "description": "ID for the user that needs to change a subscription"
+            "description": "ID for the user that needs to update a subscription"
           },
           {
             "in": "body",
