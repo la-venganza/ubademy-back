@@ -30,7 +30,7 @@ router.post('/:id', async (req, res) => {
 
     console.log(req.body.subscription)
 
-    if (SCresponse.status === 500 && req.body.subscription.toLowerCase() != 'free') {
+    if (SCresponse.status === 500 && req.body.subscription.toLowerCase() != 'free' && req.body.subscription.toLowerCase() != '') {
       throw new ServerError('Error', SCresponse.message, 500);
     }
 
