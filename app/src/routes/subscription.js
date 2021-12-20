@@ -14,18 +14,19 @@ router.post('/:id', async (req, res) => {
 
     let subscription_price = 0;
     if (subscriptions.data != '') {
-      const parsedSubscriptions = JSON.parse(JSON.stringify(subscriptions.data));
-      subscription_price = parsedSubscriptions.forEach((item) => {
-        if (item.title === req.body.subscription) { return item.price; }
+      subscriptions.subscription_plans.forEach((item) => {
+        if (item.title === req.body.subscription) { 
+          subscription_price = item.price; }
       });
     }
 
     const depositBody = {
-      amount: subscription_price,
+      amount: `${subscription_price}`,
     };
 
     // Falta logica de callback -> hay que pasar un endpoint para resolucion de pago
-    const SCresponse = await walletService.deposit(req.uid, depositBody);
+    // Por ser una red de test no estaria haciendo falta al parecer
+    const SCresponse = await walletService.deposit(req.params.id, depositBody);
 
     if (SCresponse.status === 500) {
       throw new ServerError('Error', SCresponse.message, 500);

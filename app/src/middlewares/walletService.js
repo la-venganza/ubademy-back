@@ -1,6 +1,6 @@
 // Middleware para resolver llamadas a SC
 const SCinstance = require('../utils/SCaxiosHelper')
-const handleError = require('../utils/errorHandler')
+const { handleError, handleSCError } = require('../utils/errorHandler')
 
 async function getBalance (wallet_id) {
     try {
@@ -8,22 +8,22 @@ async function getBalance (wallet_id) {
 
         return res.data
     } catch (e) {
-        handleError(e)
+        handleSCError(e)
     }
 }
 
 async function deposit (wallet_id, body) {
     try {
         const mappedBody = {
-            "teacherId": wallet_id,
-            "amountInEthers": body.amount || 0
+            "senderId": wallet_id,
+            "amountInEthers": body.amount || '0'
         }
 
         const res = await SCinstance.post('/deposit', mappedBody)
         
         return res.data
     } catch (e) {
-        handleError(e)
+        handleSCError(e)
     }
 }
 
@@ -33,17 +33,19 @@ async function getWallet (wallet_id) {
         
         return res.data
     } catch (e) {
-        handleError(e)
+        handleSCError(e)
     }
 }
 
 async function createWallet (wallet_id) {
     try {
-        const res = await SCinstance.post('/wallet/' + wallet_id)
-        
+        const res = await SCinstance.post('/wallet/' + wallet_id, {})
+
+        console.log(res)
+
         return res.data
     } catch (e) {
-        handleError(e)
+        handleSCError(e)
     }
 }
 
@@ -53,14 +55,19 @@ async function getTeacherBalance (wallet_id) {
         
         return res.data
     } catch (e) {
-        handleError(e)
+        handleSCError(e)
     }
 }
 
-async function payTeacher (wallet_id) {
+async function payTeacher (wallet_id, body) {
     try {
-        const res = await SCinstance.post('/suscription/' + wallet_id)
-        
+        const mappedBody = {
+            "teacherId": wallet_id,
+            "amountInEthers": body.amount || '0'
+        }
+
+        const res = await SCinstance.post('/payTeacher', mappedBody)
+
         return res.data
     } catch (e) {
         if (e.status == 500) {
@@ -80,7 +87,7 @@ async function teacherWithdraw (wallet_id, body) {
         
         return res.data
     } catch (e) {
-        handleError(e)
+        handleSCError(e)
     }
 }
 
@@ -90,7 +97,7 @@ async function getOwnerBalance () {
         
         return res.data
     } catch (e) {
-        handleError(e)
+        handleSCError(e)
     }
 }
 
@@ -100,7 +107,7 @@ async function ownerWithdraw (body) {
         
         return res.data
     } catch (e) {
-        handleError(e)
+        handleSCError(e)
     }
 }
 

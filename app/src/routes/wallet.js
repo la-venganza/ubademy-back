@@ -26,28 +26,28 @@ router.get('/balance/:id', async (req, res) => {
       res.status(500).send(body);
     }
   }
-});
+})
 
-router.post('/deposit', async (req, res) => {
-  try {
-    const response = await walletService.deposit(req.uid, req.body);
+router.post('/deposit', async function(req, res) {
+    try {
+        const response = await walletService.deposit(uid, req.body)
 
-    res.status(200).send(response);
-  } catch (e) {
-    const body = {
-      error: e.name,
-      message: e.message,
-    };
-    if (e instanceof ConnectionError) {
-      res.status(500).send(body);
-    } else if (e instanceof AuthError) {
-      res.status(401).send(body);
-    } else if (e instanceof ServerError) {
-      res.status(e.status).send(body);
-    } else {
-      res.status(500).send(body);
+        res.status(200).send(response)
+    } catch (e) {
+        const body = {
+            error: e.name,
+            message: e.message
+        }
+        if (e instanceof ConnectionError) {
+            res.status(500).send(body)
+        } else if (e instanceof AuthError) {
+            res.status(401).send(body)
+        } else if (e instanceof ServerError) {
+            res.status(e.status).send(body)
+        } else {
+            res.status(500).send(body)
+        }
     }
-  }
 });
 
 router.get('/:id', async (req, res) => {
@@ -118,7 +118,7 @@ router.get('/teacherBalance/:id', async (req, res) => {
 
 router.post('/payTeacher', async (req, res) => {
   try {
-    const response = await walletService.payTeacher(body);
+    const response = await walletService.payTeacher(req.body);
 
     res.status(200).send(response);
   } catch (e) {

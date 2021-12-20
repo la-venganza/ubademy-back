@@ -1,5 +1,7 @@
 const express = require('express');
 const verifyIdToken = require('../middlewares/firebase');
+const subscriptionPlanService = require('../middlewares/subscriptionPlanService');
+const walletService = require('../middlewares/walletService');
 const courseService = require('../middlewares/courseService');
 const courseMapper = require('../utils/requestMapper');
 
@@ -32,7 +34,6 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-  // Verifica que el token de firebase sea valido
   try {
     const response = await courseService.getCourseById(req.params.id, req.query);
 
@@ -55,7 +56,6 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  // Verificar request y mandar al back de python
   try {
     const body = courseMapper.courseMappingPost(req.body);
 
@@ -80,7 +80,6 @@ router.post('/', async (req, res) => {
 });
 
 router.patch('/:id', async (req, res) => {
-  // Verificar request y mandar al back de python
   try {
     const body = courseMapper.courseMappingPatch(req.body);
 
@@ -106,16 +105,34 @@ router.patch('/:id', async (req, res) => {
 });
 
 router.post('/:id/registration', async (req, res) => {
-  // Verificar request y mandar al back de python
   try {
     const course = await courseService.getCourseById(req.params.id, req.body);
-    // let teacher_id = '';
-    // if (course.data != '') {
-    //   const parsedCourse = JSON.parse(JSON.stringify(subscriptions.data));
-    //   teacher_id = parsedCourse.creator_id;
-    // }
-    // const payment = await walletService.payTeacher(teacher_id);
+    let teacher_id = '';
+    let courseSubscription = ''
+    if (course.data != '') {
+      teacher_id = course.creator_id;
+      courseSubscription = course.subscription_required;
+    }
+
+    let subscription = ''
+    if (courseSubscription.title != "Free" && courseSubscription != '') {
+      subscription = await subscriptionPlanService.getSubscriptionPlan(courseSubscription.id);
+    }
+
+    let subscription_price = 0;
+    if (subscription.data != '') {
+      subscription_price = subscription.price
+    }
+
+    const depositBody = {
+      amount: `${subscription_price/10}`,
+    };
+
     const response = await courseService.addRegistration(req.params.id, req.body);
+
+    if (subscription_price != 0) {
+      const payment = await walletService.payTeacher(teacher_id, depositBody);
+    }
 
     // Send to back
     res.status(201).send(response);
@@ -137,7 +154,6 @@ router.post('/:id/registration', async (req, res) => {
 });
 
 router.patch('/:id/registration', async (req, res) => {
-  // Verificar request y mandar al back de python
   try {
     const response = await courseService.undoRegistration(req.params.id, req.body);
 
@@ -161,7 +177,6 @@ router.patch('/:id/registration', async (req, res) => {
 });
 
 router.post('/:id/collaboration', async (req, res) => {
-  // Verificar request y mandar al back de python
   try {
     const response = await courseService.addCollaborator(req.params.id, req.body);
 
@@ -185,7 +200,6 @@ router.post('/:id/collaboration', async (req, res) => {
 });
 
 router.get('/types', async (req, res) => {
-  // Verifica que el token de firebase sea valido
   try {
     const response = await courseService.getTypes();
 
