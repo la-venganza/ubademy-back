@@ -108,6 +108,11 @@
           },
           {
             "in": "query",
+            "name": "page_size",
+            "type": "integer"
+          },
+          {
+            "in": "query",
             "name": "keyword",
             "type": "string"
           },
@@ -599,6 +604,11 @@
         {
           "in": "query",
           "name": "page",
+          "type": "integer"
+        },
+        {
+          "in": "query",
+          "name": "page_size",
           "type": "integer"
         }
       ],

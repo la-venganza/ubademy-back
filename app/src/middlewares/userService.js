@@ -10,6 +10,9 @@ async function getUsers(query) {
         } else {
             path += '?page=1'
         }
+        if (query.page_size) {
+            path += `&page_size=${query.page_size}`;
+        }
         if (query.keyword) {
             path += '&keyword=' + query.keyword
         }
