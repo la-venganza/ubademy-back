@@ -28,7 +28,7 @@ router.post('/:id', async (req, res) => {
     // Por ser una red de test no estaria haciendo falta al parecer
     const SCresponse = await walletService.deposit(req.params.id, depositBody);
 
-    if (SCresponse.status === 500) {
+    if (SCresponse.status === 500 && req.body.subscription.toLowerCase() != 'free') {
       throw new ServerError('Error', SCresponse.message, 500);
     }
 
