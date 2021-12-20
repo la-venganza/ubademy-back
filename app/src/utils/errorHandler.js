@@ -29,7 +29,7 @@ function handleSCError(error){
     if (error.response) {
         //custom errors for server status response
         parsedError = JSON.parse(JSON.stringify(error.response.data))
-        let message = parsedError
+        let message = parsedError.code
         console.log("there was a response")
         console.log(message)
         throw new ServerError(error, message, error.response.status || 500)
