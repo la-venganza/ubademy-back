@@ -26,12 +26,14 @@ router.post('/:id', async (req, res) => {
 
     // Falta logica de callback -> hay que pasar un endpoint para resolucion de pago
     // Por ser una red de test no estaria haciendo falta al parecer
-    const SCresponse = await walletService.deposit(req.params.id, depositBody);
+    if (req.body.subscription.toLowerCase() != 'free' && req.body.subscription.toLowerCase() != '') {
+      const SCresponse = await walletService.deposit(req.params.id, depositBody);
 
-    console.log(req.body.subscription)
+      console.log(req.body.subscription)
 
-    if (SCresponse.status === 500 && req.body.subscription.toLowerCase() != 'free' && req.body.subscription.toLowerCase() != '') {
-      throw new ServerError('Error', SCresponse.message, 500);
+      if (SCresponse.status === 500) {
+        throw new ServerError('Error', SCresponse.message, 500);
+      }
     }
 
     // Despues si falla por callback se resuelve el tema de que fallo el pago en otro endpoint
