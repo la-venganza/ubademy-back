@@ -10,6 +10,9 @@ async function getCourses(params) {
     } else {
       path += '?page=1';
     }
+    if (params.page_size) {
+      path += `&page_size=${params.page_size}`;
+    }
     if (params.keyword) {
       path += `&keyword=${params.keyword}`;
     }
