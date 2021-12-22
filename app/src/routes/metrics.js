@@ -1,9 +1,12 @@
 const express = require('express');
-const { verifyIdToken, listAllUsers } = require('../middlewares/firebase');
+const { listAllUsers } = require('../middlewares/firebase');
 const ConnectionError = require('../errors/connectionError');
 const AuthError = require('../errors/authError');
 const ServerError = require('../errors/serverError');
-const { getGoogleLoginMetrics, getPasswordLoginMetrics } = require('../middlewares/firebase');
+const {
+  getGoogleLoginMetrics,
+  getPasswordLoginMetrics, incrementRecoveryMetrics, getAccountRecoveryMetrics,
+} = require('../middlewares/firebase');
 
 const router = express.Router();
 
@@ -14,14 +17,19 @@ router.get('/users/', async (req, res) => {
       const googleUsers = allUsers ? allUsers[0].users
         .filter((user) => user.providerData[0].providerId === 'google.com') : [];
       const countAll = allUsers ? allUsers[0].users.length : 0;
-      const federatedLoginMetrics = await getGoogleLoginMetrics();
-      const passwordLoginMetrics = await getPasswordLoginMetrics();
+      // const federatedLoginMetrics = await getGoogleLoginMetrics();
+      // const passwordLoginMetrics = await getPasswordLoginMetrics();
+      // const recoveryMetrics = await getAccountRecoveryMetrics();
+      const firebaseMetrics = await Promise.all([
+        getGoogleLoginMetrics(), getPasswordLoginMetrics(), getAccountRecoveryMetrics()]);
+      console.log(firebaseMetrics);
       return {
         totalUsers: countAll,
         googleUsers: googleUsers.length,
         passwordUsers: countAll - googleUsers.length,
-        federatedLoginMetrics,
-        passwordLoginMetrics,
+        federatedLoginMetrics: firebaseMetrics[0],
+        passwordLoginMetrics: firebaseMetrics[1],
+        recoveryMetrics: firebaseMetrics[2],
       };
     });
     return res.status(200).send(response);
@@ -39,6 +47,16 @@ router.get('/users/', async (req, res) => {
     } else {
       res.status(500).send(body);
     }
+  }
+});
+
+router.patch('/password-recovery', async (req, res) => {
+  try {
+    const response = await incrementRecoveryMetrics();
+    return res.status(200).send(response);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error.message);
   }
 });
 

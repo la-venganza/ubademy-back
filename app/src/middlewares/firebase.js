@@ -79,6 +79,14 @@ const incrementPasswordLogin = async () => {
   return res;
 };
 
+const incrementRecoveryMetrics = async () => {
+  const metricRef = db.collection('metrics').doc('account-recovery');
+  const res = await metricRef.update({
+    total: FieldValue.increment(1),
+  });
+  return res;
+};
+
 const getGoogleLoginMetrics = async () => {
   const googleMetricRef = await db.collection('metrics').doc('federated-login').get();
   if (googleMetricRef.exists) {
@@ -95,6 +103,21 @@ const getPasswordLoginMetrics = async () => {
   return 0;
 };
 
+const getAccountRecoveryMetrics = async () => {
+  const passwordMetricRef = await db.collection('metrics').doc('account-recovery').get();
+  if (passwordMetricRef.exists) {
+    return passwordMetricRef.data().total;
+  }
+  return 0;
+};
+
 module.exports = {
-  verifyIdToken, listAllUsers, incrementGoogleLogin, incrementPasswordLogin, getGoogleLoginMetrics, getPasswordLoginMetrics,
+  verifyIdToken,
+  listAllUsers,
+  incrementGoogleLogin,
+  incrementPasswordLogin,
+  getGoogleLoginMetrics,
+  getPasswordLoginMetrics,
+  incrementRecoveryMetrics,
+  getAccountRecoveryMetrics,
 };
