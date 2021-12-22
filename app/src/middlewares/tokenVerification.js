@@ -1,4 +1,4 @@
-const verifyIdToken = require('./firebase');
+const { verifyIdToken } = require('./firebase');
 
 const tokenVerificationMiddleware = async (req, res, next) => {
   try {
