@@ -1,9 +1,10 @@
 const express = require('express');
-const userService = require('../middlewares/userService')
-const walletService = require('../middlewares/walletService')
-const ConnectionError = require('../errors/connectionError')
-const AuthError = require('../errors/authError')
-const ServerError = require('../errors/serverError')
+const userService = require('../middlewares/userService');
+const walletService = require('../middlewares/walletService');
+const ConnectionError = require('../errors/connectionError');
+const AuthError = require('../errors/authError');
+const ServerError = require('../errors/serverError');
+const { sendLoginMetrics } = require('../utils/sendMetrics');
 
 const router = express.Router();
 
@@ -61,6 +62,8 @@ router.get('/login/:email', async (req, res) => {
       response = await userService.getUserById(response.results[0].user_id, req.query);
     }
 
+    sendLoginMetrics(req.query.loginType);
+
     res.status(200).send(response);
   } catch (e) {
     const body = {
@@ -91,6 +94,8 @@ router.get('/admin/:email', async (req, res) => {
       throw new AuthError(Error, 'You are not an admin user', 401);
     }
 
+    sendLoginMetrics(req.query.loginType);
+
     res.status(200).send(response);
   } catch (e) {
     const body = {
@@ -109,28 +114,28 @@ router.get('/admin/:email', async (req, res) => {
   }
 });
 
-router.post('/', async function(req, res) {
-    try {
-        const response = await userService.createUser(req.body)
+router.post('/', async (req, res) => {
+  try {
+    const response = await userService.createUser(req.body);
 
-        await walletService.createWallet(response.user_id)
+    await walletService.createWallet(response.user_id);
 
-        res.status(201).send(response)
-    } catch (e) {
-        const body = {
-            error: e.name,
-            message: e.message
-        }
-        if (e instanceof ConnectionError) {
-            res.status(500).send(body)
-        } else if (e instanceof AuthError) {
-            res.status(401).send(body)
-        } else if (e instanceof ServerError) {
-            res.status(e.status).send(body)
-        } else {
-            res.status(500).send(body)
-        }
+    res.status(201).send(response);
+  } catch (e) {
+    const body = {
+      error: e.name,
+      message: e.message,
+    };
+    if (e instanceof ConnectionError) {
+      res.status(500).send(body);
+    } else if (e instanceof AuthError) {
+      res.status(401).send(body);
+    } else if (e instanceof ServerError) {
+      res.status(e.status).send(body);
+    } else {
+      res.status(500).send(body);
     }
+  }
 });
 
 router.put('/:id', async (req, res) => {

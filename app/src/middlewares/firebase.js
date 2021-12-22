@@ -3,6 +3,7 @@ const firebaseAuth = require('firebase-admin/auth');
 const admin = require('firebase-admin');
 const AuthError = require('../errors/authError');
 require('dotenv').config();
+const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
 
 const firebaseConfig = {
   credential: admin.credential.cert({
@@ -33,6 +34,8 @@ const app = initializeApp(firebaseConfig);
 
 const auth = firebaseAuth.getAuth(app);
 
+const db = getFirestore();
+
 async function verifyIdToken(token) {
   try {
     const decodedToken = await auth.verifyIdToken(token);
@@ -60,4 +63,22 @@ async function listAllUsers(nextPageToken) {
   return result;
 }
 
-module.exports = { verifyIdToken, listAllUsers };
+const incrementGoogleLogin = async () => {
+  const metricRef = db.collection('metrics').doc('federated-login');
+  const res = await metricRef.update({
+    total: FieldValue.increment(1),
+  });
+  return res;
+};
+
+const incrementPasswordLogin = async () => {
+  const metricRef = db.collection('metrics').doc('password-login');
+  const res = await metricRef.update({
+    total: FieldValue.increment(1),
+  });
+  return res;
+};
+
+module.exports = {
+  verifyIdToken, listAllUsers, incrementGoogleLogin, incrementPasswordLogin,
+};
