@@ -79,6 +79,22 @@ const incrementPasswordLogin = async () => {
   return res;
 };
 
+const getGoogleLoginMetrics = async () => {
+  const googleMetricRef = await db.collection('metrics').doc('federated-login').get();
+  if (googleMetricRef.exists) {
+    return googleMetricRef.data().total;
+  }
+  return 0;
+};
+
+const getPasswordLoginMetrics = async () => {
+  const passwordMetricRef = await db.collection('metrics').doc('password-login').get();
+  if (passwordMetricRef.exists) {
+    return passwordMetricRef.data().total;
+  }
+  return 0;
+};
+
 module.exports = {
-  verifyIdToken, listAllUsers, incrementGoogleLogin, incrementPasswordLogin,
+  verifyIdToken, listAllUsers, incrementGoogleLogin, incrementPasswordLogin, getGoogleLoginMetrics, getPasswordLoginMetrics,
 };
