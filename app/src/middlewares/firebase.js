@@ -3,6 +3,7 @@ const firebaseAuth = require('firebase-admin/auth');
 const admin = require('firebase-admin');
 const AuthError = require('../errors/authError');
 require('dotenv').config();
+const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
 
 const firebaseConfig = {
   credential: admin.credential.cert({
@@ -33,6 +34,8 @@ const app = initializeApp(firebaseConfig);
 
 const auth = firebaseAuth.getAuth(app);
 
+const db = getFirestore();
+
 async function verifyIdToken(token) {
   try {
     const decodedToken = await auth.verifyIdToken(token);
@@ -60,4 +63,38 @@ async function listAllUsers(nextPageToken) {
   return result;
 }
 
-module.exports = { verifyIdToken, listAllUsers };
+const incrementGoogleLogin = async () => {
+  const metricRef = db.collection('metrics').doc('federated-login');
+  const res = await metricRef.update({
+    total: FieldValue.increment(1),
+  });
+  return res;
+};
+
+const incrementPasswordLogin = async () => {
+  const metricRef = db.collection('metrics').doc('password-login');
+  const res = await metricRef.update({
+    total: FieldValue.increment(1),
+  });
+  return res;
+};
+
+const getGoogleLoginMetrics = async () => {
+  const googleMetricRef = await db.collection('metrics').doc('federated-login').get();
+  if (googleMetricRef.exists) {
+    return googleMetricRef.data().total;
+  }
+  return 0;
+};
+
+const getPasswordLoginMetrics = async () => {
+  const passwordMetricRef = await db.collection('metrics').doc('password-login').get();
+  if (passwordMetricRef.exists) {
+    return passwordMetricRef.data().total;
+  }
+  return 0;
+};
+
+module.exports = {
+  verifyIdToken, listAllUsers, incrementGoogleLogin, incrementPasswordLogin, getGoogleLoginMetrics, getPasswordLoginMetrics,
+};
