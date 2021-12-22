@@ -1,4 +1,4 @@
-const { initializeApp, applicationDefault } = require('firebase-admin/app');
+const { initializeApp } = require('firebase-admin/app');
 const firebaseAuth = require('firebase-admin/auth');
 const admin = require('firebase-admin');
 const AuthError = require('../errors/authError');

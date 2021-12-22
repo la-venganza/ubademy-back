@@ -10,14 +10,17 @@ const router = express.Router();
 router.get('/users/', async (req, res) => {
   try {
     // Start listing users from the beginning, 1000 at a time.
-    const res = listAllUsers().then((allUsers) => {
-      const googleUsers = allUsers[0].users.filter((user) => user.providerData[0].providerId === 'google.com');
+    const response = await listAllUsers().then((allUsers) => {
+      const googleUsers = allUsers ? allUsers[0].users
+        .filter((user) => user.providerData[0].providerId === 'google.com') : [];
+      const countAll = allUsers ? allUsers[0].users.length : 0;
       return {
-        totalUsers: allUsers[0].users.length,
+        totalUsers: countAll,
         googleUsers: googleUsers.length,
-        passwordUsers: allUsers[0].users.length - googleUsers.length,
+        passwordUsers: countAll - googleUsers.length,
       };
     });
+    return res.status(200).send(response);
   } catch (e) {
     const body = {
       error: e.name,
