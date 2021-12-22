@@ -4,6 +4,7 @@ const user = require('./user');
 const exam = require('./exam');
 const subscription = require('./subscription');
 const subscription_plans = require('./subscription_plans');
+const metrics = require('./metrics');
 const wallet = require('./wallet');
 const tokenVerificationMiddleware = require('../middlewares/tokenVerification');
 
@@ -30,5 +31,6 @@ router.use('/exam', exam);
 router.use('/subscription', subscription);
 router.use('/subscription_plans', subscription_plans);
 router.use('/wallet', wallet);
+router.use('/metrics', metrics);
 
 module.exports = router;

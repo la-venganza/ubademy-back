@@ -1,9 +1,26 @@
 const { initializeApp } = require('firebase-admin/app');
 const firebaseAuth = require('firebase-admin/auth');
+const admin = require('firebase-admin');
 const AuthError = require('../errors/authError');
 require('dotenv').config();
 
 const firebaseConfig = {
+  credential: admin.credential.cert({
+    httpAgent: undefined,
+    implicit: true,
+    projectId: 'ubademy',
+    privateKey: `${process.env.FIREBASE_PRIVATE_KEY}`.replace(/\\n/g, '\n'),
+    clientEmail: 'firebase-adminsdk-7a43r@ubademy.iam.gserviceaccount.com',
+    httpClient: {
+      retry: {
+        maxRetries: 4,
+        statusCodes: [Array],
+        ioErrorCodes: [Array],
+        backOffFactor: 0.5,
+        maxDelayInMillis: 60000,
+      },
+    },
+  }),
   apiKey: `${process.env.FIREBASE_APIKEY}`,
   authDomain: `${process.env.FIREBASE_AUTHDOMAIN}`,
   projectId: `${process.env.FIREBASE_PROJECTID}`,
@@ -25,4 +42,22 @@ async function verifyIdToken(token) {
   }
 }
 
-module.exports = verifyIdToken;
+async function listAllUsers(nextPageToken) {
+  // List batch of users, 1000 at a time.
+  const result = await auth
+    .listUsers(1000, nextPageToken)
+    .then((listUsersResult) => {
+      const users = [];
+      if (listUsersResult.pageToken) {
+        // List next batch of users.
+        users.concat(listAllUsers(listUsersResult.pageToken));
+      }
+      return users.concat(listUsersResult);
+    })
+    .catch((error) => {
+      console.log('Error listing users:', error);
+    });
+  return result;
+}
+
+module.exports = { verifyIdToken, listAllUsers };
