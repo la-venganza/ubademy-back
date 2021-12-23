@@ -1,6 +1,9 @@
 const { verifyIdToken } = require('./firebase');
+const notTokenRoutesValidator = require('../utils/nonTokenRoutesValidator');
 
 const tokenVerificationMiddleware = async (req, res, next) => {
+  console.log(req.path);
+  if (notTokenRoutesValidator(req.path)) return next();
   try {
     if (req.cookies.firebaseAuth) {
       req.uid = await verifyIdToken(req.cookies.firebaseAuth);
